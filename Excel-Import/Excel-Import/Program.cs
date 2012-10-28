@@ -19,7 +19,7 @@ namespace Excel_Import
       int? nameCol = null;
       int? neptunCol = null;
 
-      // opening an Excel application
+      // open an Excel application
       Excel.Application excelApp = new Excel.Application();      
       excelApp.Visible = false;
 
