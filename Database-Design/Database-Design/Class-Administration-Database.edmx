@@ -4,15 +4,190 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl" Namespace="Model1.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005">
-        <EntityContainer Name="Model1TargetContainer" >
-        </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+    <Schema Namespace="Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="ModelStoreContainer">
+    <EntitySet Name="HallgatoSet" EntityType="Model.Store.HallgatoSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TeremSet" EntityType="Model.Store.TeremSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="GyakorlatvezetoSet" EntityType="Model.Store.GyakorlatvezetoSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CsoportSet" EntityType="Model.Store.CsoportSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="KurzusSet" EntityType="Model.Store.KurzusSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TeremKurzus" EntityType="Model.Store.TeremKurzus" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="HallgatoKurzus" Association="Model.Store.HallgatoKurzus">
+      <End Role="Hallgato" EntitySet="HallgatoSet" />
+      <End Role="Kurzus" EntitySet="KurzusSet" />
+    </AssociationSet>
+    <AssociationSet Name="CsoportGyakorlatvezeto" Association="Model.Store.CsoportGyakorlatvezeto">
+      <End Role="Csoport" EntitySet="CsoportSet" />
+      <End Role="Gyakorlatvezeto" EntitySet="GyakorlatvezetoSet" />
+    </AssociationSet>
+    <AssociationSet Name="KurzusCsoport" Association="Model.Store.KurzusCsoport">
+      <End Role="Kurzus" EntitySet="KurzusSet" />
+      <End Role="Csoport" EntitySet="CsoportSet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TeremKurzus_Terem" Association="Model.Store.FK_TeremKurzus_Terem">
+      <End Role="Terem" EntitySet="TeremSet" />
+      <End Role="TeremKurzus" EntitySet="TeremKurzus" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TeremKurzus_Kurzus" Association="Model.Store.FK_TeremKurzus_Kurzus">
+      <End Role="Kurzus" EntitySet="KurzusSet" />
+      <End Role="TeremKurzus" EntitySet="TeremKurzus" />
+    </AssociationSet>
+    <AssociationSet Name="CsoportTerem" Association="Model.Store.CsoportTerem">
+      <End Role="Csoport" EntitySet="CsoportSet" />
+      <End Role="Terem" EntitySet="TeremSet" />
+    </AssociationSet>
+    <AssociationSet Name="CsoportHallgato" Association="Model.Store.CsoportHallgato">
+      <End Role="Csoport" EntitySet="CsoportSet" />
+      <End Role="Hallgato" EntitySet="HallgatoSet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="HallgatoSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Neptun" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Nev" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Felev" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Kurzus_Id" Type="int" Nullable="true" />
+    <Property Name="Csoport_Id" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="TeremSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nev" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Gepek_szama" Type="int" Nullable="false" />
+    <Property Name="Ulohelyek_szama" Type="decimal" Nullable="false" />
+  </EntityType>
+  <EntityType Name="GyakorlatvezetoSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Neptun" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Nev" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CsoportSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Felev" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Sorszam" Type="decimal" Nullable="false" />
+    <Property Name="Gyakorlatvezeto_Id" Type="int" Nullable="false" />
+    <Property Name="Kurzus_Id" Type="int" Nullable="false" />
+    <Property Name="Terem_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="KurzusSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Felev" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Het_napja" Type="decimal" Nullable="false" />
+    <Property Name="Het_paritasa" Type="bit" Nullable="false" />
+    <Property Name="Idosav_kezdete" Type="time" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TeremKurzus">
+    <Key>
+      <PropertyRef Name="Terem_Id" />
+      <PropertyRef Name="Kurzus_Id" />
+    </Key>
+    <Property Name="Terem_Id" Type="int" Nullable="false" />
+    <Property Name="Kurzus_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="HallgatoKurzus">
+    <End Role="Hallgato" Type="Model.Store.HallgatoSet" Multiplicity="*" />
+    <End Role="Kurzus" Type="Model.Store.KurzusSet" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Kurzus">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Hallgato">
+        <PropertyRef Name="Kurzus_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CsoportGyakorlatvezeto">
+    <End Role="Csoport" Type="Model.Store.CsoportSet" Multiplicity="*" />
+    <End Role="Gyakorlatvezeto" Type="Model.Store.GyakorlatvezetoSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Gyakorlatvezeto">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Csoport">
+        <PropertyRef Name="Gyakorlatvezeto_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="KurzusCsoport">
+    <End Role="Kurzus" Type="Model.Store.KurzusSet" Multiplicity="1" />
+    <End Role="Csoport" Type="Model.Store.CsoportSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kurzus">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Csoport">
+        <PropertyRef Name="Kurzus_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CsoportTerem">
+    <End Role="Csoport" Type="Model.Store.CsoportSet" Multiplicity="*" />
+    <End Role="Terem" Type="Model.Store.TeremSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Terem">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Csoport">
+        <PropertyRef Name="Terem_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CsoportHallgato">
+    <End Role="Csoport" Type="Model.Store.CsoportSet" Multiplicity="0..1" />
+    <End Role="Hallgato" Type="Model.Store.HallgatoSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Csoport">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Hallgato">
+        <PropertyRef Name="Csoport_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TeremKurzus_Terem">
+    <End Role="Terem" Type="Model.Store.TeremSet" Multiplicity="1" />
+    <End Role="TeremKurzus" Type="Model.Store.TeremKurzus" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Terem">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TeremKurzus">
+        <PropertyRef Name="Terem_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TeremKurzus_Kurzus">
+    <End Role="TeremKurzus" Type="Model.Store.TeremKurzus" Multiplicity="*" />
+    <End Role="Kurzus" Type="Model.Store.KurzusSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Kurzus">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TeremKurzus">
+        <PropertyRef Name="Kurzus_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema xmlns="http://schemas.microsoft.com/ado/2008/09/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Model" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
-        <EntityContainer Name="ModelContainer" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="TerembeosztoEntitasok" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="HallgatoSet" EntityType="Model.Hallgato" />
           <EntitySet Name="TeremSet" EntityType="Model.Terem" />
           <EntitySet Name="GyakorlatvezetoSet" EntityType="Model.Gyakorlatvezeto" />
@@ -128,13 +303,110 @@
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
-      <Mapping xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs" Space="C-S">
-        <Alias Key="Model" Value="Model1" />
-        <Alias Key="Target" Value="Model1.Store" />
-        <EntityContainerMapping CdmEntityContainer="ModelContainer" StorageEntityContainer="Model1TargetContainer">
-        </EntityContainerMapping>
-      </Mapping>
-    </edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="TerembeosztoEntitasok">
+    <EntitySetMapping Name="HallgatoSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Hallgato)">
+        <MappingFragment StoreEntitySet="HallgatoSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Neptun" ColumnName="Neptun" />
+          <ScalarProperty Name="Nev" ColumnName="Nev" />
+          <ScalarProperty Name="Felev" ColumnName="Felev" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TeremSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Terem)">
+        <MappingFragment StoreEntitySet="TeremSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nev" ColumnName="Nev" />
+          <ScalarProperty Name="Gepek_szama" ColumnName="Gepek_szama" />
+          <ScalarProperty Name="Ulohelyek_szama" ColumnName="Ulohelyek_szama" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GyakorlatvezetoSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Gyakorlatvezeto)">
+        <MappingFragment StoreEntitySet="GyakorlatvezetoSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Neptun" ColumnName="Neptun" />
+          <ScalarProperty Name="Nev" ColumnName="Nev" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CsoportSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Csoport)">
+        <MappingFragment StoreEntitySet="CsoportSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Felev" ColumnName="Felev" />
+          <ScalarProperty Name="Sorszam" ColumnName="Sorszam" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="KurzusSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Kurzus)">
+        <MappingFragment StoreEntitySet="KurzusSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Felev" ColumnName="Felev" />
+          <ScalarProperty Name="Het_napja" ColumnName="Het_napja" />
+          <ScalarProperty Name="Het_paritasa" ColumnName="Het_paritasa" />
+          <ScalarProperty Name="Idosav_kezdete" ColumnName="Idosav_kezdete" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="HallgatoKurzus" TypeName="Model.HallgatoKurzus" StoreEntitySet="HallgatoSet">
+      <EndProperty Name="Kurzus">
+        <ScalarProperty Name="Id" ColumnName="Kurzus_Id" />
+      </EndProperty>
+      <EndProperty Name="Hallgato">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+      <Condition ColumnName="Kurzus_Id" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="CsoportGyakorlatvezeto" TypeName="Model.CsoportGyakorlatvezeto" StoreEntitySet="CsoportSet">
+      <EndProperty Name="Gyakorlatvezeto">
+        <ScalarProperty Name="Id" ColumnName="Gyakorlatvezeto_Id" />
+      </EndProperty>
+      <EndProperty Name="Csoport">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="KurzusCsoport" TypeName="Model.KurzusCsoport" StoreEntitySet="CsoportSet">
+      <EndProperty Name="Kurzus">
+        <ScalarProperty Name="Id" ColumnName="Kurzus_Id" />
+      </EndProperty>
+      <EndProperty Name="Csoport">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="TeremKurzus" TypeName="Model.TeremKurzus" StoreEntitySet="TeremKurzus">
+      <EndProperty Name="Terem">
+        <ScalarProperty Name="Id" ColumnName="Terem_Id" />
+      </EndProperty>
+      <EndProperty Name="Kurzus">
+        <ScalarProperty Name="Id" ColumnName="Kurzus_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="CsoportTerem" TypeName="Model.CsoportTerem" StoreEntitySet="CsoportSet">
+      <EndProperty Name="Terem">
+        <ScalarProperty Name="Id" ColumnName="Terem_Id" />
+      </EndProperty>
+      <EndProperty Name="Csoport">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="CsoportHallgato" TypeName="Model.CsoportHallgato" StoreEntitySet="HallgatoSet">
+      <EndProperty Name="Csoport">
+        <ScalarProperty Name="Id" ColumnName="Csoport_Id" />
+      </EndProperty>
+      <EndProperty Name="Hallgato">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+      <Condition ColumnName="Csoport_Id" IsNull="false" />
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
@@ -147,7 +419,7 @@
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="False" />
-        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Default" />
       </DesignerInfoPropertySet>
     </edmx:Options>
     <!-- Diagram content (shape and connector positions) -->
