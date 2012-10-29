@@ -9,16 +9,8 @@ namespace Database_Design
   {
     static void Main(string[] args)
     {
-      using (TerembeosztoEntitasok ctx = new TerembeosztoEntitasok())
-      {
-        var terem = new Terem();
-        terem.Nev = "V2.637";
-        terem.Gepek_szama = 20;
-        terem.Ulohelyek_szama = 25;
-
-        ctx.TeremSet.AddObject(terem);
-        ctx.SaveChanges();
-      }
+      var worker = new Worker();
+      worker.TestImport();
     }    
   }
 }
