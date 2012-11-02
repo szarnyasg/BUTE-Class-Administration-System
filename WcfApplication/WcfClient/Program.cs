@@ -13,7 +13,6 @@ namespace microsoft.servicemodel.samples
     {
       ServiceClient client = new ServiceClient();
 
-
       // Call the Add service operation.
       ComplexNumber value1 = new ComplexNumber(); 
       value1.Real = 1; 

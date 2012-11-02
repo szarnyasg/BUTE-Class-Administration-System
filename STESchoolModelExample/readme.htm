@@ -1,0 +1,365 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=Generator content="Microsoft Word 12 (filtered)">
+<style>
+<!--
+ /* Font Definitions */
+ @font-face
+	{font-family:Wingdings;
+	panose-1:5 0 0 0 0 0 0 0 0 0;}
+@font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+@font-face
+	{font-family:Tahoma;
+	panose-1:2 11 6 4 3 5 4 4 2 4;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0in;
+	margin-bottom:.0001pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";}
+h1
+	{mso-style-link:"Heading 1 Char";
+	margin-right:0in;
+	margin-left:0in;
+	font-size:24.0pt;
+	font-family:"Times New Roman","serif";
+	font-weight:bold;}
+h3
+	{mso-style-link:"Heading 3 Char";
+	margin-right:0in;
+	margin-left:0in;
+	font-size:13.5pt;
+	font-family:"Times New Roman","serif";
+	font-weight:bold;}
+h4
+	{mso-style-link:"Heading 4 Char";
+	margin-right:0in;
+	margin-left:0in;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";
+	font-weight:bold;}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;}
+p
+	{margin-right:0in;
+	margin-left:0in;
+	font-size:12.0pt;
+	font-family:"Times New Roman","serif";}
+p.MsoAcetate, li.MsoAcetate, div.MsoAcetate
+	{mso-style-link:"Balloon Text Char";
+	margin:0in;
+	margin-bottom:.0001pt;
+	font-size:8.0pt;
+	font-family:"Tahoma","sans-serif";}
+span.Heading1Char
+	{mso-style-name:"Heading 1 Char";
+	mso-style-link:"Heading 1";
+	font-family:"Cambria","serif";
+	color:#365F91;
+	font-weight:bold;}
+span.Heading3Char
+	{mso-style-name:"Heading 3 Char";
+	mso-style-link:"Heading 3";
+	font-family:"Cambria","serif";
+	color:#4F81BD;
+	font-weight:bold;}
+span.Heading4Char
+	{mso-style-name:"Heading 4 Char";
+	mso-style-link:"Heading 4";
+	font-family:"Cambria","serif";
+	color:#4F81BD;
+	font-weight:bold;
+	font-style:italic;}
+span.BalloonTextChar
+	{mso-style-name:"Balloon Text Char";
+	mso-style-link:"Balloon Text";
+	font-family:"Tahoma","sans-serif";}
+.MsoChpDefault
+	{font-size:10.0pt;}
+@page Section1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.0in 1.0in 1.0in;}
+div.Section1
+	{page:Section1;}
+ /* List Definitions */
+ ol
+	{margin-bottom:0in;}
+ul
+	{margin-bottom:0in;}
+-->
+</style>
+
+</head>
+
+<body lang=EN-US link=blue vlink=purple scroll=auto>
+
+<div class=Section1>
+
+<div id=mainbody>
+
+<h1>Serializing Self-Tracking Entities (Entity Framework)</h1>
+
+<div id=mainSection>
+
+<div id=mainBody>
+
+<p><span style='font-size:9.5pt'>In an ADO.NET Entity Framework application, an
+object context is responsible for tracking changes in your objects. However,
+when you need to manipulate objects in another tier, where the object context
+is not available, you must decide how to track changes report those changes
+back to the object context. Starting with the Entity Framework version 4,
+self-tracking entities can help you track changes in any tier. A self-tracking
+entity is an entity built from a Text Template Transformation Toolkit (T4) template
+that generates entity types that have the ability to record changes to scalar,
+complex, and navigation properties. The ADO.NET Self-Tracking Entity Generator
+Template is available in Visual Studio 2010. For more information, see <a
+href="http://go.microsoft.com/fwlink/?LinkId=187320">Walkthrough: Serializing
+Self-Tracking Entities</a>.</span></p>
+
+<p><span style='font-size:9.5pt'>This sample is available on the <a
+href="http://go.microsoft.com/fwlink/?LinkId=165420"><linkText xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Entity
+Framework Documentation Samples</linkText></a> site on MSDN Code Gallery.</span></p>
+
+<h1>Scenario</h1>
+
+<div id=sectionSectionELBHA>
+
+<p><span style='font-size:9.5pt'>The sample demonstrates how a WCF service
+exposes a series of operations that return entity graphs. Next, a client
+application manipulates that graph and submits the modifications to a service
+operation that validates and saves the updates to a database by using the
+Entity Framework. </span></p>
+
+</div>
+
+<h1>Prerequisites</h1>
+
+<div id=sectionSectionEJBHA>
+
+<p><span style='font-size:9.5pt'>Before running this sample, make sure the
+following software is installed:</span></p>
+
+<p style='margin-left:.5in;text-indent:-.25in'><span style='font-size:10.0pt;
+font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:9.5pt'>Visual Studio 2010 containing the
+.NET Framework 4</span></p>
+
+<p style='margin-left:.5in;text-indent:-.25in'><span style='font-size:10.0pt;
+font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:9.5pt'>SQL Server 2005 or 2008 Database
+Engine</span></p>
+
+<p style='margin-left:1.0in;text-indent:-.25in'><span style='font-size:10.0pt;
+font-family:"Courier New"'>o<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:9.5pt'>School sample database (included in
+the sample)</span></p>
+
+<p style='margin-left:1.0in;text-indent:-.25in'><span style='font-size:10.0pt;
+font-family:"Courier New"'>o<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;
+</span></span><span style='font-size:9.5pt'>SQL Server Management Studio
+(optional)</span></p>
+
+</div>
+
+<h1>Building the Sample</h1>
+
+<div id=sectionSectionEHBHA>
+
+<p><span style='font-size:9.5pt'>The <b>STESchoolModelExample</b> consists of 5
+projects: </span></p>
+
+<p style='margin-left:.5in;text-indent:-.25in'><span style='font-size:10.0pt;
+font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><b><span style='font-size:9.5pt'>STESchoolModel</span></b><span
+style='font-size:9.5pt'> class library project that contains the School-based
+model and the self-tracking entity templates, which includes the self-tracking
+entity types template and the typed <b>System.Data.Objects.ObjectContext</b>
+template.</span></p>
+
+<p style='margin-left:.5in;text-indent:-.25in'><span style='font-size:10.0pt;
+font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><b><span style='font-size:9.5pt'>STESchoolModelTypes</span></b><span
+style='font-size:9.5pt'> class library project that links to the self-tracking
+entity types template that is located in the <b>STESchoolModel</b> project. </span></p>
+
+<p style='margin-left:.5in;text-indent:-.25in'><span style='font-size:10.0pt;
+font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><b><span style='font-size:9.5pt'>STESchoolModelService</span></b><span
+style='font-size:9.5pt'> Windows Communication Foundation (WCF) service
+application that exposes a set of operations that return entity graphs and
+apply changes made on the client to the database. </span></p>
+
+<p style='margin-left:.5in;text-indent:-.25in'><span style='font-size:10.0pt;
+font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><b><span style='font-size:9.5pt'>STESchoolModelConsoleTest</span></b><span
+style='font-size:9.5pt'> console client applications.</span></p>
+
+<p style='margin-left:.5in;text-indent:-.25in'><span style='font-size:10.0pt;
+font-family:Symbol'>·<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><b><span style='font-size:9.5pt'>STESchoolModelWPFTest</span></b><span
+style='font-size:9.5pt'> The Windows Presentation Foundation (WPF) client
+application. </span></p>
+
+<p><span style='font-size:9.5pt'>Use the following procedure to build the
+sample.</span></p>
+
+<h3>To build the STESchoolModelExample application</h3>
+
+<div>
+
+<p style='margin-left:.5in;text-indent:-.25in'><span style='font-size:9.5pt'>1.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span
+style='font-size:9.5pt'>(Optional) If the School sample database is not already
+present in your SQL Server instance, run the CreateSchool.sql script included with
+the project.</span></p>
+
+<p style='margin-left:.5in;text-indent:-.25in'><span style='font-size:9.5pt'>2.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span
+style='font-size:9.5pt'>Open the solution file in Visual Studio.</span></p>
+
+<p style='margin-left:.5in;text-indent:-.25in'><span style='font-size:9.5pt'>3.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span
+style='font-size:9.5pt'>(Optional) If you created the School database in an
+instance of SQL Server other than the default instance on the local machine,
+specify the correct SQL Server instance by modifying the Data Source in the
+connection string in the configuration file of the following projects: <b>STESchoolModelService</b>,
+<b>STESchoolModelConsoleTest</b>, <b>STESchoolModelWPFTest</b>.</span></p>
+
+<p style='margin-left:.5in;text-indent:-.25in'><span style='font-size:9.5pt'>4.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span
+style='font-size:9.5pt'>Build the solution.</span></p>
+
+</div>
+
+</div>
+
+<h1>Running the Sample</h1>
+
+<div id=sectionSectionEFBHA>
+
+<p><span style='font-size:9.5pt'>Use the following procedure to run the sample.</span></p>
+
+<h3>To run the client application</h3>
+
+<div>
+
+<p style='margin-left:.5in;text-indent:-.25in'><span style='font-size:9.5pt'>1.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span
+style='font-size:9.5pt'>Update service reference in the <b>STESchoolModelWPFTest</b>
+and <b>STESchoolModelConsoleTest</b> client projects. To update the reference,
+in <b>Solution Explorer</b>, right-click <b>ServiceReference1</b> under the <b>Service
+References</b> folder, and select <b>Update Service Reference</b>.</span></p>
+
+<p style='margin-left:.5in;text-indent:-.25in'><span style='font-size:9.5pt'>2.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span
+style='font-size:9.5pt'>Set the <b>STESchoolModelWPFTest</b> or <b>STESchoolModelConsoleTest</b>
+as the start-up project.</span></p>
+
+<p style='margin-left:.5in;text-indent:-.25in'><span style='font-size:9.5pt'>3.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span
+style='font-size:9.5pt'>Run the application. If the client failed to
+communicate with the referenced service, follow the next step.</span></p>
+
+<p style='margin-left:1.0in;text-indent:-.25in'><span style='font-size:9.5pt'>1.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span
+style='font-size:9.5pt'>Delete <b>ServiceReference1</b> from the client
+project.</span></p>
+
+<p style='margin-left:1.0in;text-indent:-.25in'><span style='font-size:9.5pt'>2.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span
+style='font-size:9.5pt'>Add the service reference again. To add a reference to
+the service, in <b>Solution Explorer</b>, right-click the <b>Service References</b>
+folder, and then select <b>Add Service Reference</b>. </span></p>
+
+<p style='margin-left:1.0in;text-indent:-.25in'><span style='font-size:9.5pt'>3.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span
+style='font-size:9.5pt'>Configure the service. Because <b>STESchoolModelService</b>
+returns <b>System.Collections.Generic.List</b>, you need to configure the
+service reference. Right-click the service name (<b>ServiceReference1</b>), and
+then select <b>Configure Service Reference…</b>. In the Configure Service
+Reference dialog, select the <b>System.Collections.Generic.List</b> type from
+the <b>Collection type</b> list. </span></p>
+
+<p style='margin-left:1.0in;text-indent:-.25in'><span style='font-size:9.5pt'>4.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span
+style='font-size:9.5pt'>Run the application.</span></p>
+
+</div>
+
+</div>
+
+<h1>Removing the Sample</h1>
+
+<div id=sectionSectionEDBHA>
+
+<p><span style='font-size:9.5pt'>Use the following procedure to remove the <b>STESchoolModelExample</b>
+sample.</span></p>
+
+<h3>To remove the STESchoolModelExample application</h3>
+
+<div>
+
+<p style='margin-left:.5in;text-indent:-.25in'><span style='font-size:9.5pt'>1.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span
+style='font-size:9.5pt'>Delete the project directory and contents.</span></p>
+
+<p style='margin-left:.5in;text-indent:-.25in'><span style='font-size:9.5pt'>2.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span
+style='font-size:9.5pt'>(Optional) Drop the School database from the instance
+of SQL Server.</span></p>
+
+</div>
+
+</div>
+
+<h1><span id=seeAlsoNoToggle>See Also</span></h1>
+
+<div id=seeAlsoSection>
+
+<h4>Other Resources</h4>
+
+<p class=MsoNormal style='margin-bottom:12.0pt'><span style='font-size:9.5pt'><a
+href="http://go.microsoft.com/fwlink/?LinkID=125409"><linkText xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">ADO.NET
+Entity Framework</linkText></a><br>
+<a href="http://go.microsoft.com/fwlink/?LinkId=178937"><linkText xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Entity
+Data Model</linkText></a><br>
+<a href="http://go.microsoft.com/fwlink/?LinkID=153180"><linkText xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">ADO.NET
+Entity Data Model Tools</linkText></a><br>
+<a href="http://go.microsoft.com/fwlink/?LinkId=178938"><linkText xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Binding
+Objects to Controls</linkText></a><br>
+<a href="http://go.microsoft.com/fwlink/?LinkId=187320"><linkText xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">Walkthrough:
+Serialize Self-Tracking Entities</linkText></a></span></p>
+
+</div>
+
+</div>
+
+<div id=footer>
+
+<div>
+
+<p class=MsoNormal><span style='font-size:9.5pt'><img border=0 width=800
+height=3 src="../local/footer.gif" alt=Footer></span></p>
+
+</div>
+
+<p class=MsoNormal><span style='font-size:9.5pt'>To make a suggestion or report
+a bug about Help or another feature of this product, go to the <a
+href="http://go.microsoft.com/fwlink/?LinkId=50040">feedback site </a>. </span></p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</body>
+
+</html>

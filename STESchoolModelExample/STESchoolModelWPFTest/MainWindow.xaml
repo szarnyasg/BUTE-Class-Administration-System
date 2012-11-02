@@ -1,0 +1,46 @@
+﻿<!-- <snippetSTESchoolModelWPFTestXaml> -->
+<Window x:Class="STESchoolModelWPFTest.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="508" Width="919" Loaded="Window_Loaded">
+    <!-- The code begind code sets the departmentsItemsGrid to the root of the object graph.-->
+    <Grid Name="departmentsItemsGrid">
+        <!-- comboBoxDepartment points to the root of the graph, that is why the Path is not specified-->
+        <ComboBox DisplayMemberPath="DepartmentID" ItemsSource="{Binding}"
+                  IsSynchronizedWithCurrentItem="true" 
+                  Height="23" Margin="122,12,198,0" Name="comboBoxDepartment" VerticalAlignment="Top"/>
+        <!-- listViewItems Path is set to Courses because it is bound to Department.Courses.-->
+        <ListView ItemsSource="{Binding Path=Courses}" Name="listViewItems" Margin="34,46,34,50" >
+            <ListView.View>
+                <GridView AllowsColumnReorder="False" ColumnHeaderToolTip="Courses" >
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=CourseID}" 
+                        Header="CourseID" Width="70"/>
+                    <!--The TextBox controls are embedded in the two of the following columns.
+                        This is done to enable editing in the ListView control. -->
+                    <GridViewColumn Header="Title" Width="100">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Height="25" Width="100" Text="{Binding Path=Title}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Credits" Width="100" >
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Height="25" Width="100" Text="{Binding Path=Credits}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Label Height="28" Margin="34,12,0,0" Name="departmentLabel" VerticalAlignment="Top" 
+               HorizontalAlignment="Left" Width="93">Department:</Label>
+        <!--When the Save and Close button is clicked all the objects will be sent to the service 
+            where all the updated objects will be saved to the database. -->
+        <Button Height="23" HorizontalAlignment="Right" Margin="0,0,176,12" 
+                Name="buttonSave" VerticalAlignment="Bottom" Width="127" Click="buttonSave_Click">Save</Button>
+        <Button Content="Close" Height="23" HorizontalAlignment="Left" Margin="736,0,0,12" Name="buttonClose" VerticalAlignment="Bottom" Width="127" Click="buttonClose_Click_1" />
+    </Grid>
+</Window>
+<!-- </snippetSTESchoolModelWPFTestXaml> -->
