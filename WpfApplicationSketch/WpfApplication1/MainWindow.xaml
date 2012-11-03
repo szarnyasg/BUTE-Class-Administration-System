@@ -1,0 +1,94 @@
+﻿<Window x:Class="WpfApplication1.AddStudent"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Hallgató felvétele" Height="Auto" Width="400" ResizeMode="NoResize" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+    <Grid Margin="4">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="6"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="Auto"/>
+
+
+        </Grid.RowDefinitions>
+
+        <!--  NAME  -->
+        <Label
+            Content="Név:"
+            Grid.Row="0"
+            Grid.Column="0"
+            HorizontalAlignment="Right"
+            />
+        <TextBox
+            Grid.Row="0"
+            Grid.Column="2"
+            />
+
+        <!-- NEPTUN -->
+        <Label
+            Content="Neptun kód:"
+            Grid.Row="2"
+            Grid.Column="0"
+            HorizontalAlignment="Right"
+            />
+        <TextBox
+            Grid.Row="2"
+            Grid.Column="2"
+            />
+
+        <!-- COURSE -->
+        <Label
+            Content="Kurzus"
+            Grid.Row="4"
+            Grid.Column="0"
+            HorizontalAlignment="Right"
+            />
+        <ComboBox
+            Grid.Row="4"
+            Grid.Column="2"
+            />
+
+        <!-- BUTTONS -->
+        <Grid
+            Grid.Row="6"
+            Grid.Column="2">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="6"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+            </Grid.RowDefinitions>
+
+            <Button
+                Name="InsertButton"
+                Content="Felvesz"
+                Grid.Row="0"
+                Grid.Column="0"
+                />
+
+            <Button
+                Name="CanceslButton"
+                Content="Mégsem"
+                Grid.Row="0"
+                Grid.Column="2"
+                />
+
+
+        </Grid>
+
+    </Grid>
+</Window>
