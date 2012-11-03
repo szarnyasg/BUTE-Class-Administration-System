@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Database_Design
+namespace STESchoolModelTypes
 {
     using System.Runtime.Serialization;
     using System;
@@ -16,25 +16,25 @@ namespace Database_Design
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Hallgato", Namespace="http://schemas.datacontract.org/2004/07/Database_Design", IsReference=true)]
-    public partial class Hallgato : object, System.Runtime.Serialization.IExtensibleDataObject
+    [System.Runtime.Serialization.DataContractAttribute(Name="Department", Namespace="http://schemas.datacontract.org/2004/07/STESchoolModelTypes", IsReference=true)]
+    public partial class Department : object, System.Runtime.Serialization.IExtensibleDataObject
     {
         
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
-        private Database_Design.ObjectChangeTracker ChangeTrackerField;
+        private System.Nullable<int> AdministratorField;
         
-        private Database_Design.Csoport CsoportField;
+        private decimal BudgetField;
         
-        private string FelevField;
+        private STESchoolModelTypes.ObjectChangeTracker ChangeTrackerField;
         
-        private int IdField;
+        private STESchoolModelTypes.Course[] CoursesField;
         
-        private Database_Design.Kurzus KurzusField;
+        private int DepartmentIDField;
         
-        private string NeptunField;
+        private string NameField;
         
-        private string NevField;
+        private System.DateTime StartDateField;
         
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData
         {
@@ -49,7 +49,33 @@ namespace Database_Design
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Database_Design.ObjectChangeTracker ChangeTracker
+        public System.Nullable<int> Administrator
+        {
+            get
+            {
+                return this.AdministratorField;
+            }
+            set
+            {
+                this.AdministratorField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public decimal Budget
+        {
+            get
+            {
+                return this.BudgetField;
+            }
+            set
+            {
+                this.BudgetField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public STESchoolModelTypes.ObjectChangeTracker ChangeTracker
         {
             get
             {
@@ -62,101 +88,75 @@ namespace Database_Design
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Database_Design.Csoport Csoport
+        public STESchoolModelTypes.Course[] Courses
         {
             get
             {
-                return this.CsoportField;
+                return this.CoursesField;
             }
             set
             {
-                this.CsoportField = value;
+                this.CoursesField = value;
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Felev
+        public int DepartmentID
         {
             get
             {
-                return this.FelevField;
+                return this.DepartmentIDField;
             }
             set
             {
-                this.FelevField = value;
+                this.DepartmentIDField = value;
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Id
+        public string Name
         {
             get
             {
-                return this.IdField;
+                return this.NameField;
             }
             set
             {
-                this.IdField = value;
+                this.NameField = value;
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Database_Design.Kurzus Kurzus
+        public System.DateTime StartDate
         {
             get
             {
-                return this.KurzusField;
+                return this.StartDateField;
             }
             set
             {
-                this.KurzusField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Neptun
-        {
-            get
-            {
-                return this.NeptunField;
-            }
-            set
-            {
-                this.NeptunField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Nev
-        {
-            get
-            {
-                return this.NevField;
-            }
-            set
-            {
-                this.NevField = value;
+                this.StartDateField = value;
             }
         }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ObjectChangeTracker", Namespace="http://schemas.datacontract.org/2004/07/Database_Design", IsReference=true)]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ObjectChangeTracker", Namespace="http://schemas.datacontract.org/2004/07/STESchoolModelTypes", IsReference=true)]
     public partial class ObjectChangeTracker : object, System.Runtime.Serialization.IExtensibleDataObject
     {
         
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
-        private Database_Design.ExtendedPropertiesDictionary ExtendedPropertiesField;
+        private STESchoolModelTypes.ExtendedPropertiesDictionary ExtendedPropertiesField;
         
-        private Database_Design.ObjectsAddedToCollectionProperties ObjectsAddedToCollectionPropertiesField;
+        private STESchoolModelTypes.ObjectsAddedToCollectionProperties ObjectsAddedToCollectionPropertiesField;
         
-        private Database_Design.ObjectsRemovedFromCollectionProperties ObjectsRemovedFromCollectionPropertiesField;
+        private STESchoolModelTypes.ObjectsRemovedFromCollectionProperties ObjectsRemovedFromCollectionPropertiesField;
         
-        private Database_Design.OriginalValuesDictionary OriginalValuesField;
+        private STESchoolModelTypes.OriginalValuesDictionary OriginalValuesField;
         
-        private Database_Design.ObjectState StateField;
+        private STESchoolModelTypes.ObjectState StateField;
         
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData
         {
@@ -171,7 +171,7 @@ namespace Database_Design
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Database_Design.ExtendedPropertiesDictionary ExtendedProperties
+        public STESchoolModelTypes.ExtendedPropertiesDictionary ExtendedProperties
         {
             get
             {
@@ -184,7 +184,7 @@ namespace Database_Design
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Database_Design.ObjectsAddedToCollectionProperties ObjectsAddedToCollectionProperties
+        public STESchoolModelTypes.ObjectsAddedToCollectionProperties ObjectsAddedToCollectionProperties
         {
             get
             {
@@ -197,7 +197,7 @@ namespace Database_Design
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Database_Design.ObjectsRemovedFromCollectionProperties ObjectsRemovedFromCollectionProperties
+        public STESchoolModelTypes.ObjectsRemovedFromCollectionProperties ObjectsRemovedFromCollectionProperties
         {
             get
             {
@@ -210,7 +210,7 @@ namespace Database_Design
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Database_Design.OriginalValuesDictionary OriginalValues
+        public STESchoolModelTypes.OriginalValuesDictionary OriginalValues
         {
             get
             {
@@ -223,7 +223,7 @@ namespace Database_Design
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Database_Design.ObjectState State
+        public STESchoolModelTypes.ObjectState State
         {
             get
             {
@@ -238,27 +238,25 @@ namespace Database_Design
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Csoport", Namespace="http://schemas.datacontract.org/2004/07/Database_Design", IsReference=true)]
-    public partial class Csoport : object, System.Runtime.Serialization.IExtensibleDataObject
+    [System.Runtime.Serialization.DataContractAttribute(Name="Course", Namespace="http://schemas.datacontract.org/2004/07/STESchoolModelTypes", IsReference=true)]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(STESchoolModelTypes.OnsiteCourse))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(STESchoolModelTypes.OnlineCourse))]
+    public partial class Course : object, System.Runtime.Serialization.IExtensibleDataObject
     {
         
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
-        private Database_Design.ObjectChangeTracker ChangeTrackerField;
+        private STESchoolModelTypes.ObjectChangeTracker ChangeTrackerField;
         
-        private string FelevField;
+        private int CourseIDField;
         
-        private Database_Design.Gyakorlatvezeto GyakorlatvezetoField;
+        private int CreditsField;
         
-        private Database_Design.Hallgato[] HallgatoField;
+        private STESchoolModelTypes.Department DepartmentField;
         
-        private int IdField;
+        private int DepartmentIDField;
         
-        private Database_Design.Kurzus KurzusField;
-        
-        private decimal SorszamField;
-        
-        private Database_Design.Terem TeremField;
+        private string TitleField;
         
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData
         {
@@ -273,7 +271,7 @@ namespace Database_Design
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Database_Design.ObjectChangeTracker ChangeTracker
+        public STESchoolModelTypes.ObjectChangeTracker ChangeTracker
         {
             get
             {
@@ -286,284 +284,102 @@ namespace Database_Design
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Felev
+        public int CourseID
         {
             get
             {
-                return this.FelevField;
+                return this.CourseIDField;
             }
             set
             {
-                this.FelevField = value;
+                this.CourseIDField = value;
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Database_Design.Gyakorlatvezeto Gyakorlatvezeto
+        public int Credits
         {
             get
             {
-                return this.GyakorlatvezetoField;
+                return this.CreditsField;
             }
             set
             {
-                this.GyakorlatvezetoField = value;
+                this.CreditsField = value;
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Database_Design.Hallgato[] Hallgato
+        public STESchoolModelTypes.Department Department
         {
             get
             {
-                return this.HallgatoField;
+                return this.DepartmentField;
             }
             set
             {
-                this.HallgatoField = value;
+                this.DepartmentField = value;
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Id
+        public int DepartmentID
         {
             get
             {
-                return this.IdField;
+                return this.DepartmentIDField;
             }
             set
             {
-                this.IdField = value;
+                this.DepartmentIDField = value;
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Database_Design.Kurzus Kurzus
+        public string Title
         {
             get
             {
-                return this.KurzusField;
+                return this.TitleField;
             }
             set
             {
-                this.KurzusField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public decimal Sorszam
-        {
-            get
-            {
-                return this.SorszamField;
-            }
-            set
-            {
-                this.SorszamField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Database_Design.Terem Terem
-        {
-            get
-            {
-                return this.TeremField;
-            }
-            set
-            {
-                this.TeremField = value;
+                this.TitleField = value;
             }
         }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Kurzus", Namespace="http://schemas.datacontract.org/2004/07/Database_Design", IsReference=true)]
-    public partial class Kurzus : object, System.Runtime.Serialization.IExtensibleDataObject
-    {
-        
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        private Database_Design.ObjectChangeTracker ChangeTrackerField;
-        
-        private Database_Design.Csoport[] CsoportField;
-        
-        private string FelevField;
-        
-        private Database_Design.Hallgato[] HallgatoField;
-        
-        private decimal Het_napjaField;
-        
-        private bool Het_paritasaField;
-        
-        private int IdField;
-        
-        private System.TimeSpan Idosav_kezdeteField;
-        
-        private Database_Design.Terem[] TeremField;
-        
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData
-        {
-            get
-            {
-                return this.extensionDataField;
-            }
-            set
-            {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Database_Design.ObjectChangeTracker ChangeTracker
-        {
-            get
-            {
-                return this.ChangeTrackerField;
-            }
-            set
-            {
-                this.ChangeTrackerField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Database_Design.Csoport[] Csoport
-        {
-            get
-            {
-                return this.CsoportField;
-            }
-            set
-            {
-                this.CsoportField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Felev
-        {
-            get
-            {
-                return this.FelevField;
-            }
-            set
-            {
-                this.FelevField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Database_Design.Hallgato[] Hallgato
-        {
-            get
-            {
-                return this.HallgatoField;
-            }
-            set
-            {
-                this.HallgatoField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public decimal Het_napja
-        {
-            get
-            {
-                return this.Het_napjaField;
-            }
-            set
-            {
-                this.Het_napjaField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Het_paritasa
-        {
-            get
-            {
-                return this.Het_paritasaField;
-            }
-            set
-            {
-                this.Het_paritasaField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Id
-        {
-            get
-            {
-                return this.IdField;
-            }
-            set
-            {
-                this.IdField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.TimeSpan Idosav_kezdete
-        {
-            get
-            {
-                return this.Idosav_kezdeteField;
-            }
-            set
-            {
-                this.Idosav_kezdeteField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Database_Design.Terem[] Terem
-        {
-            get
-            {
-                return this.TeremField;
-            }
-            set
-            {
-                this.TeremField = value;
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0")]
-    [System.Runtime.Serialization.CollectionDataContractAttribute(Name="ExtendedPropertiesDictionary", Namespace="http://schemas.datacontract.org/2004/07/Database_Design", ItemName="ExtendedProperties", KeyName="Name", ValueName="ExtendedProperty")]
+    [System.Runtime.Serialization.CollectionDataContractAttribute(Name="ExtendedPropertiesDictionary", Namespace="http://schemas.datacontract.org/2004/07/STESchoolModelTypes", ItemName="ExtendedProperties", KeyName="Name", ValueName="ExtendedProperty")]
     public class ExtendedPropertiesDictionary : System.Collections.Generic.Dictionary<string, object>
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0")]
-    [System.Runtime.Serialization.CollectionDataContractAttribute(Name="ObjectsAddedToCollectionProperties", Namespace="http://schemas.datacontract.org/2004/07/Database_Design", ItemName="AddedObjectsForProperty", KeyName="CollectionPropertyName", ValueName="AddedObjects")]
-    public class ObjectsAddedToCollectionProperties : System.Collections.Generic.Dictionary<string, Database_Design.ObjectList>
+    [System.Runtime.Serialization.CollectionDataContractAttribute(Name="ObjectsAddedToCollectionProperties", Namespace="http://schemas.datacontract.org/2004/07/STESchoolModelTypes", ItemName="AddedObjectsForProperty", KeyName="CollectionPropertyName", ValueName="AddedObjects")]
+    public class ObjectsAddedToCollectionProperties : System.Collections.Generic.Dictionary<string, STESchoolModelTypes.ObjectList>
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0")]
-    [System.Runtime.Serialization.CollectionDataContractAttribute(Name="ObjectsRemovedFromCollectionProperties", Namespace="http://schemas.datacontract.org/2004/07/Database_Design", ItemName="DeletedObjectsForProperty", KeyName="CollectionPropertyName", ValueName="DeletedObjects")]
-    public class ObjectsRemovedFromCollectionProperties : System.Collections.Generic.Dictionary<string, Database_Design.ObjectList>
+    [System.Runtime.Serialization.CollectionDataContractAttribute(Name="ObjectsRemovedFromCollectionProperties", Namespace="http://schemas.datacontract.org/2004/07/STESchoolModelTypes", ItemName="DeletedObjectsForProperty", KeyName="CollectionPropertyName", ValueName="DeletedObjects")]
+    public class ObjectsRemovedFromCollectionProperties : System.Collections.Generic.Dictionary<string, STESchoolModelTypes.ObjectList>
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0")]
-    [System.Runtime.Serialization.CollectionDataContractAttribute(Name="OriginalValuesDictionary", Namespace="http://schemas.datacontract.org/2004/07/Database_Design", ItemName="OriginalValues", KeyName="Name", ValueName="OriginalValue")]
+    [System.Runtime.Serialization.CollectionDataContractAttribute(Name="OriginalValuesDictionary", Namespace="http://schemas.datacontract.org/2004/07/STESchoolModelTypes", ItemName="OriginalValues", KeyName="Name", ValueName="OriginalValue")]
     public class OriginalValuesDictionary : System.Collections.Generic.Dictionary<string, object>
     {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0")]
     [System.FlagsAttribute()]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ObjectState", Namespace="http://schemas.datacontract.org/2004/07/Database_Design")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ObjectState", Namespace="http://schemas.datacontract.org/2004/07/STESchoolModelTypes")]
     public enum ObjectState : int
     {
         
@@ -582,244 +398,81 @@ namespace Database_Design
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0")]
-    [System.Runtime.Serialization.CollectionDataContractAttribute(Name="ObjectList", Namespace="http://schemas.datacontract.org/2004/07/Database_Design", ItemName="ObjectValue")]
+    [System.Runtime.Serialization.CollectionDataContractAttribute(Name="ObjectList", Namespace="http://schemas.datacontract.org/2004/07/STESchoolModelTypes", ItemName="ObjectValue")]
     public class ObjectList : System.Collections.Generic.List<object>
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Gyakorlatvezeto", Namespace="http://schemas.datacontract.org/2004/07/Database_Design", IsReference=true)]
-    public partial class Gyakorlatvezeto : object, System.Runtime.Serialization.IExtensibleDataObject
+    [System.Runtime.Serialization.DataContractAttribute(Name="OnsiteCourse", Namespace="http://schemas.datacontract.org/2004/07/STESchoolModelTypes", IsReference=true)]
+    public partial class OnsiteCourse : STESchoolModelTypes.Course
     {
         
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        private string DaysField;
         
-        private Database_Design.ObjectChangeTracker ChangeTrackerField;
+        private string LocationField;
         
-        private Database_Design.Csoport[] CsoportField;
+        private System.DateTime TimeField;
         
-        private string EmailField;
-        
-        private int IdField;
-        
-        private string NeptunField;
-        
-        private string NevField;
-        
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Days
         {
             get
             {
-                return this.extensionDataField;
+                return this.DaysField;
             }
             set
             {
-                this.extensionDataField = value;
+                this.DaysField = value;
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Database_Design.ObjectChangeTracker ChangeTracker
+        public string Location
         {
             get
             {
-                return this.ChangeTrackerField;
+                return this.LocationField;
             }
             set
             {
-                this.ChangeTrackerField = value;
+                this.LocationField = value;
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Database_Design.Csoport[] Csoport
+        public System.DateTime Time
         {
             get
             {
-                return this.CsoportField;
+                return this.TimeField;
             }
             set
             {
-                this.CsoportField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Email
-        {
-            get
-            {
-                return this.EmailField;
-            }
-            set
-            {
-                this.EmailField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Id
-        {
-            get
-            {
-                return this.IdField;
-            }
-            set
-            {
-                this.IdField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Neptun
-        {
-            get
-            {
-                return this.NeptunField;
-            }
-            set
-            {
-                this.NeptunField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Nev
-        {
-            get
-            {
-                return this.NevField;
-            }
-            set
-            {
-                this.NevField = value;
+                this.TimeField = value;
             }
         }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "3.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Terem", Namespace="http://schemas.datacontract.org/2004/07/Database_Design", IsReference=true)]
-    public partial class Terem : object, System.Runtime.Serialization.IExtensibleDataObject
+    [System.Runtime.Serialization.DataContractAttribute(Name="OnlineCourse", Namespace="http://schemas.datacontract.org/2004/07/STESchoolModelTypes", IsReference=true)]
+    public partial class OnlineCourse : STESchoolModelTypes.Course
     {
         
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        private Database_Design.ObjectChangeTracker ChangeTrackerField;
-        
-        private Database_Design.Csoport CsoportField;
-        
-        private int Gepek_szamaField;
-        
-        private int IdField;
-        
-        private Database_Design.Kurzus[] KurzusField;
-        
-        private string NevField;
-        
-        private decimal Ulohelyek_szamaField;
-        
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData
-        {
-            get
-            {
-                return this.extensionDataField;
-            }
-            set
-            {
-                this.extensionDataField = value;
-            }
-        }
+        private string URLField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Database_Design.ObjectChangeTracker ChangeTracker
+        public string URL
         {
             get
             {
-                return this.ChangeTrackerField;
+                return this.URLField;
             }
             set
             {
-                this.ChangeTrackerField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Database_Design.Csoport Csoport
-        {
-            get
-            {
-                return this.CsoportField;
-            }
-            set
-            {
-                this.CsoportField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Gepek_szama
-        {
-            get
-            {
-                return this.Gepek_szamaField;
-            }
-            set
-            {
-                this.Gepek_szamaField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Id
-        {
-            get
-            {
-                return this.IdField;
-            }
-            set
-            {
-                this.IdField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Database_Design.Kurzus[] Kurzus
-        {
-            get
-            {
-                return this.KurzusField;
-            }
-            set
-            {
-                this.KurzusField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Nev
-        {
-            get
-            {
-                return this.NevField;
-            }
-            set
-            {
-                this.NevField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public decimal Ulohelyek_szama
-        {
-            get
-            {
-                return this.Ulohelyek_szamaField;
-            }
-            set
-            {
-                this.Ulohelyek_szamaField = value;
+                this.URLField = value;
             }
         }
     }
@@ -827,50 +480,58 @@ namespace Database_Design
 
 
 [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
-[System.ServiceModel.ServiceContractAttribute(Namespace="http://Microsoft.ServiceModel.Samples", ConfigurationName="IService")]
-public interface IService
+[System.ServiceModel.ServiceContractAttribute(ConfigurationName="IService1")]
+public interface IService1
 {
     
-    [System.ServiceModel.OperationContractAttribute(Action="http://Microsoft.ServiceModel.Samples/IService/GetHallgato", ReplyAction="http://Microsoft.ServiceModel.Samples/IService/GetHallgatoResponse")]
-    Database_Design.Hallgato GetHallgato();
+    [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/UpdateDepartment", ReplyAction="http://tempuri.org/IService1/UpdateDepartmentResponse")]
+    void UpdateDepartment(STESchoolModelTypes.Department updated);
+    
+    [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetDepartments", ReplyAction="http://tempuri.org/IService1/GetDepartmentsResponse")]
+    STESchoolModelTypes.Department[] GetDepartments();
 }
 
 [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
-public interface IServiceChannel : IService, System.ServiceModel.IClientChannel
+public interface IService1Channel : IService1, System.ServiceModel.IClientChannel
 {
 }
 
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
-public partial class ServiceClient : System.ServiceModel.ClientBase<IService>, IService
+public partial class Service1Client : System.ServiceModel.ClientBase<IService1>, IService1
 {
     
-    public ServiceClient()
+    public Service1Client()
     {
     }
     
-    public ServiceClient(string endpointConfigurationName) : 
+    public Service1Client(string endpointConfigurationName) : 
             base(endpointConfigurationName)
     {
     }
     
-    public ServiceClient(string endpointConfigurationName, string remoteAddress) : 
+    public Service1Client(string endpointConfigurationName, string remoteAddress) : 
             base(endpointConfigurationName, remoteAddress)
     {
     }
     
-    public ServiceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+    public Service1Client(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
             base(endpointConfigurationName, remoteAddress)
     {
     }
     
-    public ServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+    public Service1Client(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
             base(binding, remoteAddress)
     {
     }
     
-    public Database_Design.Hallgato GetHallgato()
+    public void UpdateDepartment(STESchoolModelTypes.Department updated)
     {
-        return base.Channel.GetHallgato();
+        base.Channel.UpdateDepartment(updated);
+    }
+    
+    public STESchoolModelTypes.Department[] GetDepartments()
+    {
+        return base.Channel.GetDepartments();
     }
 }

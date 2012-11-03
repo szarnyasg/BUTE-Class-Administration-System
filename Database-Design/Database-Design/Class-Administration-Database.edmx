@@ -186,34 +186,34 @@
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema xmlns="http://schemas.microsoft.com/ado/2008/09/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Model" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+      <Schema xmlns="http://schemas.microsoft.com/ado/2008/09/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="TerembeosztoModell" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
         <EntityContainer Name="TerembeosztoEntitasok" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="HallgatoSet" EntityType="Model.Hallgato" />
-          <EntitySet Name="TeremSet" EntityType="Model.Terem" />
-          <EntitySet Name="GyakorlatvezetoSet" EntityType="Model.Gyakorlatvezeto" />
-          <EntitySet Name="CsoportSet" EntityType="Model.Csoport" />
-          <EntitySet Name="KurzusSet" EntityType="Model.Kurzus" />
-          <AssociationSet Name="HallgatoKurzus" Association="Model.HallgatoKurzus">
+          <EntitySet Name="HallgatoSet" EntityType="TerembeosztoModell.Hallgato" />
+          <EntitySet Name="TeremSet" EntityType="TerembeosztoModell.Terem" />
+          <EntitySet Name="GyakorlatvezetoSet" EntityType="TerembeosztoModell.Gyakorlatvezeto" />
+          <EntitySet Name="CsoportSet" EntityType="TerembeosztoModell.Csoport" />
+          <EntitySet Name="KurzusSet" EntityType="TerembeosztoModell.Kurzus" />
+          <AssociationSet Name="HallgatoKurzus" Association="TerembeosztoModell.HallgatoKurzus">
             <End Role="Hallgato" EntitySet="HallgatoSet" />
             <End Role="Kurzus" EntitySet="KurzusSet" />
           </AssociationSet>
-          <AssociationSet Name="CsoportGyakorlatvezeto" Association="Model.CsoportGyakorlatvezeto">
+          <AssociationSet Name="CsoportGyakorlatvezeto" Association="TerembeosztoModell.CsoportGyakorlatvezeto">
             <End Role="Csoport" EntitySet="CsoportSet" />
             <End Role="Gyakorlatvezeto" EntitySet="GyakorlatvezetoSet" />
           </AssociationSet>
-          <AssociationSet Name="KurzusCsoport" Association="Model.KurzusCsoport">
+          <AssociationSet Name="KurzusCsoport" Association="TerembeosztoModell.KurzusCsoport">
             <End Role="Kurzus" EntitySet="KurzusSet" />
             <End Role="Csoport" EntitySet="CsoportSet" />
           </AssociationSet>
-          <AssociationSet Name="TeremKurzus" Association="Model.TeremKurzus">
+          <AssociationSet Name="TeremKurzus" Association="TerembeosztoModell.TeremKurzus">
             <End Role="Terem" EntitySet="TeremSet" />
             <End Role="Kurzus" EntitySet="KurzusSet" />
           </AssociationSet>
-          <AssociationSet Name="CsoportTerem" Association="Model.CsoportTerem">
+          <AssociationSet Name="CsoportTerem" Association="TerembeosztoModell.CsoportTerem">
             <End Role="Csoport" EntitySet="CsoportSet" />
             <End Role="Terem" EntitySet="TeremSet" />
           </AssociationSet>
-          <AssociationSet Name="CsoportHallgato" Association="Model.CsoportHallgato">
+          <AssociationSet Name="CsoportHallgato" Association="TerembeosztoModell.CsoportHallgato">
             <End Role="Csoport" EntitySet="CsoportSet" />
             <End Role="Hallgato" EntitySet="HallgatoSet" />
           </AssociationSet>
@@ -223,10 +223,10 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="Kurzus" Relationship="Model.HallgatoKurzus" FromRole="Hallgato" ToRole="Kurzus" />
+          <NavigationProperty Name="Kurzus" Relationship="TerembeosztoModell.HallgatoKurzus" FromRole="Hallgato" ToRole="Kurzus" />
           <Property Type="String" Name="Neptun" Nullable="false" />
           <Property Type="String" Name="Nev" Nullable="false" />
-          <NavigationProperty Name="Csoport" Relationship="Model.CsoportHallgato" FromRole="Hallgato" ToRole="Csoport" />
+          <NavigationProperty Name="Csoport" Relationship="TerembeosztoModell.CsoportHallgato" FromRole="Hallgato" ToRole="Csoport" />
           <Property Type="String" Name="Felev" Nullable="false" />
         </EntityType>
         <EntityType Name="Terem">
@@ -237,15 +237,15 @@
           <Property Type="String" Name="Nev" Nullable="false" />
           <Property Type="Int32" Name="Gepek_szama" Nullable="false" />
           <Property Type="Decimal" Name="Ulohelyek_szama" Nullable="false" />
-          <NavigationProperty Name="Kurzus" Relationship="Model.TeremKurzus" FromRole="Terem" ToRole="Kurzus" />
-          <NavigationProperty Name="Csoport" Relationship="Model.CsoportTerem" FromRole="Terem" ToRole="Csoport" />
+          <NavigationProperty Name="Kurzus" Relationship="TerembeosztoModell.TeremKurzus" FromRole="Terem" ToRole="Kurzus" />
+          <NavigationProperty Name="Csoport" Relationship="TerembeosztoModell.CsoportTerem" FromRole="Terem" ToRole="Csoport" />
         </EntityType>
         <EntityType Name="Gyakorlatvezeto">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="Csoport" Relationship="Model.CsoportGyakorlatvezeto" FromRole="Gyakorlatvezeto" ToRole="Csoport" />
+          <NavigationProperty Name="Csoport" Relationship="TerembeosztoModell.CsoportGyakorlatvezeto" FromRole="Gyakorlatvezeto" ToRole="Csoport" />
           <Property Type="String" Name="Neptun" Nullable="false" />
           <Property Type="String" Name="Nev" Nullable="false" />
           <Property Type="String" Name="Email" Nullable="false" />
@@ -255,49 +255,49 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="Gyakorlatvezeto" Relationship="Model.CsoportGyakorlatvezeto" FromRole="Csoport" ToRole="Gyakorlatvezeto" />
-          <NavigationProperty Name="Kurzus" Relationship="Model.KurzusCsoport" FromRole="Csoport" ToRole="Kurzus" />
+          <NavigationProperty Name="Gyakorlatvezeto" Relationship="TerembeosztoModell.CsoportGyakorlatvezeto" FromRole="Csoport" ToRole="Gyakorlatvezeto" />
+          <NavigationProperty Name="Kurzus" Relationship="TerembeosztoModell.KurzusCsoport" FromRole="Csoport" ToRole="Kurzus" />
           <Property Type="String" Name="Felev" Nullable="false" />
           <Property Type="Decimal" Name="Sorszam" Nullable="false" />
-          <NavigationProperty Name="Terem" Relationship="Model.CsoportTerem" FromRole="Csoport" ToRole="Terem" />
-          <NavigationProperty Name="Hallgato" Relationship="Model.CsoportHallgato" FromRole="Csoport" ToRole="Hallgato" />
+          <NavigationProperty Name="Terem" Relationship="TerembeosztoModell.CsoportTerem" FromRole="Csoport" ToRole="Terem" />
+          <NavigationProperty Name="Hallgato" Relationship="TerembeosztoModell.CsoportHallgato" FromRole="Csoport" ToRole="Hallgato" />
         </EntityType>
         <EntityType Name="Kurzus">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="Hallgato" Relationship="Model.HallgatoKurzus" FromRole="Kurzus" ToRole="Hallgato" />
-          <NavigationProperty Name="Csoport" Relationship="Model.KurzusCsoport" FromRole="Kurzus" ToRole="Csoport" />
-          <NavigationProperty Name="Terem" Relationship="Model.TeremKurzus" FromRole="Kurzus" ToRole="Terem" />
+          <NavigationProperty Name="Hallgato" Relationship="TerembeosztoModell.HallgatoKurzus" FromRole="Kurzus" ToRole="Hallgato" />
+          <NavigationProperty Name="Csoport" Relationship="TerembeosztoModell.KurzusCsoport" FromRole="Kurzus" ToRole="Csoport" />
+          <NavigationProperty Name="Terem" Relationship="TerembeosztoModell.TeremKurzus" FromRole="Kurzus" ToRole="Terem" />
           <Property Type="String" Name="Felev" Nullable="false" />
           <Property Type="Decimal" Name="Het_napja" Nullable="false" />
           <Property Type="Boolean" Name="Het_paritasa" Nullable="false" />
           <Property Type="Time" Name="Idosav_kezdete" Nullable="false" />
         </EntityType>
         <Association Name="HallgatoKurzus">
-          <End Type="Model.Hallgato" Role="Hallgato" Multiplicity="*" />
-          <End Type="Model.Kurzus" Role="Kurzus" Multiplicity="0..1" />
+          <End Type="TerembeosztoModell.Hallgato" Role="Hallgato" Multiplicity="*" />
+          <End Type="TerembeosztoModell.Kurzus" Role="Kurzus" Multiplicity="0..1" />
         </Association>
         <Association Name="CsoportGyakorlatvezeto">
-          <End Type="Model.Csoport" Role="Csoport" Multiplicity="*" />
-          <End Type="Model.Gyakorlatvezeto" Role="Gyakorlatvezeto" Multiplicity="1" />
+          <End Type="TerembeosztoModell.Csoport" Role="Csoport" Multiplicity="*" />
+          <End Type="TerembeosztoModell.Gyakorlatvezeto" Role="Gyakorlatvezeto" Multiplicity="1" />
         </Association>
         <Association Name="KurzusCsoport">
-          <End Type="Model.Kurzus" Role="Kurzus" Multiplicity="1" />
-          <End Type="Model.Csoport" Role="Csoport" Multiplicity="*" />
+          <End Type="TerembeosztoModell.Kurzus" Role="Kurzus" Multiplicity="1" />
+          <End Type="TerembeosztoModell.Csoport" Role="Csoport" Multiplicity="*" />
         </Association>
         <Association Name="TeremKurzus">
-          <End Type="Model.Terem" Role="Terem" Multiplicity="*" />
-          <End Type="Model.Kurzus" Role="Kurzus" Multiplicity="*" />
+          <End Type="TerembeosztoModell.Terem" Role="Terem" Multiplicity="*" />
+          <End Type="TerembeosztoModell.Kurzus" Role="Kurzus" Multiplicity="*" />
         </Association>
         <Association Name="CsoportTerem">
-          <End Type="Model.Csoport" Role="Csoport" Multiplicity="0..1" />
-          <End Type="Model.Terem" Role="Terem" Multiplicity="1" />
+          <End Type="TerembeosztoModell.Csoport" Role="Csoport" Multiplicity="0..1" />
+          <End Type="TerembeosztoModell.Terem" Role="Terem" Multiplicity="1" />
         </Association>
         <Association Name="CsoportHallgato">
-          <End Type="Model.Csoport" Role="Csoport" Multiplicity="0..1" />
-          <End Type="Model.Hallgato" Role="Hallgato" Multiplicity="*" />
+          <End Type="TerembeosztoModell.Csoport" Role="Csoport" Multiplicity="0..1" />
+          <End Type="TerembeosztoModell.Hallgato" Role="Hallgato" Multiplicity="*" />
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -306,7 +306,7 @@
     <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="TerembeosztoEntitasok">
     <EntitySetMapping Name="HallgatoSet">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.Hallgato)">
+      <EntityTypeMapping TypeName="IsTypeOf(TerembeosztoModell.Hallgato)">
         <MappingFragment StoreEntitySet="HallgatoSet">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Neptun" ColumnName="Neptun" />
@@ -316,7 +316,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="TeremSet">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.Terem)">
+      <EntityTypeMapping TypeName="IsTypeOf(TerembeosztoModell.Terem)">
         <MappingFragment StoreEntitySet="TeremSet">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Nev" ColumnName="Nev" />
@@ -326,7 +326,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="GyakorlatvezetoSet">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.Gyakorlatvezeto)">
+      <EntityTypeMapping TypeName="IsTypeOf(TerembeosztoModell.Gyakorlatvezeto)">
         <MappingFragment StoreEntitySet="GyakorlatvezetoSet">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Neptun" ColumnName="Neptun" />
@@ -336,7 +336,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="CsoportSet">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.Csoport)">
+      <EntityTypeMapping TypeName="IsTypeOf(TerembeosztoModell.Csoport)">
         <MappingFragment StoreEntitySet="CsoportSet">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Felev" ColumnName="Felev" />
@@ -345,7 +345,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="KurzusSet">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.Kurzus)">
+      <EntityTypeMapping TypeName="IsTypeOf(TerembeosztoModell.Kurzus)">
         <MappingFragment StoreEntitySet="KurzusSet">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Felev" ColumnName="Felev" />
@@ -355,7 +355,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="HallgatoKurzus" TypeName="Model.HallgatoKurzus" StoreEntitySet="HallgatoSet">
+    <AssociationSetMapping Name="HallgatoKurzus" TypeName="TerembeosztoModell.HallgatoKurzus" StoreEntitySet="HallgatoSet">
       <EndProperty Name="Kurzus">
         <ScalarProperty Name="Id" ColumnName="Kurzus_Id" />
       </EndProperty>
@@ -364,7 +364,7 @@
       </EndProperty>
       <Condition ColumnName="Kurzus_Id" IsNull="false" />
     </AssociationSetMapping>
-    <AssociationSetMapping Name="CsoportGyakorlatvezeto" TypeName="Model.CsoportGyakorlatvezeto" StoreEntitySet="CsoportSet">
+    <AssociationSetMapping Name="CsoportGyakorlatvezeto" TypeName="TerembeosztoModell.CsoportGyakorlatvezeto" StoreEntitySet="CsoportSet">
       <EndProperty Name="Gyakorlatvezeto">
         <ScalarProperty Name="Id" ColumnName="Gyakorlatvezeto_Id" />
       </EndProperty>
@@ -372,7 +372,7 @@
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="KurzusCsoport" TypeName="Model.KurzusCsoport" StoreEntitySet="CsoportSet">
+    <AssociationSetMapping Name="KurzusCsoport" TypeName="TerembeosztoModell.KurzusCsoport" StoreEntitySet="CsoportSet">
       <EndProperty Name="Kurzus">
         <ScalarProperty Name="Id" ColumnName="Kurzus_Id" />
       </EndProperty>
@@ -380,7 +380,7 @@
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="TeremKurzus" TypeName="Model.TeremKurzus" StoreEntitySet="TeremKurzus">
+    <AssociationSetMapping Name="TeremKurzus" TypeName="TerembeosztoModell.TeremKurzus" StoreEntitySet="TeremKurzus">
       <EndProperty Name="Terem">
         <ScalarProperty Name="Id" ColumnName="Terem_Id" />
       </EndProperty>
@@ -388,7 +388,7 @@
         <ScalarProperty Name="Id" ColumnName="Kurzus_Id" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="CsoportTerem" TypeName="Model.CsoportTerem" StoreEntitySet="CsoportSet">
+    <AssociationSetMapping Name="CsoportTerem" TypeName="TerembeosztoModell.CsoportTerem" StoreEntitySet="CsoportSet">
       <EndProperty Name="Terem">
         <ScalarProperty Name="Id" ColumnName="Terem_Id" />
       </EndProperty>
@@ -396,7 +396,7 @@
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="CsoportHallgato" TypeName="Model.CsoportHallgato" StoreEntitySet="HallgatoSet">
+    <AssociationSetMapping Name="CsoportHallgato" TypeName="TerembeosztoModell.CsoportHallgato" StoreEntitySet="HallgatoSet">
       <EndProperty Name="Csoport">
         <ScalarProperty Name="Id" ColumnName="Csoport_Id" />
       </EndProperty>
@@ -425,37 +425,37 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram Name="Model1" ZoomLevel="84" >
-        <EntityTypeShape EntityType="Model.Hallgato" Width="1.5" PointX="10.75" PointY="5" Height="2.1725878906249996" />
-        <EntityTypeShape EntityType="Model.Terem" Width="1.5" PointX="6" PointY="1.125" Height="2.1725878906249996" />
-        <EntityTypeShape EntityType="Model.Gyakorlatvezeto" Width="1.5" PointX="3.625" PointY="1.125" Height="1.9802864583333339" />
-        <EntityTypeShape EntityType="Model.Csoport" Width="1.5" PointX="6.5" PointY="4.875" Height="2.3648893229166665" />
-        <EntityTypeShape EntityType="Model.Kurzus" Width="1.5" PointX="8.375" PointY="1.125" Height="2.5571907552083331" />
-        <AssociationConnector Association="Model.HallgatoKurzus">
-          <ConnectorPoint PointX="11.5" PointY="5" />
-          <ConnectorPoint PointX="11.5" PointY="2.4035953776041667" />
-          <ConnectorPoint PointX="9.875" PointY="2.4035953776041667" />
+        <EntityTypeShape EntityType="TerembeosztoModell.Hallgato" Width="1.5" PointX="7.625" PointY="4.375" Height="2.1725878906249996" />
+        <EntityTypeShape EntityType="TerembeosztoModell.Terem" Width="1.5" PointX="2.875" PointY="0.5" Height="2.1725878906249996" />
+        <EntityTypeShape EntityType="TerembeosztoModell.Gyakorlatvezeto" Width="1.5" PointX="0.5" PointY="0.5" Height="1.9802864583333339" />
+        <EntityTypeShape EntityType="TerembeosztoModell.Csoport" Width="1.5" PointX="3.375" PointY="4.25" Height="2.3648893229166665" />
+        <EntityTypeShape EntityType="TerembeosztoModell.Kurzus" Width="1.5" PointX="5.25" PointY="0.5" Height="2.5571907552083331" />
+        <AssociationConnector Association="TerembeosztoModell.HallgatoKurzus">
+          <ConnectorPoint PointX="8.375" PointY="4.375" />
+          <ConnectorPoint PointX="8.375" PointY="1.7785953776041668" />
+          <ConnectorPoint PointX="6.75" PointY="1.7785953776041668" />
         </AssociationConnector>
-        <AssociationConnector Association="Model.CsoportGyakorlatvezeto">
-          <ConnectorPoint PointX="6.5" PointY="6.0574446614583337" />
-          <ConnectorPoint PointX="4.375" PointY="6.0574446614583337" />
-          <ConnectorPoint PointX="4.375" PointY="3.1052864583333339" />
+        <AssociationConnector Association="TerembeosztoModell.CsoportGyakorlatvezeto">
+          <ConnectorPoint PointX="3.375" PointY="5.4324446614583337" />
+          <ConnectorPoint PointX="1.25" PointY="5.4324446614583337" />
+          <ConnectorPoint PointX="1.25" PointY="2.4802864583333339" />
         </AssociationConnector>
-        <AssociationConnector Association="Model.KurzusCsoport">
-          <ConnectorPoint PointX="9.125" PointY="3.6821907552083331" />
-          <ConnectorPoint PointX="9.125" PointY="5.4403816145833321" />
-          <ConnectorPoint PointX="8" PointY="5.4403816145833321" />
+        <AssociationConnector Association="TerembeosztoModell.KurzusCsoport">
+          <ConnectorPoint PointX="6" PointY="3.0571907552083331" />
+          <ConnectorPoint PointX="6" PointY="5.4324446614583337" />
+          <ConnectorPoint PointX="4.875" PointY="5.4324446614583337" />
         </AssociationConnector>
-        <AssociationConnector Association="Model.TeremKurzus">
-          <ConnectorPoint PointX="7.5" PointY="2.2112939453125" />
-          <ConnectorPoint PointX="8.375" PointY="2.2112939453125" />
+        <AssociationConnector Association="TerembeosztoModell.TeremKurzus">
+          <ConnectorPoint PointX="4.375" PointY="1.5862939453124998" />
+          <ConnectorPoint PointX="5.25" PointY="1.5862939453124998" />
         </AssociationConnector>
-        <AssociationConnector Association="Model.CsoportTerem">
-          <ConnectorPoint PointX="7" PointY="4.875" />
-          <ConnectorPoint PointX="7" PointY="3.2975878906249996" />
+        <AssociationConnector Association="TerembeosztoModell.CsoportTerem">
+          <ConnectorPoint PointX="3.875" PointY="4.25" />
+          <ConnectorPoint PointX="3.875" PointY="2.6725878906249996" />
         </AssociationConnector>
-        <AssociationConnector Association="Model.CsoportHallgato">
-          <ConnectorPoint PointX="8" PointY="6.3689847526041659" />
-          <ConnectorPoint PointX="10.75" PointY="6.3689847526041659" />
+        <AssociationConnector Association="TerembeosztoModell.CsoportHallgato">
+          <ConnectorPoint PointX="4.875" PointY="6.0525162760416666" />
+          <ConnectorPoint PointX="7.625" PointY="6.0525162760416666" />
         </AssociationConnector>
       </Diagram>
     </edmx:Diagrams>
