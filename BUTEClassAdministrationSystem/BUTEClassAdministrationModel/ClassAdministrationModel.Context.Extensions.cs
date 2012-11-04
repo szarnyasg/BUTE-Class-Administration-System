@@ -20,9 +20,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 
-using BUTEClassAdministrationTypes;
-
-namespace BUTEClassAdministrationService
+namespace BUTEClassAdministrationTypes
 {
     public static class SelfTrackingEntitiesContextExtensions
     {

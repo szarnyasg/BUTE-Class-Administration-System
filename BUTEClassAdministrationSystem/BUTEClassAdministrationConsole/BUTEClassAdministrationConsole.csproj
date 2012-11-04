@@ -58,9 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="Service References\ClassAdministrationServiceReference\BUTEClassAdministrationConsole.ClassAdministrationServiceReference.Student.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
+    <None Include="Properties\DataSources\BUTEClassAdministrationTypes.Student.datasource" />
     <None Include="Service References\ClassAdministrationServiceReference\ClassAdministrationService.wsdl" />
     <None Include="Service References\ClassAdministrationServiceReference\item.xsd">
       <SubType>Designer</SubType>

@@ -19,5 +19,8 @@ namespace BUTEClassAdministrationService
 		[OperationContract]
 		List<Student> GetStudents();
 
+		[OperationContract]
+		Student My();
+
 	}
 }

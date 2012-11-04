@@ -79,6 +79,7 @@
       <Link>ClassAdministrationModel.Context.tt</Link>
       <LastGenOutput>ClassAdministrationModel.Context.cs</LastGenOutput>
       <Generator>TextTemplatingFileGenerator</Generator>
+      <CustomToolNamespace>BUTEClassAdministrationTypes</CustomToolNamespace>
     </None>
   </ItemGroup>
   <ItemGroup>

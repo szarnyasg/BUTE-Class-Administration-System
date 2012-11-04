@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using BUTEClassAdministrationTypes;
 using BUTEClassAdministrationConsole.ClassAdministrationServiceReference;
 
 namespace BUTEClassAdministrationConsole
@@ -18,10 +19,11 @@ namespace BUTEClassAdministrationConsole
 		{
 			using (var service = new ClassAdministrationServiceClient())
 			{
-				Student s = service.GetStudent();
-				Console.WriteLine(s.Neptun);
-				s.Neptun = "ABC123";
-
+				//List<Student> list = service.GetStudents();
+				
+				
+				Console.WriteLine(service.My().Name);
+				
 			}
 		}
 	}
