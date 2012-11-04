@@ -26,26 +26,15 @@ namespace BUTEClassAdministrationClient
 		public MainWindow()
 		{
 			InitializeComponent();
+    	}
 
-			Work();
-		}
+        private void Insert_Student(object sender, RoutedEventArgs e)
+        {
+            Window asd = new InsertStudent();
+            asd.ShowDialog();
+        }
 
-		void Work()
-		{
-			using (var service = new ClassAdministrationServiceClient())
-			{
-				Student s = service.GetStudent();
-
-				Console.WriteLine(s.Name);
-
-				s.Name = "Móricz";
-				s.Neptun = "ZL2V8F";
-
-				service.SetStudent(s);
-
-				s.AcceptChanges();
-			}
-		}
+		
 
 	}
 }

@@ -1,0 +1,115 @@
+﻿<Window x:Class="BUTEClassAdministrationClient.InsertStudent"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:c="clr-namespace:BUTEClassAdministrationClient"
+                Title="Hallgató felvétele" Height="Auto" Width="400" ResizeMode="NoResize" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+       
+    <Grid Margin="4">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="6"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+
+        <Grid.Resources>
+            <DataTemplate DataType="{x:Type ValidationError}">
+                <TextBlock 
+          FontStyle="Italic"
+          Foreground="Red"
+          HorizontalAlignment="Right"
+          Margin="0,1"
+          Text="{Binding Path=ErrorContent}" 
+          />
+            </DataTemplate>
+        </Grid.Resources>
+
+        
+        
+        <!--  NAME  -->
+        <Label
+            Content="Név:"
+            Grid.Row="0"
+            Grid.Column="0"
+            HorizontalAlignment="Right"
+            />
+        <TextBox
+            Grid.Row="0"
+            Grid.Column="2"
+        />
+
+        <!-- NEPTUN -->
+        <Label 
+      Grid.Row="2" Grid.Column="0" 
+      Content="First _name:" 
+      HorizontalAlignment="Right"
+      Target="{Binding ElementName=firstNameTxt}"
+      />
+        <TextBox 
+      x:Name="firstNameTxt"
+      Grid.Row="2" Grid.Column="2" 
+      Text="{Binding Path=ASD, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" 
+      Validation.ErrorTemplate="{x:Null}"
+      />
+        <ContentPresenter 
+      Grid.Row="3" Grid.Column="2"
+      Content="{Binding ElementName=firstNameTxt, Path=(Validation.Errors).CurrentItem}"
+      />
+
+        <!-- COURSE -->
+        <Label
+            Content="Kurzus"
+            Grid.Row="4"
+            Grid.Column="0"
+            HorizontalAlignment="Right"
+            />
+        <ComboBox
+            Grid.Row="4"
+            Grid.Column="2"
+            />
+
+        <!-- BUTTONS -->
+        <Grid
+            Grid.Row="6"
+            Grid.Column="2">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="6"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+            </Grid.RowDefinitions>
+
+            <Button
+                Name="InsertButton"
+                Content="Felvesz"
+                Click="Insert"
+                Grid.Row="0"
+                Grid.Column="0"
+                />
+
+            <Button
+                Name="CanceslButton"
+                Content="Mégsem"
+                Click="Cancel"
+                Grid.Row="0"
+                Grid.Column="2"
+                />
+        </Grid>
+
+    </Grid>
+</Window>
