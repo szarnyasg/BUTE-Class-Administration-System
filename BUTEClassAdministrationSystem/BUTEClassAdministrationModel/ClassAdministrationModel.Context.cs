@@ -20,30 +20,28 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 
-using BUTEClassAdministrationTypes;
-
-namespace BUTEClassAdministrationService
+namespace BUTEClassAdministrationTypes
 {
-    public partial class ClassAdministrationEntityContainer : ObjectContext
+    public partial class ClassAdministrationEntityContext : ObjectContext
     {
-        public const string ConnectionString = "name=ClassAdministrationEntityContainer";
-        public const string ContainerName = "ClassAdministrationEntityContainer";
+        public const string ConnectionString = "name=ClassAdministrationEntityContext";
+        public const string ContainerName = "ClassAdministrationEntityContext";
     
         #region Constructors
     
-        public ClassAdministrationEntityContainer()
+        public ClassAdministrationEntityContext()
             : base(ConnectionString, ContainerName)
         {
             Initialize();
         }
     
-        public ClassAdministrationEntityContainer(string connectionString)
+        public ClassAdministrationEntityContext(string connectionString)
             : base(connectionString, ContainerName)
         {
             Initialize();
         }
     
-        public ClassAdministrationEntityContainer(EntityConnection connection)
+        public ClassAdministrationEntityContext(EntityConnection connection)
             : base(connection, ContainerName)
         {
             Initialize();

@@ -187,7 +187,7 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema xmlns="http://schemas.microsoft.com/ado/2008/09/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="ClassAdministrationModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
-        <EntityContainer Name="ClassAdministrationEntityContainer" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="ClassAdministrationEntityContext" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="StudentSet" EntityType="ClassAdministrationModel.Student" />
           <EntitySet Name="RoomSet" EntityType="ClassAdministrationModel.Room" />
           <EntitySet Name="InstructorSet" EntityType="ClassAdministrationModel.Instructor" />
@@ -304,7 +304,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
     <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="Model1StoreContainer" CdmEntityContainer="ClassAdministrationEntityContainer">
+  <EntityContainerMapping StorageEntityContainer="Model1StoreContainer" CdmEntityContainer="ClassAdministrationEntityContext">
     <EntitySetMapping Name="StudentSet">
       <EntityTypeMapping TypeName="IsTypeOf(ClassAdministrationModel.Student)">
         <MappingFragment StoreEntitySet="StudentSet">

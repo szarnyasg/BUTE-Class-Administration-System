@@ -10,7 +10,7 @@ namespace BUTEClassAdministrationService
 	class ClassAdministrationService : IClassAdministrationService
 	{
 
-		public BUTEClassAdministrationTypes.Student GetStudent()
+		public Student GetStudent()
 		{
 			return new Student()
 			{
@@ -22,16 +22,18 @@ namespace BUTEClassAdministrationService
 
 		public List<Student> GetStudents()
 		{
-			/*
-						 using (SchoolEntities context = new SchoolEntities())
-						{
-							// Use System.Data.Objects.ObjectQuery(T).Include to eagrly load the related courses.
-							return context.Departments.Include("Courses").OrderBy(d => d.Name).ToList();
-						}
-			 */
-			using (ClassAdministrationEntityContainer context = new ClassAdministrationEntityContainer()) 
+			using (ClassAdministrationEntityContext context = new ClassAdministrationEntityContext()) 
 			{
+				Console.WriteLine("call");
 				return context.StudentSet.ToList();
+			}
+		}
+
+		public Student My()
+		{
+			using (ClassAdministrationEntityContext context = new ClassAdministrationEntityContext())
+			{
+				return context.StudentSet.First();
 			}
 		}
 	}
