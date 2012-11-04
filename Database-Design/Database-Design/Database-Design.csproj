@@ -65,10 +65,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class-Administration-Database.Designer.cs">
+    <Compile Include="ClassAdministrationDatabase.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Class-Administration-Database.edmx</DependentUpon>
+      <DependentUpon>ClassAdministrationDatabase.edmx</DependentUpon>
     </Compile>
     <Compile Include="Csoport.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -103,9 +103,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="Class-Administration-Database.edmx">
+    <EntityDeploy Include="ClassAdministrationDatabase.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Class-Administration-Database.Designer.cs</LastGenOutput>
+      <LastGenOutput>ClassAdministrationDatabase.Designer.cs</LastGenOutput>
     </EntityDeploy>
   </ItemGroup>
   <ItemGroup>

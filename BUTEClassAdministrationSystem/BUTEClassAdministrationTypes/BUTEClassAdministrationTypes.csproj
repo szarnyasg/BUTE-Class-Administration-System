@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>efd89399-94d9-4d42-82d3-ef31541ef605</ProjectGuid>
+    <ProjectGuid>{B87ED1B3-D93D-4EF9-A8F4-B3EBADC185E9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>BUTEClassAdministrationTypes</RootNamespace>
@@ -33,6 +33,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -40,8 +41,43 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="..\BUTEClassAdministrationModel\ClassAdministrationModel.cs">
+      <Link>ClassAdministrationModel.cs</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ClassAdministrationModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="..\BUTEClassAdministrationModel\Course.cs">
+      <Link>Course.cs</Link>
+      <DependentUpon>ClassAdministrationModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="..\BUTEClassAdministrationModel\Group.cs">
+      <Link>Group.cs</Link>
+      <DependentUpon>ClassAdministrationModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="..\BUTEClassAdministrationModel\Instructor.cs">
+      <Link>Instructor.cs</Link>
+      <DependentUpon>ClassAdministrationModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="..\BUTEClassAdministrationModel\Room.cs">
+      <Link>Room.cs</Link>
+      <DependentUpon>ClassAdministrationModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="..\BUTEClassAdministrationModel\Student.cs">
+      <Link>Student.cs</Link>
+      <DependentUpon>ClassAdministrationModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\BUTEClassAdministrationModel\ClassAdministrationModel.tt">
+      <Link>ClassAdministrationModel.tt</Link>
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ClassAdministrationModel.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

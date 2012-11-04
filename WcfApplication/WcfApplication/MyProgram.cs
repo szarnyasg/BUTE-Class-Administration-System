@@ -8,7 +8,7 @@ using System.ServiceModel.Description;
 
 namespace WcfApplication
 {
-  class Program
+  class MyProgram
   {
     static void Main(string[] args)
     {
@@ -44,7 +44,7 @@ namespace WcfApplication
       {
         Console.WriteLine("An exception occurred: {0}", ce.Message);
         selfHost.Abort();
-      }      
+      }
     }
   }
 }

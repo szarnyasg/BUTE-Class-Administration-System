@@ -36,6 +36,9 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -43,8 +46,43 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\BUTEClassAdministrationModel\ClassAdministrationModel.Context.cs">
+      <Link>ClassAdministrationModel.Context.cs</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ClassAdministrationModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="..\BUTEClassAdministrationModel\ClassAdministrationModel.Context.Extensions.cs">
+      <Link>ClassAdministrationModel.Context.Extensions.cs</Link>
+      <DependentUpon>ClassAdministrationModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClassAdministrationService.cs" />
+    <Compile Include="IClassAdministrationService.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BUTEClassAdministrationModel\BUTEClassAdministrationModel.csproj">
+      <Project>{ABCCD89B-423C-44EF-8722-7B9150761B52}</Project>
+      <Name>BUTEClassAdministrationModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BUTEClassAdministrationTypes\BUTEClassAdministrationTypes.csproj">
+      <Project>{B87ED1B3-D93D-4EF9-A8F4-B3EBADC185E9}</Project>
+      <Name>BUTEClassAdministrationTypes</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\BUTEClassAdministrationModel\ClassAdministrationModel.Context.tt">
+      <Link>ClassAdministrationModel.Context.tt</Link>
+      <LastGenOutput>ClassAdministrationModel.Context.cs</LastGenOutput>
+      <Generator>TextTemplatingFileGenerator</Generator>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
