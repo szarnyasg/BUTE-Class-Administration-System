@@ -13,10 +13,37 @@ namespace BUTEClassAdministrationService
 	[ServiceContract]
 	public interface IClassAdministrationService
 	{
-		[OperationContract]
-		Student GetStudent();
+		#region Student operations
 
 		[OperationContract]
-		void SetStudent(Student s);
+		void CreateStudents(IEnumerable<Student> students);
+
+		[OperationContract]
+		IEnumerable<Student> ReadStudentsFromSemester(string semester);
+
+		[OperationContract]
+		void UpdateStudents(IEnumerable<Student> students);
+
+		[OperationContract]
+		void DeleteStudent(IEnumerable<Student> students);
+
+		#endregion
+		/*
+		#region Student operations
+
+		[OperationContract]
+		void CreateStudents(IEnumerable<Student> students);
+
+		[OperationContract]
+		IEnumerable<Student> ReadStudentsFromSemester(string semester);
+
+		[OperationContract]
+		void UpdateStudents(IEnumerable<Student> students);
+
+		[OperationContract]
+		void DeleteStudent(IEnumerable<Student> students);
+
+		#endregion	
+		*/
 	}
 }

@@ -32,6 +32,7 @@ namespace BUTEClassAdministrationClient
 
 		void Work()
 		{
+			/*
 			using (var service = new ClassAdministrationServiceClient())
 			{
 				Student s = service.GetStudent();
@@ -44,8 +45,55 @@ namespace BUTEClassAdministrationClient
 				service.SetStudent(s);
 
 				s.AcceptChanges();
-			}
+			}*/
 		}
 
+		private void button1_Click(object sender, RoutedEventArgs e)
+		{
+			IEnumerable<Student> students = ExcelTools.ImportFromExcel(@"C:\worksheet.xlsx");
+
+			Console.WriteLine("----------------------------");
+			foreach (var student in students)
+			{
+				Console.WriteLine("    név:    " + student.Name);
+				Console.WriteLine("    neptun: " + student.Neptun);
+			}
+
+			using (var service = new ClassAdministrationServiceClient())
+			{
+				service.CreateStudents(students.ToArray());
+			}
+
+			return;
+
+			Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+			dlg.FileName = "";
+			dlg.DefaultExt = ".xlsx";
+			dlg.Filter = "Excel-fájl | *.xls; *.xlsx";
+
+			bool? result = dlg.ShowDialog();
+
+			if (result == false)
+			{
+				return;
+			}
+
+			string filename = dlg.FileName;
+			label1.Content = filename;
+			ExcelTools.ImportFromExcel(filename);
+		}
+
+		private void button2_Click(object sender, RoutedEventArgs e)
+		{
+			using (var service = new ClassAdministrationServiceClient())
+			{
+				Student first = service.ReadStudentsFromSemester("félév").First();
+				
+				List<Student> students = new List<Student>();
+				students.Add(first);
+
+				service.DeleteStudent(students.ToArray());
+			}
+		}
 	}
 }
