@@ -22,8 +22,6 @@ namespace BUTEClassAdministrationClient
 	/// </summary>
 	public partial class MainWindow : Window
 	{
-		Category category = new Category();
-
 		public MainWindow()
 		{
 			InitializeComponent();
@@ -65,8 +63,9 @@ namespace BUTEClassAdministrationClient
 				service.CreateStudents(students.ToArray());
 			}
 
-			return;
-
+			/* 
+			 Excel file dialog
+			 
 			Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
 			dlg.FileName = "";
 			dlg.DefaultExt = ".xlsx";
@@ -80,8 +79,8 @@ namespace BUTEClassAdministrationClient
 			}
 
 			string filename = dlg.FileName;
-			label1.Content = filename;
 			ExcelTools.ImportFromExcel(filename);
+			 */
 		}
 
 		private void button2_Click(object sender, RoutedEventArgs e)

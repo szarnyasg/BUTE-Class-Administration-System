@@ -63,8 +63,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Category.cs" />
-    <Compile Include="Class1.cs" />
     <Compile Include="ExcelTools.cs" />
     <Compile Include="Service References\ClassAdministrationServiceReference\Reference.cs">
       <AutoGen>True</AutoGen>
@@ -103,6 +101,9 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="app.config" />
+    <None Include="Properties\DataSources\BUTEClassAdministrationTypes.Course.datasource" />
+    <None Include="Properties\DataSources\BUTEClassAdministrationTypes.Group.datasource" />
+    <None Include="Properties\DataSources\BUTEClassAdministrationTypes.Instructor.datasource" />
     <None Include="Properties\DataSources\BUTEClassAdministrationTypes.Student.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

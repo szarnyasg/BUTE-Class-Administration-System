@@ -200,4 +200,10 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfRoom" nillable="true" type="tns:ArrayOfRoom" />
+  <xs:complexType name="ArrayOfInstructor">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Instructor" nillable="true" type="tns:Instructor" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfInstructor" nillable="true" type="tns:ArrayOfInstructor" />
 </xs:schema>

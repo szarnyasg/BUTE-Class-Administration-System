@@ -63,6 +63,42 @@ namespace BUTEClassAdministrationClient.ClassAdministrationServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClassAdministrationService/DeleteStudent", ReplyAction="http://tempuri.org/IClassAdministrationService/DeleteStudentResponse")]
         void DeleteStudent(BUTEClassAdministrationTypes.Student[] students);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClassAdministrationService/CreateCourse", ReplyAction="http://tempuri.org/IClassAdministrationService/CreateCourseResponse")]
+        void CreateCourse(BUTEClassAdministrationTypes.Course[] courses);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClassAdministrationService/ReadCoursesFromSemester", ReplyAction="http://tempuri.org/IClassAdministrationService/ReadCoursesFromSemesterResponse")]
+        BUTEClassAdministrationTypes.Course[] ReadCoursesFromSemester(string semester);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClassAdministrationService/UpdateCourses", ReplyAction="http://tempuri.org/IClassAdministrationService/UpdateCoursesResponse")]
+        void UpdateCourses(BUTEClassAdministrationTypes.Course[] courses);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClassAdministrationService/DeleteCourses", ReplyAction="http://tempuri.org/IClassAdministrationService/DeleteCoursesResponse")]
+        void DeleteCourses(BUTEClassAdministrationTypes.Course[] courses);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClassAdministrationService/CreateGroup", ReplyAction="http://tempuri.org/IClassAdministrationService/CreateGroupResponse")]
+        void CreateGroup(BUTEClassAdministrationTypes.Group[] groups);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClassAdministrationService/ReadGroupsFromSemester", ReplyAction="http://tempuri.org/IClassAdministrationService/ReadGroupsFromSemesterResponse")]
+        BUTEClassAdministrationTypes.Group[] ReadGroupsFromSemester(string semester);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClassAdministrationService/UpdateGroups", ReplyAction="http://tempuri.org/IClassAdministrationService/UpdateGroupsResponse")]
+        void UpdateGroups(BUTEClassAdministrationTypes.Group[] groups);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClassAdministrationService/DeleteGroups", ReplyAction="http://tempuri.org/IClassAdministrationService/DeleteGroupsResponse")]
+        void DeleteGroups(BUTEClassAdministrationTypes.Group[] groups);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClassAdministrationService/CreateInstructor", ReplyAction="http://tempuri.org/IClassAdministrationService/CreateInstructorResponse")]
+        void CreateInstructor(BUTEClassAdministrationTypes.Instructor[] instructors);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClassAdministrationService/ReadInstructors", ReplyAction="http://tempuri.org/IClassAdministrationService/ReadInstructorsResponse")]
+        BUTEClassAdministrationTypes.Instructor[] ReadInstructors();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClassAdministrationService/UpdateInstructors", ReplyAction="http://tempuri.org/IClassAdministrationService/UpdateInstructorsResponse")]
+        void UpdateInstructors(BUTEClassAdministrationTypes.Instructor[] instructors);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClassAdministrationService/DeleteInstructors", ReplyAction="http://tempuri.org/IClassAdministrationService/DeleteInstructorsResponse")]
+        void DeleteInstructors(BUTEClassAdministrationTypes.Instructor[] instructors);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -106,6 +142,54 @@ namespace BUTEClassAdministrationClient.ClassAdministrationServiceReference {
         
         public void DeleteStudent(BUTEClassAdministrationTypes.Student[] students) {
             base.Channel.DeleteStudent(students);
+        }
+        
+        public void CreateCourse(BUTEClassAdministrationTypes.Course[] courses) {
+            base.Channel.CreateCourse(courses);
+        }
+        
+        public BUTEClassAdministrationTypes.Course[] ReadCoursesFromSemester(string semester) {
+            return base.Channel.ReadCoursesFromSemester(semester);
+        }
+        
+        public void UpdateCourses(BUTEClassAdministrationTypes.Course[] courses) {
+            base.Channel.UpdateCourses(courses);
+        }
+        
+        public void DeleteCourses(BUTEClassAdministrationTypes.Course[] courses) {
+            base.Channel.DeleteCourses(courses);
+        }
+        
+        public void CreateGroup(BUTEClassAdministrationTypes.Group[] groups) {
+            base.Channel.CreateGroup(groups);
+        }
+        
+        public BUTEClassAdministrationTypes.Group[] ReadGroupsFromSemester(string semester) {
+            return base.Channel.ReadGroupsFromSemester(semester);
+        }
+        
+        public void UpdateGroups(BUTEClassAdministrationTypes.Group[] groups) {
+            base.Channel.UpdateGroups(groups);
+        }
+        
+        public void DeleteGroups(BUTEClassAdministrationTypes.Group[] groups) {
+            base.Channel.DeleteGroups(groups);
+        }
+        
+        public void CreateInstructor(BUTEClassAdministrationTypes.Instructor[] instructors) {
+            base.Channel.CreateInstructor(instructors);
+        }
+        
+        public BUTEClassAdministrationTypes.Instructor[] ReadInstructors() {
+            return base.Channel.ReadInstructors();
+        }
+        
+        public void UpdateInstructors(BUTEClassAdministrationTypes.Instructor[] instructors) {
+            base.Channel.UpdateInstructors(instructors);
+        }
+        
+        public void DeleteInstructors(BUTEClassAdministrationTypes.Instructor[] instructors) {
+            base.Channel.DeleteInstructors(instructors);
         }
     }
 }
