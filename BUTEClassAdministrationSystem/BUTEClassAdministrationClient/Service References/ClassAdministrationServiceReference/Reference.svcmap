@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="e8ca9c0f-a4bd-4183-a55e-6c1a00dffa77" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:17271/ClassAdministrationService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="ClassAdministrationService.disco" MetadataType="Disco" ID="3aca211e-0862-4c64-865f-f9c5478ba821" SourceId="1" SourceUrl="http://localhost:17271/ClassAdministrationService.svc?disco" />
+    <MetadataFile FileName="ClassAdministrationService.xsd" MetadataType="Schema" ID="d44a89b2-c8ac-4cfb-a3bc-81fa5e5d4463" SourceId="1" SourceUrl="http://localhost:17271/ClassAdministrationService.svc?xsd=xsd1" />
+    <MetadataFile FileName="ClassAdministrationService.wsdl" MetadataType="Wsdl" ID="e0812441-9efb-4ea4-bcf2-bd027d39a3c1" SourceId="1" SourceUrl="http://localhost:17271/ClassAdministrationService.svc?wsdl" />
+    <MetadataFile FileName="ClassAdministrationService1.xsd" MetadataType="Schema" ID="bcf71ea0-d16c-44ac-815c-e576ece4a2b7" SourceId="1" SourceUrl="http://localhost:17271/ClassAdministrationService.svc?xsd=xsd2" />
+    <MetadataFile FileName="ClassAdministrationService2.xsd" MetadataType="Schema" ID="648d150b-f0f4-46e7-9fb5-cc92b8055b74" SourceId="1" SourceUrl="http://localhost:17271/ClassAdministrationService.svc?xsd=xsd0" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

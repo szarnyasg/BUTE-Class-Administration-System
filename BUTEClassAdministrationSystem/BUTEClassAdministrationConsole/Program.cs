@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using BUTEClassAdministrationTypes;
+//using BUTEClassAdministrationTypes;
 using BUTEClassAdministrationConsole.ClassAdministrationServiceReference;
+using BUTEClassAdministrationTypes;
 
 namespace BUTEClassAdministrationConsole
 {

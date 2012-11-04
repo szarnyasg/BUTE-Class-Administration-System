@@ -6,6 +6,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BUTEClassAdministrationTypes", "BUTEClassAdministrationTypes\BUTEClassAdministrationTypes.csproj", "{B87ED1B3-D93D-4EF9-A8F4-B3EBADC185E9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BUTEClassAdministrationClient", "BUTEClassAdministrationClient\BUTEClassAdministrationClient.csproj", "{54EE4459-7788-4085-927E-C3794C91145D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{020B9396-0174-4474-AF19-DA2D4E6BE196} = {020B9396-0174-4474-AF19-DA2D4E6BE196}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BUTEClassAdministrationConsole", "BUTEClassAdministrationConsole\BUTEClassAdministrationConsole.csproj", "{74E28376-A7C4-428F-8C6F-0E5647553286}"
 	ProjectSection(ProjectDependencies) = postProject
