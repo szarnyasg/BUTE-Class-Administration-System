@@ -55,11 +55,8 @@ namespace BUTEClassAdministrationConsole.ClassAdministrationServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClassAdministrationService/GetStudent", ReplyAction="http://tempuri.org/IClassAdministrationService/GetStudentResponse")]
         BUTEClassAdministrationTypes.Student GetStudent();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClassAdministrationService/GetStudents", ReplyAction="http://tempuri.org/IClassAdministrationService/GetStudentsResponse")]
-        System.Collections.Generic.List<BUTEClassAdministrationTypes.Student> GetStudents();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClassAdministrationService/My", ReplyAction="http://tempuri.org/IClassAdministrationService/MyResponse")]
-        BUTEClassAdministrationTypes.Student My();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClassAdministrationService/SetStudent", ReplyAction="http://tempuri.org/IClassAdministrationService/SetStudentResponse")]
+        void SetStudent(BUTEClassAdministrationTypes.Student s);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -93,12 +90,8 @@ namespace BUTEClassAdministrationConsole.ClassAdministrationServiceReference {
             return base.Channel.GetStudent();
         }
         
-        public System.Collections.Generic.List<BUTEClassAdministrationTypes.Student> GetStudents() {
-            return base.Channel.GetStudents();
-        }
-        
-        public BUTEClassAdministrationTypes.Student My() {
-            return base.Channel.My();
+        public void SetStudent(BUTEClassAdministrationTypes.Student s) {
+            base.Channel.SetStudent(s);
         }
     }
 }

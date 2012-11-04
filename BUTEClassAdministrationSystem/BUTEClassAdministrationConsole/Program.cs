@@ -19,11 +19,16 @@ namespace BUTEClassAdministrationConsole
 		{
 			using (var service = new ClassAdministrationServiceClient())
 			{
-				//List<Student> list = service.GetStudents();
-				
-				
-				Console.WriteLine(service.My().Name);
-				
+				Student s = service.GetStudent();
+
+				Console.WriteLine(s.Name);
+
+				s.Name = "Cuppa";
+				s.Neptun = "ZL2V8F";
+
+				service.SetStudent(s);
+				s.AcceptChanges();
+
 			}
 		}
 	}
