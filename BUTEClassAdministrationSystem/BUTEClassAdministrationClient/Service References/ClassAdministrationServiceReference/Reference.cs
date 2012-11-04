@@ -52,11 +52,17 @@ namespace BUTEClassAdministrationClient.ClassAdministrationServiceReference {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ClassAdministrationServiceReference.IClassAdministrationService")]
     public interface IClassAdministrationService {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClassAdministrationService/GetStudent", ReplyAction="http://tempuri.org/IClassAdministrationService/GetStudentResponse")]
-        BUTEClassAdministrationTypes.Student GetStudent();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClassAdministrationService/CreateStudents", ReplyAction="http://tempuri.org/IClassAdministrationService/CreateStudentsResponse")]
+        void CreateStudents(BUTEClassAdministrationTypes.Student[] students);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClassAdministrationService/SetStudent", ReplyAction="http://tempuri.org/IClassAdministrationService/SetStudentResponse")]
-        void SetStudent(BUTEClassAdministrationTypes.Student s);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClassAdministrationService/ReadStudentsFromSemester", ReplyAction="http://tempuri.org/IClassAdministrationService/ReadStudentsFromSemesterResponse")]
+        BUTEClassAdministrationTypes.Student[] ReadStudentsFromSemester(string semester);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClassAdministrationService/UpdateStudents", ReplyAction="http://tempuri.org/IClassAdministrationService/UpdateStudentsResponse")]
+        void UpdateStudents(BUTEClassAdministrationTypes.Student[] students);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClassAdministrationService/DeleteStudent", ReplyAction="http://tempuri.org/IClassAdministrationService/DeleteStudentResponse")]
+        void DeleteStudent(BUTEClassAdministrationTypes.Student[] students);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -86,12 +92,20 @@ namespace BUTEClassAdministrationClient.ClassAdministrationServiceReference {
                 base(binding, remoteAddress) {
         }
         
-        public BUTEClassAdministrationTypes.Student GetStudent() {
-            return base.Channel.GetStudent();
+        public void CreateStudents(BUTEClassAdministrationTypes.Student[] students) {
+            base.Channel.CreateStudents(students);
         }
         
-        public void SetStudent(BUTEClassAdministrationTypes.Student s) {
-            base.Channel.SetStudent(s);
+        public BUTEClassAdministrationTypes.Student[] ReadStudentsFromSemester(string semester) {
+            return base.Channel.ReadStudentsFromSemester(semester);
+        }
+        
+        public void UpdateStudents(BUTEClassAdministrationTypes.Student[] students) {
+            base.Channel.UpdateStudents(students);
+        }
+        
+        public void DeleteStudent(BUTEClassAdministrationTypes.Student[] students) {
+            base.Channel.DeleteStudent(students);
         }
     }
 }

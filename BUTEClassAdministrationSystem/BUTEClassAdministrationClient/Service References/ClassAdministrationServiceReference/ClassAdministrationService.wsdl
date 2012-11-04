@@ -7,32 +7,52 @@
       <xsd:import schemaLocation="http://localhost:17271/ClassAdministrationService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/BUTEClassAdministrationTypes" />
     </xsd:schema>
   </wsdl:types>
-  <wsdl:message name="IClassAdministrationService_GetStudent_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetStudent" />
+  <wsdl:message name="IClassAdministrationService_CreateStudents_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateStudents" />
   </wsdl:message>
-  <wsdl:message name="IClassAdministrationService_GetStudent_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetStudentResponse" />
+  <wsdl:message name="IClassAdministrationService_CreateStudents_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateStudentsResponse" />
   </wsdl:message>
-  <wsdl:message name="IClassAdministrationService_SetStudent_InputMessage">
-    <wsdl:part name="parameters" element="tns:SetStudent" />
+  <wsdl:message name="IClassAdministrationService_ReadStudentsFromSemester_InputMessage">
+    <wsdl:part name="parameters" element="tns:ReadStudentsFromSemester" />
   </wsdl:message>
-  <wsdl:message name="IClassAdministrationService_SetStudent_OutputMessage">
-    <wsdl:part name="parameters" element="tns:SetStudentResponse" />
+  <wsdl:message name="IClassAdministrationService_ReadStudentsFromSemester_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ReadStudentsFromSemesterResponse" />
+  </wsdl:message>
+  <wsdl:message name="IClassAdministrationService_UpdateStudents_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateStudents" />
+  </wsdl:message>
+  <wsdl:message name="IClassAdministrationService_UpdateStudents_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateStudentsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IClassAdministrationService_DeleteStudent_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteStudent" />
+  </wsdl:message>
+  <wsdl:message name="IClassAdministrationService_DeleteStudent_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteStudentResponse" />
   </wsdl:message>
   <wsdl:portType name="IClassAdministrationService">
-    <wsdl:operation name="GetStudent">
-      <wsdl:input wsaw:Action="http://tempuri.org/IClassAdministrationService/GetStudent" message="tns:IClassAdministrationService_GetStudent_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IClassAdministrationService/GetStudentResponse" message="tns:IClassAdministrationService_GetStudent_OutputMessage" />
+    <wsdl:operation name="CreateStudents">
+      <wsdl:input wsaw:Action="http://tempuri.org/IClassAdministrationService/CreateStudents" message="tns:IClassAdministrationService_CreateStudents_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IClassAdministrationService/CreateStudentsResponse" message="tns:IClassAdministrationService_CreateStudents_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="SetStudent">
-      <wsdl:input wsaw:Action="http://tempuri.org/IClassAdministrationService/SetStudent" message="tns:IClassAdministrationService_SetStudent_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IClassAdministrationService/SetStudentResponse" message="tns:IClassAdministrationService_SetStudent_OutputMessage" />
+    <wsdl:operation name="ReadStudentsFromSemester">
+      <wsdl:input wsaw:Action="http://tempuri.org/IClassAdministrationService/ReadStudentsFromSemester" message="tns:IClassAdministrationService_ReadStudentsFromSemester_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IClassAdministrationService/ReadStudentsFromSemesterResponse" message="tns:IClassAdministrationService_ReadStudentsFromSemester_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateStudents">
+      <wsdl:input wsaw:Action="http://tempuri.org/IClassAdministrationService/UpdateStudents" message="tns:IClassAdministrationService_UpdateStudents_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IClassAdministrationService/UpdateStudentsResponse" message="tns:IClassAdministrationService_UpdateStudents_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteStudent">
+      <wsdl:input wsaw:Action="http://tempuri.org/IClassAdministrationService/DeleteStudent" message="tns:IClassAdministrationService_DeleteStudent_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IClassAdministrationService/DeleteStudentResponse" message="tns:IClassAdministrationService_DeleteStudent_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IClassAdministrationService" type="tns:IClassAdministrationService">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="GetStudent">
-      <soap:operation soapAction="http://tempuri.org/IClassAdministrationService/GetStudent" style="document" />
+    <wsdl:operation name="CreateStudents">
+      <soap:operation soapAction="http://tempuri.org/IClassAdministrationService/CreateStudents" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -40,8 +60,26 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="SetStudent">
-      <soap:operation soapAction="http://tempuri.org/IClassAdministrationService/SetStudent" style="document" />
+    <wsdl:operation name="ReadStudentsFromSemester">
+      <soap:operation soapAction="http://tempuri.org/IClassAdministrationService/ReadStudentsFromSemester" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateStudents">
+      <soap:operation soapAction="http://tempuri.org/IClassAdministrationService/UpdateStudents" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteStudent">
+      <soap:operation soapAction="http://tempuri.org/IClassAdministrationService/DeleteStudent" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
