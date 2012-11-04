@@ -6,7 +6,7 @@
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{54EE4459-7788-4085-927E-C3794C91145D}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>BUTEClassAdministrationClient</RootNamespace>
     <AssemblyName>BUTEClassAdministrationClient</AssemblyName>
@@ -35,7 +35,13 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Runtime.Serialization" />
@@ -61,6 +67,7 @@
       <DependentUpon>InsertStudent.xaml</DependentUpon>
     </Compile>
     <Compile Include="MyData.cs" />
+    <Compile Include="ExcelTools.cs" />
     <Compile Include="Service References\ClassAdministrationServiceReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -102,6 +109,9 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="app.config" />
+    <None Include="Properties\DataSources\BUTEClassAdministrationTypes.Course.datasource" />
+    <None Include="Properties\DataSources\BUTEClassAdministrationTypes.Group.datasource" />
+    <None Include="Properties\DataSources\BUTEClassAdministrationTypes.Instructor.datasource" />
     <None Include="Properties\DataSources\BUTEClassAdministrationTypes.Student.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

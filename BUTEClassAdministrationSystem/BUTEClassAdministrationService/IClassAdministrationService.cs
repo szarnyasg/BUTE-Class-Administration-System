@@ -13,10 +13,72 @@ namespace BUTEClassAdministrationService
 	[ServiceContract]
 	public interface IClassAdministrationService
 	{
-		[OperationContract]
-		Student GetStudent();
+		#region Student operations
 
 		[OperationContract]
-		void SetStudent(Student s);
+		void CreateStudents(IEnumerable<Student> students);
+
+		[OperationContract]
+		IEnumerable<Student> ReadStudentsFromSemester(string semester);
+
+		[OperationContract]
+		void UpdateStudents(IEnumerable<Student> students);
+
+		[OperationContract]
+		void DeleteStudent(IEnumerable<Student> students);
+
+		#endregion
+
+
+		#region Course operations
+
+		[OperationContract]
+		void CreateCourse(IEnumerable<Course> courses);
+
+		[OperationContract]
+		IEnumerable<Course> ReadCoursesFromSemester(string semester);
+
+		[OperationContract]
+		void UpdateCourses(IEnumerable<Course> courses);
+
+		[OperationContract]
+		void DeleteCourses(IEnumerable<Course> courses);
+
+		#endregion
+
+		
+		#region Group operations
+
+		[OperationContract]
+		void CreateGroup(IEnumerable<Group> groups);
+
+		[OperationContract]
+		IEnumerable<Group> ReadGroupsFromSemester(string semester);
+
+		[OperationContract]
+		void UpdateGroups(IEnumerable<Group> groups);
+
+		[OperationContract]
+		void DeleteGroups(IEnumerable<Group> groups);
+
+		#endregion
+
+
+		#region Instructor operations
+
+		[OperationContract]
+		void CreateInstructor(IEnumerable<Instructor> instructors);
+
+		[OperationContract]
+		IEnumerable<Instructor> ReadInstructors();
+
+		[OperationContract]
+		void UpdateInstructors(IEnumerable<Instructor> instructors);
+
+		[OperationContract]
+		void DeleteInstructors(IEnumerable<Instructor> instructors);
+
+		#endregion
+
 	}
 }
