@@ -3,6 +3,30 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:c="clr-namespace:BUTEClassAdministrationClient"
                 Title="Hallgató felvétele" Height="Auto" Width="400" ResizeMode="NoResize" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+
+    <Window.Resources>
+        <c:StudentModelView x:Key="studentModelView"/>
+
+        <!--
+        <ControlTemplate x:Key="validationTemplate">
+            <DockPanel>
+                <TextBlock Foreground="Red" FontSize="20">Hiba</TextBlock>
+                <AdornedElementPlaceholder/>
+            </DockPanel>
+        </ControlTemplate>
+        
+        <Style x:Key="textBoxInError" TargetType="{x:Type TextBox}">
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="true">
+                    <Setter Property="ToolTip"
+              Value="{Binding RelativeSource={x:Static RelativeSource.Self},
+                              Path=(Validation.Errors)[0].ErrorContent}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>   
+        -->
+    </Window.Resources>
+    
        
     <Grid Margin="4">
 
@@ -22,54 +46,53 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-
-        <Grid.Resources>
-            <DataTemplate DataType="{x:Type ValidationError}">
-                <TextBlock 
-          FontStyle="Italic"
-          Foreground="Red"
-          HorizontalAlignment="Right"
-          Margin="0,1"
-          Text="{Binding Path=ErrorContent}" 
-          />
-            </DataTemplate>
-        </Grid.Resources>
-
-        
-        
         <!--  NAME  -->
         <Label
             Content="Név:"
             Grid.Row="0"
             Grid.Column="0"
             HorizontalAlignment="Right"
+            Target="{Binding ElementName=nameTxtBox}"
             />
         <TextBox
+            Name="nameTxtBox"
             Grid.Row="0"
             Grid.Column="2"
-        />
+            >
+            <TextBox.Text>
+                <Binding 
+                    Path="Name" 
+                    Source="{StaticResource studentModelView}"
+                    UpdateSourceTrigger="PropertyChanged"
+                    />     
+            </TextBox.Text>
+        </TextBox>
 
-        <!-- NEPTUN -->
-        <Label 
-      Grid.Row="2" Grid.Column="0" 
-      Content="First _name:" 
-      HorizontalAlignment="Right"
-      Target="{Binding ElementName=firstNameTxt}"
-      />
+            <!-- NEPTUN -->
+        <Label
+            Content="Neptun:" 
+            Grid.Row="2" 
+            Grid.Column="0"
+            HorizontalAlignment="Right"
+            Target="{Binding ElementName=neptunTxtBox}"
+        />
         <TextBox 
-      x:Name="firstNameTxt"
-      Grid.Row="2" Grid.Column="2" 
-      Text="{Binding Path=ASD, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" 
-      Validation.ErrorTemplate="{x:Null}"
-      />
-        <ContentPresenter 
-      Grid.Row="3" Grid.Column="2"
-      Content="{Binding ElementName=firstNameTxt, Path=(Validation.Errors).CurrentItem}"
-      />
+            Name="neptunTxtBox"
+            Grid.Row="2" 
+            Grid.Column="2"
+            >
+            <TextBox.Text>
+                <Binding
+                    Path="Neptun"
+                    Source="{StaticResource studentModelView}"
+                    UpdateSourceTrigger="PropertyChanged"
+                    />
+            </TextBox.Text>
+        </TextBox>
 
         <!-- COURSE -->
         <Label
-            Content="Kurzus"
+            Content="Kurzus:"
             Grid.Row="4"
             Grid.Column="0"
             HorizontalAlignment="Right"

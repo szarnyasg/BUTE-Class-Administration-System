@@ -27,10 +27,10 @@ namespace BUTEClassAdministrationClient
         {
             InitializeComponent();
 
-            using (var service = new ClassAdministrationServiceClient())
+            /*using (var service = new ClassAdministrationServiceClient())
             {
                 student = service.GetStudent();
-            }
+            }*/
         }
 
         private void Cancel(object sender, RoutedEventArgs e)
@@ -40,7 +40,7 @@ namespace BUTEClassAdministrationClient
 
         private void Insert(object sender, RoutedEventArgs e)
         {
-            using (var service = new ClassAdministrationServiceClient())
+            /*using (var service = new ClassAdministrationServiceClient())
             {
                 student.Name = "Cuppa";
                 student.Neptun = "987654";
@@ -48,7 +48,7 @@ namespace BUTEClassAdministrationClient
                 service.SetStudent(student);
 
                 student.AcceptChanges();
-            }
+            }*/
         }
     }
 }

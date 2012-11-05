@@ -22,9 +22,12 @@ namespace BUTEClassAdministrationClient
 	/// </summary>
 	public partial class MainWindow : Window
 	{
+        StudentModelView asd;
+
 		public MainWindow()
 		{
 			InitializeComponent();
+            asd = new StudentModelView();
     	}
 
         private void Insert_Student(object sender, RoutedEventArgs e)
