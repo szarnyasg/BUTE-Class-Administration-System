@@ -71,10 +71,12 @@ namespace BUTEClassAdministrationClient
 				string name = usedRange.Cells[i, nameColumnIndex].Value.ToString();
 				string neptun = usedRange.Cells[i, neptunColumnIndex].Value.ToString();
 
+                /*
 				Console.WriteLine("#" + (i - 1));
 				Console.WriteLine("    név:    " + name);
 				Console.WriteLine("    neptun: " + neptun);
-
+                */
+ 
 				Student student = new Student();
 				student.Name = name;
 				student.Neptun = neptun;

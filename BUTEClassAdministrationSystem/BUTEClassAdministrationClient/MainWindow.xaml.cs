@@ -30,7 +30,7 @@ namespace BUTEClassAdministrationClient
             studentModelView = new StudentModelView();
     	}
 
-        private void Insert_Student(object sender, RoutedEventArgs e)
+        private void InsertStudent_Click(object sender, RoutedEventArgs e)
         {
             Window window = new InsertStudentWindow();
             window.ShowDialog();
@@ -51,44 +51,7 @@ namespace BUTEClassAdministrationClient
 
 				service.SetStudent(s);
 
-				s.AcceptChanges();
 			}*/
-		}
-
-		private void button1_Click(object sender, RoutedEventArgs e)
-		{
-			IEnumerable<Student> students = ExcelTools.ImportFromExcel(@"C:\worksheet.xlsx");
-
-			Console.WriteLine("----------------------------");
-			foreach (var student in students)
-			{
-				Console.WriteLine("    név:    " + student.Name);
-				Console.WriteLine("    neptun: " + student.Neptun);
-			}
-
-			using (var service = new ClassAdministrationServiceClient())
-			{
-				service.CreateStudents(students.ToArray());
-			}
-
-			/* 
-			 Excel file dialog
-			 
-			Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
-			dlg.FileName = "";
-			dlg.DefaultExt = ".xlsx";
-			dlg.Filter = "Excel-fájl | *.xls; *.xlsx";
-
-			bool? result = dlg.ShowDialog();
-
-			if (result == false)
-			{
-				return;
-			}
-
-			string filename = dlg.FileName;
-			ExcelTools.ImportFromExcel(filename);
-			 */
 		}
 
 		private void button2_Click(object sender, RoutedEventArgs e)
@@ -103,5 +66,30 @@ namespace BUTEClassAdministrationClient
 				service.DeleteStudent(students.ToArray());
 			}
 		}
+
+        private void ImportFromExcel_Click(object sender, RoutedEventArgs e)
+        {
+            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+            dlg.FileName = "";
+            dlg.DefaultExt = ".xlsx";
+            dlg.Filter = "Excel-fájl | *.xls; *.xlsx";
+
+            bool? result = dlg.ShowDialog();
+
+            if (result == false)
+            {
+                return;
+            }
+
+            string filename = dlg.FileName;
+            IEnumerable<Student> students = ExcelTools.ImportFromExcel(filename);
+
+            using (var service = new ClassAdministrationServiceClient())
+            {
+                service.CreateStudents(students.ToArray());
+                Console.WriteLine(students.Count());
+            }
+
+        }
 	}
 }

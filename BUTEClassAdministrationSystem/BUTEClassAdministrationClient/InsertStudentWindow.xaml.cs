@@ -28,6 +28,8 @@ namespace BUTEClassAdministrationClient
         {
             InitializeComponent();
 
+            // Automatically resize height relative to content 
+            this.SizeToContent = SizeToContent.Height;
 
             using (var service = new ClassAdministrationServiceClient())
             {

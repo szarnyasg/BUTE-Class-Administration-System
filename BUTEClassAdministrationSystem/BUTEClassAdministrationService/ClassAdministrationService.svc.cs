@@ -22,6 +22,7 @@ namespace BUTEClassAdministrationService
 				{
 					context.StudentSet.AddObject(student);
 				}
+                context.SaveChanges();
 			}
 		}
 		
@@ -74,7 +75,8 @@ namespace BUTEClassAdministrationService
 				{
 					context.CourseSet.AddObject(course);
 				}
-			}
+                context.SaveChanges();
+            }
 		}
 
 		public IEnumerable<Course> ReadCoursesFromSemester(string semester)
@@ -126,7 +128,8 @@ namespace BUTEClassAdministrationService
 				{
 					context.GroupSet.AddObject(group);
 				}
-			}
+                context.SaveChanges();
+            }
 		}
 
 		public IEnumerable<Group> ReadGroupsFromSemester(string semester)
@@ -178,7 +181,8 @@ namespace BUTEClassAdministrationService
 				{
 					context.InstructorSet.AddObject(instructor);
 				}
-			}
+                context.SaveChanges();
+            }
 		}
 
 		public IEnumerable<Instructor> ReadInstructors()
