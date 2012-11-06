@@ -179,20 +179,6 @@
     <xs:attribute ref="ser:Ref" />
   </xs:complexType>
   <xs:element name="Instructor" nillable="true" type="tns:Instructor" />
-  <xs:complexType name="Room">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="ChangeTracker" nillable="true" type="tns:ObjectChangeTracker" />
-      <xs:element minOccurs="0" name="Computer_count" type="xs:int" />
-      <xs:element minOccurs="0" name="Course" nillable="true" type="tns:ArrayOfCourse" />
-      <xs:element minOccurs="0" name="Group" nillable="true" type="tns:Group" />
-      <xs:element minOccurs="0" name="Id" type="xs:int" />
-      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Seating_capacity" type="xs:decimal" />
-    </xs:sequence>
-    <xs:attribute ref="ser:Id" />
-    <xs:attribute ref="ser:Ref" />
-  </xs:complexType>
-  <xs:element name="Room" nillable="true" type="tns:Room" />
   <xs:complexType name="Student">
     <xs:sequence>
       <xs:element minOccurs="0" name="ChangeTracker" nillable="true" type="tns:ObjectChangeTracker" />
@@ -207,6 +193,20 @@
     <xs:attribute ref="ser:Ref" />
   </xs:complexType>
   <xs:element name="Student" nillable="true" type="tns:Student" />
+  <xs:complexType name="Room">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ChangeTracker" nillable="true" type="tns:ObjectChangeTracker" />
+      <xs:element minOccurs="0" name="Computer_count" type="xs:int" />
+      <xs:element minOccurs="0" name="Course" nillable="true" type="tns:ArrayOfCourse" />
+      <xs:element minOccurs="0" name="Group" nillable="true" type="tns:Group" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Seating_capacity" type="xs:decimal" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="Room" nillable="true" type="tns:Room" />
   <xs:complexType name="ArrayOfStudent">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="Student" nillable="true" type="tns:Student" />

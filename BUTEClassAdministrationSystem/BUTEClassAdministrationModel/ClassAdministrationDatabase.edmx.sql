@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 11/06/2012 20:07:32
--- Generated from EDMX file: C:\GitHub\BUTE-Class-Administration-System\BUTEClassAdministrationSystem\BUTEClassAdministrationModel\ClassAdministrationDatabase.edmx
+-- Date Created: 11/06/2012 22:05:27
+-- Generated from EDMX file: D:\bme\GITHUB\BUTE-Class-Administration-System\BUTEClassAdministrationSystem\BUTEClassAdministrationModel\ClassAdministrationDatabase.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -38,6 +38,15 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_GroupStudent]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[StudentSet] DROP CONSTRAINT [FK_GroupStudent];
 GO
+IF OBJECT_ID(N'[dbo].[FK_SemesterGroup]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[GroupSet] DROP CONSTRAINT [FK_SemesterGroup];
+GO
+IF OBJECT_ID(N'[dbo].[FK_SemesterStudent]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[StudentSet] DROP CONSTRAINT [FK_SemesterStudent];
+GO
+IF OBJECT_ID(N'[dbo].[FK_SemesterCourse]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[CourseSet] DROP CONSTRAINT [FK_SemesterCourse];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -57,6 +66,9 @@ IF OBJECT_ID(N'[dbo].[GroupSet]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[CourseSet]', 'U') IS NOT NULL
     DROP TABLE [dbo].[CourseSet];
+GO
+IF OBJECT_ID(N'[dbo].[SemesterSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[SemesterSet];
 GO
 IF OBJECT_ID(N'[dbo].[RoomCourse]', 'U') IS NOT NULL
     DROP TABLE [dbo].[RoomCourse];

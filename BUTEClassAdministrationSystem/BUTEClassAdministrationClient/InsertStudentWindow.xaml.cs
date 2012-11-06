@@ -24,6 +24,8 @@ namespace BUTEClassAdministrationClient
         //private Student student;
         private string[] coursesArray;
 
+        public Semester semester { get; set; }
+
         public InsertStudentWindow()
         {
             InitializeComponent();
@@ -31,9 +33,9 @@ namespace BUTEClassAdministrationClient
             // Automatically resize height relative to content 
             this.SizeToContent = SizeToContent.Height;
 
-            using (var service = new ClassAdministrationServiceClient())
+            /*using (var service = new ClassAdministrationServiceClient())
             {
-                /*Course[] courses = service.ReadCoursesFromSemester("2012");
+                Course[] courses = service.ReadCoursesFromSemester("2012");
                 IList<String> coursesToCombobox = new List<string>();
                 foreach (var course in courses)
                 {
@@ -43,12 +45,12 @@ namespace BUTEClassAdministrationClient
                                 PrettyFormatter.parityFormatter(course.Week_parity);
                     coursesToCombobox.Add(s);
                 }
-                //coursesArray = coursesToCombobox.ToArray();*/
+                //coursesArray = coursesToCombobox.ToArray();
                 coursesArray = new string[] {"A","B","C"};
                 Console.WriteLine(coursesArray[0]);
             }
 
-            /*using (var service = new ClassAdministrationServiceClient())
+            using (var service = new ClassAdministrationServiceClient())
             {
                 student = service.GetStudent();
             }*/
@@ -69,15 +71,20 @@ namespace BUTEClassAdministrationClient
 
         private void Insert(object sender, RoutedEventArgs e)
         {
-            /*using (var service = new ClassAdministrationServiceClient())
+            using (var service = new ClassAdministrationServiceClient())
             {
-                student.Name = "Cuppa";
-                student.Neptun = "987654";
+                Student student = new Student();
 
-                service.SetStudent(student);
+                student.Name = nameTxtBox.Text;
+                student.Neptun = neptunTxtBox.Text;
+                student.Course = null;
+                student.Semester = service.ReadSemesters().First(); // oh my
 
+                service.CreateStudents(new Student[] { student });
                 student.AcceptChanges();
-            }*/
+
+                MessageBox.Show("Rekord beszúrva.");
+            }
         }
 
         private void coursesCmbBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

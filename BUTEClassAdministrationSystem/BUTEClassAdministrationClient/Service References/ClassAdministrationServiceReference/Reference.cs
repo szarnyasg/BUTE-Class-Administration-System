@@ -102,6 +102,9 @@ namespace BUTEClassAdministrationClient.ClassAdministrationServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClassAdministrationService/DeleteInstructors", ReplyAction="http://tempuri.org/IClassAdministrationService/DeleteInstructorsResponse")]
         void DeleteInstructors(BUTEClassAdministrationTypes.Instructor[] instructors);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClassAdministrationService/ReadRooms", ReplyAction="http://tempuri.org/IClassAdministrationService/ReadRoomsResponse")]
+        BUTEClassAdministrationTypes.Room[] ReadRooms();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -197,6 +200,10 @@ namespace BUTEClassAdministrationClient.ClassAdministrationServiceReference {
         
         public void DeleteInstructors(BUTEClassAdministrationTypes.Instructor[] instructors) {
             base.Channel.DeleteInstructors(instructors);
+        }
+        
+        public BUTEClassAdministrationTypes.Room[] ReadRooms() {
+            return base.Channel.ReadRooms();
         }
     }
 }
