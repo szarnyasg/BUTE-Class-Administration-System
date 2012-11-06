@@ -63,18 +63,21 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="InsertStudent.xaml.cs">
-      <DependentUpon>InsertStudent.xaml</DependentUpon>
+    <Compile Include="EmailValidator.cs" />
+    <Compile Include="InsertStudentWindow.xaml.cs">
+      <DependentUpon>InsertStudentWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MyData.cs" />
     <Compile Include="ExcelTools.cs" />
+    <Compile Include="NameValidator.cs" />
+    <Compile Include="NeptunValidator.cs" />
+    <Compile Include="PrettyFormatter.cs" />
     <Compile Include="Service References\ClassAdministrationServiceReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="StudentModelView.cs" />
-    <Page Include="InsertStudent.xaml">
+    <Page Include="InsertStudentWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

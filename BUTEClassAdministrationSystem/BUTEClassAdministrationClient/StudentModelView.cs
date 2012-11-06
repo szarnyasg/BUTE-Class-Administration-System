@@ -5,27 +5,15 @@ using System.Text;
 
 using BUTEClassAdministrationTypes;
 using System.Windows.Controls;
+using System.Globalization;
 
 namespace BUTEClassAdministrationClient
 {
-    class StudentModelView : ValidationRule
-    {
-        Student student;
-
-        /*public string Name 
-        { 
-            get { return student.Name; }
-            set { student.Name = value; } 
-        }
-
-        public string Neptun
-        {
-            get { return student.Neptun; }
-            set { student.Neptun = value; }
-        }*/
-
-
+    class StudentModelView
+    { 
         private string _name, _neptun;
+        private string[] _array = new string[] {"A","B","C"};
+
 
         public string Name
         {
@@ -39,16 +27,10 @@ namespace BUTEClassAdministrationClient
             set { _neptun = value; }
         }
 
-
-
-
-
-        public override ValidationResult Validate(object value, System.Globalization.CultureInfo cultureInfo)
+        public string[] Array 
         {
-            //value.
-            if (((string)value).Length > 0)
-            return new ValidationResult(true, "kapd be");
-            return new ValidationResult(false, "szopja lovat");
+            get { return _array ;} 
+            set { _array = value;} 
         }
     }
 }

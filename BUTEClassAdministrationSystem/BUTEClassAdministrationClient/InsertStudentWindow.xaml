@@ -1,4 +1,4 @@
-﻿<Window x:Class="BUTEClassAdministrationClient.InsertStudent"
+﻿<Window x:Class="BUTEClassAdministrationClient.InsertStudentWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:c="clr-namespace:BUTEClassAdministrationClient"
@@ -6,25 +6,29 @@
 
     <Window.Resources>
         <c:StudentModelView x:Key="studentModelView"/>
-
-        <!--
-        <ControlTemplate x:Key="validationTemplate">
-            <DockPanel>
-                <TextBlock Foreground="Red" FontSize="20">Hiba</TextBlock>
+       
+        <ControlTemplate x:Key="nameValidationTemplate">
+            <StackPanel Orientation="Vertical">
                 <AdornedElementPlaceholder/>
-            </DockPanel>
+                <Label
+                    Content="Kérem ne hagyja üresen a Név mezőt!"
+                    Foreground="Red"
+                    FontStyle="Italic"
+                    />
+            </StackPanel>
         </ControlTemplate>
-        
-        <Style x:Key="textBoxInError" TargetType="{x:Type TextBox}">
-            <Style.Triggers>
-                <Trigger Property="Validation.HasError" Value="true">
-                    <Setter Property="ToolTip"
-              Value="{Binding RelativeSource={x:Static RelativeSource.Self},
-                              Path=(Validation.Errors)[0].ErrorContent}"/>
-                </Trigger>
-            </Style.Triggers>
-        </Style>   
-        -->
+
+        <ControlTemplate x:Key="neptunValidationTemplate">
+            <StackPanel Orientation="Vertical">
+                <AdornedElementPlaceholder/>
+                <Label
+                    Content="A neptun kód hibás!)"
+                    Foreground="Red"
+                    FontStyle="Italic"
+                    />
+            </StackPanel>
+        </ControlTemplate>
+
     </Window.Resources>
     
        
@@ -58,13 +62,18 @@
             Name="nameTxtBox"
             Grid.Row="0"
             Grid.Column="2"
-            >
+            Validation.ErrorTemplate="{StaticResource nameValidationTemplate}">
+
             <TextBox.Text>
                 <Binding 
                     Path="Name" 
                     Source="{StaticResource studentModelView}"
                     UpdateSourceTrigger="PropertyChanged"
-                    />     
+                    >
+                    <Binding.ValidationRules>
+                        <c:NameValidator/>
+                    </Binding.ValidationRules>
+                </Binding>
             </TextBox.Text>
         </TextBox>
 
@@ -80,13 +89,18 @@
             Name="neptunTxtBox"
             Grid.Row="2" 
             Grid.Column="2"
-            >
+            Validation.ErrorTemplate="{StaticResource neptunValidationTemplate}">
+
             <TextBox.Text>
                 <Binding
                     Path="Neptun"
                     Source="{StaticResource studentModelView}"
                     UpdateSourceTrigger="PropertyChanged"
-                    />
+                    >
+                    <Binding.ValidationRules>
+                        <c:NeptunValidator/>
+                    </Binding.ValidationRules>
+                </Binding>
             </TextBox.Text>
         </TextBox>
 
@@ -96,11 +110,13 @@
             Grid.Row="4"
             Grid.Column="0"
             HorizontalAlignment="Right"
+            Target="{Binding Path=coursesCmbBox}"
             />
         <ComboBox
+            Name="coursesCmbBox"
             Grid.Row="4"
             Grid.Column="2"
-            />
+            ItemsSource="{Binding Path=Array, Source={StaticResource studentModelView}, Mode=OneTime}" SelectionChanged="coursesCmbBox_SelectionChanged" />
 
         <!-- BUTTONS -->
         <Grid
