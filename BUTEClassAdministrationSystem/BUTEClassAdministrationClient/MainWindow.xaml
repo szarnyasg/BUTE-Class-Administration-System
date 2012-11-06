@@ -1,18 +1,49 @@
 ﻿<Window x:Class="BUTEClassAdministrationClient.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:c="clr-namespace:BUTEClassAdministrationClient"
         Title="MainWindow" Height="350" Width="525">
-    <Grid>
+    
+    <Window.Resources>
+        <c:StudentModelView x:Key="studentModelView"/>
+    </Window.Resources>
+    
+    <Grid Margin="8">
         <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Button
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="6"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        
+        <Label
+            Content="Félév:"
             Grid.Row="0"
+            Grid.Column="0"
+            Target="{Binding ElementName=semesterCmbBox}"
+            />
+        <ComboBox
+            Name="semesterCmbBox"
+            Grid.Row="0"
+            Grid.Column="2"
+            Width="100"
+            HorizontalAlignment="Left"
+            ItemsSource="{Binding Path=Semesters, Source={StaticResource studentModelView}}">
+        </ComboBox>
+        
+        <Button
+            Grid.Row="1"
+            Grid.ColumnSpan="3"
             Content="Hallgató felvétele" 
             Click="InsertStudent_Click" />
         <Button
-            Grid.Row="1"
+            Grid.Row="2"
+            Grid.ColumnSpan="3"
             Content="Inportálás Excelből"
             Click="ImportFromExcel_Click"
             />

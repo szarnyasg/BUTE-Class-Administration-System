@@ -109,6 +109,12 @@
   <wsdl:message name="IClassAdministrationService_DeleteInstructors_OutputMessage">
     <wsdl:part name="parameters" element="tns:DeleteInstructorsResponse" />
   </wsdl:message>
+  <wsdl:message name="IClassAdministrationService_ReadRooms_InputMessage">
+    <wsdl:part name="parameters" element="tns:ReadRooms" />
+  </wsdl:message>
+  <wsdl:message name="IClassAdministrationService_ReadRooms_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ReadRoomsResponse" />
+  </wsdl:message>
   <wsdl:portType name="IClassAdministrationService">
     <wsdl:operation name="ReadSemesters">
       <wsdl:input wsaw:Action="http://tempuri.org/IClassAdministrationService/ReadSemesters" message="tns:IClassAdministrationService_ReadSemesters_InputMessage" />
@@ -177,6 +183,10 @@
     <wsdl:operation name="DeleteInstructors">
       <wsdl:input wsaw:Action="http://tempuri.org/IClassAdministrationService/DeleteInstructors" message="tns:IClassAdministrationService_DeleteInstructors_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IClassAdministrationService/DeleteInstructorsResponse" message="tns:IClassAdministrationService_DeleteInstructors_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadRooms">
+      <wsdl:input wsaw:Action="http://tempuri.org/IClassAdministrationService/ReadRooms" message="tns:IClassAdministrationService_ReadRooms_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IClassAdministrationService/ReadRoomsResponse" message="tns:IClassAdministrationService_ReadRooms_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IClassAdministrationService" type="tns:IClassAdministrationService">
@@ -327,6 +337,15 @@
     </wsdl:operation>
     <wsdl:operation name="DeleteInstructors">
       <soap:operation soapAction="http://tempuri.org/IClassAdministrationService/DeleteInstructors" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadRooms">
+      <soap:operation soapAction="http://tempuri.org/IClassAdministrationService/ReadRooms" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

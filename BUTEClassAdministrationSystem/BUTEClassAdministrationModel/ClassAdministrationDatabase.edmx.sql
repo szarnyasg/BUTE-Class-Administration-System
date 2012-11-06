@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 11/06/2012 21:43:28
--- Generated from EDMX file: C:\GitHub\BUTE-Class-Administration-System\BUTEClassAdministrationSystem\BUTEClassAdministrationModel\ClassAdministrationDatabase.edmx
+-- Date Created: 11/06/2012 22:05:27
+-- Generated from EDMX file: D:\bme\GITHUB\BUTE-Class-Administration-System\BUTEClassAdministrationSystem\BUTEClassAdministrationModel\ClassAdministrationDatabase.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
