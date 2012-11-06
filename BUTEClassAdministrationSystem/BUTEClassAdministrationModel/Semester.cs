@@ -18,11 +18,10 @@ using System.Runtime.Serialization;
 namespace BUTEClassAdministrationTypes
 {
     [DataContract(IsReference = true)]
-    [KnownType(typeof(Student))]
     [KnownType(typeof(Group))]
-    [KnownType(typeof(Room))]
-    [KnownType(typeof(Semester))]
-    public partial class Course: IObjectWithChangeTracker, INotifyPropertyChanged
+    [KnownType(typeof(Student))]
+    [KnownType(typeof(Course))]
+    public partial class Semester: IObjectWithChangeTracker, INotifyPropertyChanged
     {
         #region Primitive Properties
     
@@ -46,87 +45,22 @@ namespace BUTEClassAdministrationTypes
         private int _id;
     
         [DataMember]
-        public decimal Day_of_week
+        public string Semester_name
         {
-            get { return _day_of_week; }
+            get { return _semester_name; }
             set
             {
-                if (_day_of_week != value)
+                if (_semester_name != value)
                 {
-                    _day_of_week = value;
-                    OnPropertyChanged("Day_of_week");
+                    _semester_name = value;
+                    OnPropertyChanged("Semester_name");
                 }
             }
         }
-        private decimal _day_of_week;
-    
-        [DataMember]
-        public bool Week_parity
-        {
-            get { return _week_parity; }
-            set
-            {
-                if (_week_parity != value)
-                {
-                    _week_parity = value;
-                    OnPropertyChanged("Week_parity");
-                }
-            }
-        }
-        private bool _week_parity;
-    
-        [DataMember]
-        public System.TimeSpan Starting_time
-        {
-            get { return _starting_time; }
-            set
-            {
-                if (_starting_time != value)
-                {
-                    _starting_time = value;
-                    OnPropertyChanged("Starting_time");
-                }
-            }
-        }
-        private System.TimeSpan _starting_time;
+        private string _semester_name;
 
         #endregion
         #region Navigation Properties
-    
-        [DataMember]
-        public TrackableCollection<Student> Student
-        {
-            get
-            {
-                if (_student == null)
-                {
-                    _student = new TrackableCollection<Student>();
-                    _student.CollectionChanged += FixupStudent;
-                }
-                return _student;
-            }
-            set
-            {
-                if (!ReferenceEquals(_student, value))
-                {
-                    if (ChangeTracker.ChangeTrackingEnabled)
-                    {
-                        throw new InvalidOperationException("Cannot set the FixupChangeTrackingCollection when ChangeTracking is enabled");
-                    }
-                    if (_student != null)
-                    {
-                        _student.CollectionChanged -= FixupStudent;
-                    }
-                    _student = value;
-                    if (_student != null)
-                    {
-                        _student.CollectionChanged += FixupStudent;
-                    }
-                    OnNavigationPropertyChanged("Student");
-                }
-            }
-        }
-        private TrackableCollection<Student> _student;
     
         [DataMember]
         public TrackableCollection<Group> Group
@@ -164,56 +98,74 @@ namespace BUTEClassAdministrationTypes
         private TrackableCollection<Group> _group;
     
         [DataMember]
-        public TrackableCollection<Room> Room
+        public TrackableCollection<Student> Student
         {
             get
             {
-                if (_room == null)
+                if (_student == null)
                 {
-                    _room = new TrackableCollection<Room>();
-                    _room.CollectionChanged += FixupRoom;
+                    _student = new TrackableCollection<Student>();
+                    _student.CollectionChanged += FixupStudent;
                 }
-                return _room;
+                return _student;
             }
             set
             {
-                if (!ReferenceEquals(_room, value))
+                if (!ReferenceEquals(_student, value))
                 {
                     if (ChangeTracker.ChangeTrackingEnabled)
                     {
                         throw new InvalidOperationException("Cannot set the FixupChangeTrackingCollection when ChangeTracking is enabled");
                     }
-                    if (_room != null)
+                    if (_student != null)
                     {
-                        _room.CollectionChanged -= FixupRoom;
+                        _student.CollectionChanged -= FixupStudent;
                     }
-                    _room = value;
-                    if (_room != null)
+                    _student = value;
+                    if (_student != null)
                     {
-                        _room.CollectionChanged += FixupRoom;
+                        _student.CollectionChanged += FixupStudent;
                     }
-                    OnNavigationPropertyChanged("Room");
+                    OnNavigationPropertyChanged("Student");
                 }
             }
         }
-        private TrackableCollection<Room> _room;
+        private TrackableCollection<Student> _student;
     
         [DataMember]
-        public Semester Semester
+        public TrackableCollection<Course> Course
         {
-            get { return _semester; }
+            get
+            {
+                if (_course == null)
+                {
+                    _course = new TrackableCollection<Course>();
+                    _course.CollectionChanged += FixupCourse;
+                }
+                return _course;
+            }
             set
             {
-                if (!ReferenceEquals(_semester, value))
+                if (!ReferenceEquals(_course, value))
                 {
-                    var previousValue = _semester;
-                    _semester = value;
-                    FixupSemester(previousValue);
-                    OnNavigationPropertyChanged("Semester");
+                    if (ChangeTracker.ChangeTrackingEnabled)
+                    {
+                        throw new InvalidOperationException("Cannot set the FixupChangeTrackingCollection when ChangeTracking is enabled");
+                    }
+                    if (_course != null)
+                    {
+                        _course.CollectionChanged -= FixupCourse;
+                    }
+                    _course = value;
+                    if (_course != null)
+                    {
+                        _course.CollectionChanged += FixupCourse;
+                    }
+                    OnNavigationPropertyChanged("Course");
                 }
             }
         }
-        private Semester _semester;
+        private TrackableCollection<Course> _course;
 
         #endregion
         #region ChangeTracking
@@ -293,108 +245,13 @@ namespace BUTEClassAdministrationTypes
     
         protected virtual void ClearNavigationProperties()
         {
-            Student.Clear();
             Group.Clear();
-            Room.Clear();
-            Semester = null;
-            FixupSemesterKeys();
+            Student.Clear();
+            Course.Clear();
         }
 
         #endregion
         #region Association Fixup
-    
-        private void FixupSemester(Semester previousValue)
-        {
-            if (IsDeserializing)
-            {
-                return;
-            }
-    
-            if (previousValue != null && previousValue.Course.Contains(this))
-            {
-                previousValue.Course.Remove(this);
-            }
-    
-            if (Semester != null)
-            {
-                if (!Semester.Course.Contains(this))
-                {
-                    Semester.Course.Add(this);
-                }
-    
-            }
-            if (ChangeTracker.ChangeTrackingEnabled)
-            {
-                if (ChangeTracker.OriginalValues.ContainsKey("Semester")
-                    && (ChangeTracker.OriginalValues["Semester"] == Semester))
-                {
-                    ChangeTracker.OriginalValues.Remove("Semester");
-                }
-                else
-                {
-                    ChangeTracker.RecordOriginalValue("Semester", previousValue);
-                }
-                if (Semester != null && !Semester.ChangeTracker.ChangeTrackingEnabled)
-                {
-                    Semester.StartTracking();
-                }
-                FixupSemesterKeys();
-            }
-        }
-    
-        private void FixupSemesterKeys()
-        {
-            const string IdKeyName = "Semester.Id";
-    
-            if(ChangeTracker.ExtendedProperties.ContainsKey(IdKeyName))
-            {
-                if(Semester == null ||
-                   !Equals(ChangeTracker.ExtendedProperties[IdKeyName], Semester.Id))
-                {
-                    ChangeTracker.RecordOriginalValue(IdKeyName, ChangeTracker.ExtendedProperties[IdKeyName]);
-                }
-                ChangeTracker.ExtendedProperties.Remove(IdKeyName);
-            }
-        }
-    
-        private void FixupStudent(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            if (IsDeserializing)
-            {
-                return;
-            }
-    
-            if (e.NewItems != null)
-            {
-                foreach (Student item in e.NewItems)
-                {
-                    item.Course = this;
-                    if (ChangeTracker.ChangeTrackingEnabled)
-                    {
-                        if (!item.ChangeTracker.ChangeTrackingEnabled)
-                        {
-                            item.StartTracking();
-                        }
-                        ChangeTracker.RecordAdditionToCollectionProperties("Student", item);
-                    }
-                }
-            }
-    
-            if (e.OldItems != null)
-            {
-                foreach (Student item in e.OldItems)
-                {
-                    if (ReferenceEquals(item.Course, this))
-                    {
-                        item.Course = null;
-                    }
-                    if (ChangeTracker.ChangeTrackingEnabled)
-                    {
-                        ChangeTracker.RecordRemovalFromCollectionProperties("Student", item);
-                    }
-                }
-            }
-        }
     
         private void FixupGroup(object sender, NotifyCollectionChangedEventArgs e)
         {
@@ -407,7 +264,7 @@ namespace BUTEClassAdministrationTypes
             {
                 foreach (Group item in e.NewItems)
                 {
-                    item.Course = this;
+                    item.Semester = this;
                     if (ChangeTracker.ChangeTrackingEnabled)
                     {
                         if (!item.ChangeTracker.ChangeTrackingEnabled)
@@ -423,9 +280,9 @@ namespace BUTEClassAdministrationTypes
             {
                 foreach (Group item in e.OldItems)
                 {
-                    if (ReferenceEquals(item.Course, this))
+                    if (ReferenceEquals(item.Semester, this))
                     {
-                        item.Course = null;
+                        item.Semester = null;
                     }
                     if (ChangeTracker.ChangeTrackingEnabled)
                     {
@@ -435,7 +292,7 @@ namespace BUTEClassAdministrationTypes
             }
         }
     
-        private void FixupRoom(object sender, NotifyCollectionChangedEventArgs e)
+        private void FixupStudent(object sender, NotifyCollectionChangedEventArgs e)
         {
             if (IsDeserializing)
             {
@@ -444,34 +301,70 @@ namespace BUTEClassAdministrationTypes
     
             if (e.NewItems != null)
             {
-                foreach (Room item in e.NewItems)
+                foreach (Student item in e.NewItems)
                 {
-                    if (!item.Course.Contains(this))
-                    {
-                        item.Course.Add(this);
-                    }
+                    item.Semester = this;
                     if (ChangeTracker.ChangeTrackingEnabled)
                     {
                         if (!item.ChangeTracker.ChangeTrackingEnabled)
                         {
                             item.StartTracking();
                         }
-                        ChangeTracker.RecordAdditionToCollectionProperties("Room", item);
+                        ChangeTracker.RecordAdditionToCollectionProperties("Student", item);
                     }
                 }
             }
     
             if (e.OldItems != null)
             {
-                foreach (Room item in e.OldItems)
+                foreach (Student item in e.OldItems)
                 {
-                    if (item.Course.Contains(this))
+                    if (ReferenceEquals(item.Semester, this))
                     {
-                        item.Course.Remove(this);
+                        item.Semester = null;
                     }
                     if (ChangeTracker.ChangeTrackingEnabled)
                     {
-                        ChangeTracker.RecordRemovalFromCollectionProperties("Room", item);
+                        ChangeTracker.RecordRemovalFromCollectionProperties("Student", item);
+                    }
+                }
+            }
+        }
+    
+        private void FixupCourse(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (IsDeserializing)
+            {
+                return;
+            }
+    
+            if (e.NewItems != null)
+            {
+                foreach (Course item in e.NewItems)
+                {
+                    item.Semester = this;
+                    if (ChangeTracker.ChangeTrackingEnabled)
+                    {
+                        if (!item.ChangeTracker.ChangeTrackingEnabled)
+                        {
+                            item.StartTracking();
+                        }
+                        ChangeTracker.RecordAdditionToCollectionProperties("Course", item);
+                    }
+                }
+            }
+    
+            if (e.OldItems != null)
+            {
+                foreach (Course item in e.OldItems)
+                {
+                    if (ReferenceEquals(item.Semester, this))
+                    {
+                        item.Semester = null;
+                    }
+                    if (ChangeTracker.ChangeTrackingEnabled)
+                    {
+                        ChangeTracker.RecordRemovalFromCollectionProperties("Course", item);
                     }
                 }
             }

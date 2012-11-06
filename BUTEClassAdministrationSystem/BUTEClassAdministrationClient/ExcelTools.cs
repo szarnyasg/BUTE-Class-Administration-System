@@ -18,7 +18,7 @@ namespace BUTEClassAdministrationClient
 			throw new NotImplementedException();
 		}
 
-		public static IEnumerable<Student> ImportFromExcel(string filename)
+		public static IEnumerable<Student> ImportFromExcel(string filename, Semester semester)
 		{
 			const String nameColumnName = "név";
 			const String neptunColumnName = "neptun kód";
@@ -80,8 +80,8 @@ namespace BUTEClassAdministrationClient
 				Student student = new Student();
 				student.Name = name;
 				student.Neptun = neptun;
-				student.Semester = "félév";
-
+				student.Semester = semester;
+				
 				students.Add(student);
 			}
 

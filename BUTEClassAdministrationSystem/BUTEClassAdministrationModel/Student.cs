@@ -20,6 +20,7 @@ namespace BUTEClassAdministrationTypes
     [DataContract(IsReference = true)]
     [KnownType(typeof(Course))]
     [KnownType(typeof(Group))]
+    [KnownType(typeof(Semester))]
     public partial class Student: IObjectWithChangeTracker, INotifyPropertyChanged
     {
         #region Primitive Properties
@@ -72,21 +73,6 @@ namespace BUTEClassAdministrationTypes
             }
         }
         private string _name;
-    
-        [DataMember]
-        public string Semester
-        {
-            get { return _semester; }
-            set
-            {
-                if (_semester != value)
-                {
-                    _semester = value;
-                    OnPropertyChanged("Semester");
-                }
-            }
-        }
-        private string _semester;
 
         #endregion
         #region Navigation Properties
@@ -124,6 +110,23 @@ namespace BUTEClassAdministrationTypes
             }
         }
         private Group _group;
+    
+        [DataMember]
+        public Semester Semester
+        {
+            get { return _semester; }
+            set
+            {
+                if (!ReferenceEquals(_semester, value))
+                {
+                    var previousValue = _semester;
+                    _semester = value;
+                    FixupSemester(previousValue);
+                    OnNavigationPropertyChanged("Semester");
+                }
+            }
+        }
+        private Semester _semester;
 
         #endregion
         #region ChangeTracking
@@ -207,6 +210,8 @@ namespace BUTEClassAdministrationTypes
             FixupCourseKeys();
             Group = null;
             FixupGroupKeys();
+            Semester = null;
+            FixupSemesterKeys();
         }
 
         #endregion
@@ -313,6 +318,60 @@ namespace BUTEClassAdministrationTypes
             {
                 if(Group == null ||
                    !Equals(ChangeTracker.ExtendedProperties[IdKeyName], Group.Id))
+                {
+                    ChangeTracker.RecordOriginalValue(IdKeyName, ChangeTracker.ExtendedProperties[IdKeyName]);
+                }
+                ChangeTracker.ExtendedProperties.Remove(IdKeyName);
+            }
+        }
+    
+        private void FixupSemester(Semester previousValue)
+        {
+            if (IsDeserializing)
+            {
+                return;
+            }
+    
+            if (previousValue != null && previousValue.Student.Contains(this))
+            {
+                previousValue.Student.Remove(this);
+            }
+    
+            if (Semester != null)
+            {
+                if (!Semester.Student.Contains(this))
+                {
+                    Semester.Student.Add(this);
+                }
+    
+            }
+            if (ChangeTracker.ChangeTrackingEnabled)
+            {
+                if (ChangeTracker.OriginalValues.ContainsKey("Semester")
+                    && (ChangeTracker.OriginalValues["Semester"] == Semester))
+                {
+                    ChangeTracker.OriginalValues.Remove("Semester");
+                }
+                else
+                {
+                    ChangeTracker.RecordOriginalValue("Semester", previousValue);
+                }
+                if (Semester != null && !Semester.ChangeTracker.ChangeTrackingEnabled)
+                {
+                    Semester.StartTracking();
+                }
+                FixupSemesterKeys();
+            }
+        }
+    
+        private void FixupSemesterKeys()
+        {
+            const string IdKeyName = "Semester.Id";
+    
+            if(ChangeTracker.ExtendedProperties.ContainsKey(IdKeyName))
+            {
+                if(Semester == null ||
+                   !Equals(ChangeTracker.ExtendedProperties[IdKeyName], Semester.Id))
                 {
                     ChangeTracker.RecordOriginalValue(IdKeyName, ChangeTracker.ExtendedProperties[IdKeyName]);
                 }

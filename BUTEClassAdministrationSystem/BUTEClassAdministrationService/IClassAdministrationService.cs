@@ -13,13 +13,22 @@ namespace BUTEClassAdministrationService
 	[ServiceContract]
 	public interface IClassAdministrationService
 	{
+		#region Semester operations
+		[OperationContract]
+		IEnumerable <Semester> ReadSemesters();
+
+		#endregion
+
+
+
+
 		#region Student operations
 
 		[OperationContract]
 		void CreateStudents(IEnumerable<Student> students);
 
 		[OperationContract]
-		IEnumerable<Student> ReadStudentsFromSemester(string semester);
+		IEnumerable<Student> ReadStudentsFromSemester(Semester semester);
 
 		[OperationContract]
 		void UpdateStudents(IEnumerable<Student> students);
@@ -30,13 +39,15 @@ namespace BUTEClassAdministrationService
 		#endregion
 
 
+
+
 		#region Course operations
 
 		[OperationContract]
 		void CreateCourse(IEnumerable<Course> courses);
 
 		[OperationContract]
-		IEnumerable<Course> ReadCoursesFromSemester(string semester);
+		IEnumerable<Course> ReadCoursesFromSemester(Semester semester);
 
 		[OperationContract]
 		void UpdateCourses(IEnumerable<Course> courses);
@@ -46,6 +57,8 @@ namespace BUTEClassAdministrationService
 
 		#endregion
 
+
+
 		
 		#region Group operations
 
@@ -53,7 +66,7 @@ namespace BUTEClassAdministrationService
 		void CreateGroup(IEnumerable<Group> groups);
 
 		[OperationContract]
-		IEnumerable<Group> ReadGroupsFromSemester(string semester);
+		IEnumerable<Group> ReadGroupsFromSemester(Semester semester);
 
 		[OperationContract]
 		void UpdateGroups(IEnumerable<Group> groups);
@@ -62,6 +75,8 @@ namespace BUTEClassAdministrationService
 		void DeleteGroups(IEnumerable<Group> groups);
 
 		#endregion
+
+
 
 
 		#region Instructor operations
@@ -80,5 +95,14 @@ namespace BUTEClassAdministrationService
 
 		#endregion
 
+
+
+
+		#region Room operations
+
+		[OperationContract]
+		IEnumerable<Room> ReadRooms();
+
+		#endregion
 	}
 }

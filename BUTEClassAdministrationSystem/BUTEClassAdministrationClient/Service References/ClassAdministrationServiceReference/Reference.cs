@@ -52,11 +52,14 @@ namespace BUTEClassAdministrationClient.ClassAdministrationServiceReference {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ClassAdministrationServiceReference.IClassAdministrationService")]
     public interface IClassAdministrationService {
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClassAdministrationService/ReadSemesters", ReplyAction="http://tempuri.org/IClassAdministrationService/ReadSemestersResponse")]
+        BUTEClassAdministrationTypes.Semester[] ReadSemesters();
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClassAdministrationService/CreateStudents", ReplyAction="http://tempuri.org/IClassAdministrationService/CreateStudentsResponse")]
         void CreateStudents(BUTEClassAdministrationTypes.Student[] students);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClassAdministrationService/ReadStudentsFromSemester", ReplyAction="http://tempuri.org/IClassAdministrationService/ReadStudentsFromSemesterResponse")]
-        BUTEClassAdministrationTypes.Student[] ReadStudentsFromSemester(string semester);
+        BUTEClassAdministrationTypes.Student[] ReadStudentsFromSemester(BUTEClassAdministrationTypes.Semester semester);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClassAdministrationService/UpdateStudents", ReplyAction="http://tempuri.org/IClassAdministrationService/UpdateStudentsResponse")]
         void UpdateStudents(BUTEClassAdministrationTypes.Student[] students);
@@ -68,7 +71,7 @@ namespace BUTEClassAdministrationClient.ClassAdministrationServiceReference {
         void CreateCourse(BUTEClassAdministrationTypes.Course[] courses);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClassAdministrationService/ReadCoursesFromSemester", ReplyAction="http://tempuri.org/IClassAdministrationService/ReadCoursesFromSemesterResponse")]
-        BUTEClassAdministrationTypes.Course[] ReadCoursesFromSemester(string semester);
+        BUTEClassAdministrationTypes.Course[] ReadCoursesFromSemester(BUTEClassAdministrationTypes.Semester semester);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClassAdministrationService/UpdateCourses", ReplyAction="http://tempuri.org/IClassAdministrationService/UpdateCoursesResponse")]
         void UpdateCourses(BUTEClassAdministrationTypes.Course[] courses);
@@ -80,7 +83,7 @@ namespace BUTEClassAdministrationClient.ClassAdministrationServiceReference {
         void CreateGroup(BUTEClassAdministrationTypes.Group[] groups);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClassAdministrationService/ReadGroupsFromSemester", ReplyAction="http://tempuri.org/IClassAdministrationService/ReadGroupsFromSemesterResponse")]
-        BUTEClassAdministrationTypes.Group[] ReadGroupsFromSemester(string semester);
+        BUTEClassAdministrationTypes.Group[] ReadGroupsFromSemester(BUTEClassAdministrationTypes.Semester semester);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClassAdministrationService/UpdateGroups", ReplyAction="http://tempuri.org/IClassAdministrationService/UpdateGroupsResponse")]
         void UpdateGroups(BUTEClassAdministrationTypes.Group[] groups);
@@ -128,11 +131,15 @@ namespace BUTEClassAdministrationClient.ClassAdministrationServiceReference {
                 base(binding, remoteAddress) {
         }
         
+        public BUTEClassAdministrationTypes.Semester[] ReadSemesters() {
+            return base.Channel.ReadSemesters();
+        }
+        
         public void CreateStudents(BUTEClassAdministrationTypes.Student[] students) {
             base.Channel.CreateStudents(students);
         }
         
-        public BUTEClassAdministrationTypes.Student[] ReadStudentsFromSemester(string semester) {
+        public BUTEClassAdministrationTypes.Student[] ReadStudentsFromSemester(BUTEClassAdministrationTypes.Semester semester) {
             return base.Channel.ReadStudentsFromSemester(semester);
         }
         
@@ -148,7 +155,7 @@ namespace BUTEClassAdministrationClient.ClassAdministrationServiceReference {
             base.Channel.CreateCourse(courses);
         }
         
-        public BUTEClassAdministrationTypes.Course[] ReadCoursesFromSemester(string semester) {
+        public BUTEClassAdministrationTypes.Course[] ReadCoursesFromSemester(BUTEClassAdministrationTypes.Semester semester) {
             return base.Channel.ReadCoursesFromSemester(semester);
         }
         
@@ -164,7 +171,7 @@ namespace BUTEClassAdministrationClient.ClassAdministrationServiceReference {
             base.Channel.CreateGroup(groups);
         }
         
-        public BUTEClassAdministrationTypes.Group[] ReadGroupsFromSemester(string semester) {
+        public BUTEClassAdministrationTypes.Group[] ReadGroupsFromSemester(BUTEClassAdministrationTypes.Semester semester) {
             return base.Channel.ReadGroupsFromSemester(semester);
         }
         

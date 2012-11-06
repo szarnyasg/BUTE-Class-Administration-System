@@ -12,6 +12,21 @@ namespace BUTEClassAdministrationService
 {
 	public class ClassAdministrationService : IClassAdministrationService
 	{
+		#region Semester operations
+
+		public IEnumerable<Semester> ReadSemesters()
+		{
+			using (ClassAdministrationEntityContext context = new ClassAdministrationEntityContext())
+			{
+				return context.SemesterSet.ToList();
+			}
+		}
+
+		#endregion
+
+
+
+
 		#region Student operations
 
 		public void CreateStudents(IEnumerable<Student> students)
@@ -20,13 +35,20 @@ namespace BUTEClassAdministrationService
 			{
 				foreach (var student in students)
 				{
-					context.StudentSet.AddObject(student);
+					// skip duplicates
+					if (context.StudentSet.Where(Student => Student.Neptun == student.Neptun).Any())
+					{
+						continue;
+					};
+					
+					context.StudentSet.ApplyChanges(student);
+					context.SaveChanges();
 				}
-                context.SaveChanges();
+				context.SaveChanges();
 			}
 		}
-		
-		public IEnumerable<Student> ReadStudentsFromSemester(string semester)
+
+		public IEnumerable<Student> ReadStudentsFromSemester(Semester semester)
 		{
 			using (ClassAdministrationEntityContext context = new ClassAdministrationEntityContext())
 			{
@@ -55,7 +77,7 @@ namespace BUTEClassAdministrationService
 					student.ChangeTracker.State = BUTEClassAdministrationTypes.ObjectState.Deleted;
 					context.StudentSet.ApplyChanges(student);
 				}
-				
+
 				context.SaveChanges();
 			}
 		}
@@ -73,13 +95,13 @@ namespace BUTEClassAdministrationService
 			{
 				foreach (var course in courses)
 				{
-					context.CourseSet.AddObject(course);
+					context.CourseSet.ApplyChanges(course);
 				}
-                context.SaveChanges();
-            }
+				context.SaveChanges();
+			}
 		}
 
-		public IEnumerable<Course> ReadCoursesFromSemester(string semester)
+		public IEnumerable<Course> ReadCoursesFromSemester(Semester semester)
 		{
 			using (ClassAdministrationEntityContext context = new ClassAdministrationEntityContext())
 			{
@@ -126,13 +148,13 @@ namespace BUTEClassAdministrationService
 			{
 				foreach (var group in groups)
 				{
-					context.GroupSet.AddObject(group);
+					context.GroupSet.ApplyChanges(group);
 				}
-                context.SaveChanges();
-            }
+				context.SaveChanges();
+			}
 		}
 
-		public IEnumerable<Group> ReadGroupsFromSemester(string semester)
+		public IEnumerable<Group> ReadGroupsFromSemester(Semester semester)
 		{
 			using (ClassAdministrationEntityContext context = new ClassAdministrationEntityContext())
 			{
@@ -179,10 +201,10 @@ namespace BUTEClassAdministrationService
 			{
 				foreach (var instructor in instructors)
 				{
-					context.InstructorSet.AddObject(instructor);
+					context.InstructorSet.ApplyChanges(instructor);
 				}
-                context.SaveChanges();
-            }
+				context.SaveChanges();
+			}
 		}
 
 		public IEnumerable<Instructor> ReadInstructors()
@@ -216,6 +238,21 @@ namespace BUTEClassAdministrationService
 				}
 
 				context.SaveChanges();
+			}
+		}
+
+		#endregion
+
+
+
+
+		#region Room operations
+
+		public IEnumerable<Room> ReadRooms()
+		{
+			using (ClassAdministrationEntityContext context = new ClassAdministrationEntityContext())
+			{
+				return context.RoomSet.ToList();
 			}
 		}
 

@@ -116,6 +116,7 @@
     <None Include="Properties\DataSources\BUTEClassAdministrationTypes.Course.datasource" />
     <None Include="Properties\DataSources\BUTEClassAdministrationTypes.Group.datasource" />
     <None Include="Properties\DataSources\BUTEClassAdministrationTypes.Instructor.datasource" />
+    <None Include="Properties\DataSources\BUTEClassAdministrationTypes.Semester.datasource" />
     <None Include="Properties\DataSources\BUTEClassAdministrationTypes.Student.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

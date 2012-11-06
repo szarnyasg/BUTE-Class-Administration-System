@@ -63,3 +63,7 @@ packages/
 
 #Test files
 *.testsettings
+
+#connection strings
+web.config
+app.config

@@ -7,6 +7,12 @@
       <xsd:import schemaLocation="http://localhost:17271/ClassAdministrationService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/BUTEClassAdministrationTypes" />
     </xsd:schema>
   </wsdl:types>
+  <wsdl:message name="IClassAdministrationService_ReadSemesters_InputMessage">
+    <wsdl:part name="parameters" element="tns:ReadSemesters" />
+  </wsdl:message>
+  <wsdl:message name="IClassAdministrationService_ReadSemesters_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ReadSemestersResponse" />
+  </wsdl:message>
   <wsdl:message name="IClassAdministrationService_CreateStudents_InputMessage">
     <wsdl:part name="parameters" element="tns:CreateStudents" />
   </wsdl:message>
@@ -104,6 +110,10 @@
     <wsdl:part name="parameters" element="tns:DeleteInstructorsResponse" />
   </wsdl:message>
   <wsdl:portType name="IClassAdministrationService">
+    <wsdl:operation name="ReadSemesters">
+      <wsdl:input wsaw:Action="http://tempuri.org/IClassAdministrationService/ReadSemesters" message="tns:IClassAdministrationService_ReadSemesters_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IClassAdministrationService/ReadSemestersResponse" message="tns:IClassAdministrationService_ReadSemesters_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="CreateStudents">
       <wsdl:input wsaw:Action="http://tempuri.org/IClassAdministrationService/CreateStudents" message="tns:IClassAdministrationService_CreateStudents_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IClassAdministrationService/CreateStudentsResponse" message="tns:IClassAdministrationService_CreateStudents_OutputMessage" />
@@ -171,6 +181,15 @@
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IClassAdministrationService" type="tns:IClassAdministrationService">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ReadSemesters">
+      <soap:operation soapAction="http://tempuri.org/IClassAdministrationService/ReadSemesters" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="CreateStudents">
       <soap:operation soapAction="http://tempuri.org/IClassAdministrationService/CreateStudents" style="document" />
       <wsdl:input>

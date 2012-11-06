@@ -106,6 +106,12 @@ namespace BUTEClassAdministrationTypes
             get { return _courseSet  ?? (_courseSet = CreateObjectSet<Course>("CourseSet")); }
         }
         private ObjectSet<Course> _courseSet;
+    
+        public ObjectSet<Semester> SemesterSet
+        {
+            get { return _semesterSet  ?? (_semesterSet = CreateObjectSet<Semester>("SemesterSet")); }
+        }
+        private ObjectSet<Semester> _semesterSet;
 
         #endregion
     }

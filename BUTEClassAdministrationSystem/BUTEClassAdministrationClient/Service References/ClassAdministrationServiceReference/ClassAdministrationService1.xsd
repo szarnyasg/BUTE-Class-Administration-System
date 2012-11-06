@@ -1,26 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/BUTEClassAdministrationTypes" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/BUTEClassAdministrationTypes" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://localhost:17271/ClassAdministrationService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-  <xs:complexType name="ArrayOfStudent">
+  <xs:complexType name="ArrayOfSemester">
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="Student" nillable="true" type="tns:Student" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Semester" nillable="true" type="tns:Semester" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="ArrayOfStudent" nillable="true" type="tns:ArrayOfStudent" />
-  <xs:complexType name="Student">
+  <xs:element name="ArrayOfSemester" nillable="true" type="tns:ArrayOfSemester" />
+  <xs:complexType name="Semester">
     <xs:sequence>
       <xs:element minOccurs="0" name="ChangeTracker" nillable="true" type="tns:ObjectChangeTracker" />
-      <xs:element minOccurs="0" name="Course" nillable="true" type="tns:Course" />
-      <xs:element minOccurs="0" name="Group" nillable="true" type="tns:Group" />
+      <xs:element minOccurs="0" name="Course" nillable="true" type="tns:ArrayOfCourse" />
+      <xs:element minOccurs="0" name="Group" nillable="true" type="tns:ArrayOfGroup" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
-      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Neptun" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Semester" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Semester_name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Student" nillable="true" type="tns:ArrayOfStudent" />
     </xs:sequence>
     <xs:attribute ref="ser:Id" />
     <xs:attribute ref="ser:Ref" />
   </xs:complexType>
-  <xs:element name="Student" nillable="true" type="tns:Student" />
+  <xs:element name="Semester" nillable="true" type="tns:Semester" />
   <xs:complexType name="ObjectChangeTracker">
     <xs:sequence>
       <xs:element minOccurs="0" name="ExtendedProperties" nillable="true" type="tns:ExtendedPropertiesDictionary" />
@@ -124,6 +123,12 @@
     </xs:list>
   </xs:simpleType>
   <xs:element name="ObjectState" nillable="true" type="tns:ObjectState" />
+  <xs:complexType name="ArrayOfCourse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Course" nillable="true" type="tns:Course" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCourse" nillable="true" type="tns:ArrayOfCourse" />
   <xs:complexType name="Course">
     <xs:sequence>
       <xs:element minOccurs="0" name="ChangeTracker" nillable="true" type="tns:ObjectChangeTracker" />
@@ -131,7 +136,7 @@
       <xs:element minOccurs="0" name="Group" nillable="true" type="tns:ArrayOfGroup" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
       <xs:element minOccurs="0" name="Room" nillable="true" type="tns:ArrayOfRoom" />
-      <xs:element minOccurs="0" name="Semester" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Semester" nillable="true" type="tns:Semester" />
       <xs:element minOccurs="0" name="Starting_time" type="ser:duration" />
       <xs:element minOccurs="0" name="Student" nillable="true" type="tns:ArrayOfStudent" />
       <xs:element minOccurs="0" name="Week_parity" type="xs:boolean" />
@@ -154,7 +159,7 @@
       <xs:element minOccurs="0" name="Index" type="xs:decimal" />
       <xs:element minOccurs="0" name="Instructor" nillable="true" type="tns:Instructor" />
       <xs:element minOccurs="0" name="Room" nillable="true" type="tns:Room" />
-      <xs:element minOccurs="0" name="Semester" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Semester" nillable="true" type="tns:Semester" />
       <xs:element minOccurs="0" name="Student" nillable="true" type="tns:ArrayOfStudent" />
     </xs:sequence>
     <xs:attribute ref="ser:Id" />
@@ -188,12 +193,26 @@
     <xs:attribute ref="ser:Ref" />
   </xs:complexType>
   <xs:element name="Room" nillable="true" type="tns:Room" />
-  <xs:complexType name="ArrayOfCourse">
+  <xs:complexType name="Student">
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="Course" nillable="true" type="tns:Course" />
+      <xs:element minOccurs="0" name="ChangeTracker" nillable="true" type="tns:ObjectChangeTracker" />
+      <xs:element minOccurs="0" name="Course" nillable="true" type="tns:Course" />
+      <xs:element minOccurs="0" name="Group" nillable="true" type="tns:Group" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Neptun" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Semester" nillable="true" type="tns:Semester" />
+    </xs:sequence>
+    <xs:attribute ref="ser:Id" />
+    <xs:attribute ref="ser:Ref" />
+  </xs:complexType>
+  <xs:element name="Student" nillable="true" type="tns:Student" />
+  <xs:complexType name="ArrayOfStudent">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Student" nillable="true" type="tns:Student" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="ArrayOfCourse" nillable="true" type="tns:ArrayOfCourse" />
+  <xs:element name="ArrayOfStudent" nillable="true" type="tns:ArrayOfStudent" />
   <xs:complexType name="ArrayOfRoom">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="Room" nillable="true" type="tns:Room" />

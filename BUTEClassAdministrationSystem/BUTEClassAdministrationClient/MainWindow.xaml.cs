@@ -37,23 +37,7 @@ namespace BUTEClassAdministrationClient
 
         }
 
-		void Work()
-		{
-			/*
-			using (var service = new ClassAdministrationServiceClient())
-			{
-				Student s = service.GetStudent();
-
-				Console.WriteLine(s.Name);
-
-				s.Name = "Móricz";
-				s.Neptun = "ZL2V8F";
-
-				service.SetStudent(s);
-
-			}*/
-		}
-
+		/*
 		private void button2_Click(object sender, RoutedEventArgs e)
 		{
 			using (var service = new ClassAdministrationServiceClient())
@@ -66,9 +50,11 @@ namespace BUTEClassAdministrationClient
 				service.DeleteStudent(students.ToArray());
 			}
 		}
+		 * */
 
         private void ImportFromExcel_Click(object sender, RoutedEventArgs e)
         {
+
             Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
             dlg.FileName = "";
             dlg.DefaultExt = ".xlsx";
@@ -82,10 +68,12 @@ namespace BUTEClassAdministrationClient
             }
 
             string filename = dlg.FileName;
-            IEnumerable<Student> students = ExcelTools.ImportFromExcel(filename);
 
-            using (var service = new ClassAdministrationServiceClient())
-            {
+			using (var service = new ClassAdministrationServiceClient())
+			{
+				Semester semester = service.ReadSemesters().First();
+				IEnumerable<Student> students = ExcelTools.ImportFromExcel(filename, semester);
+
                 service.CreateStudents(students.ToArray());
                 Console.WriteLine(students.Count());
             }

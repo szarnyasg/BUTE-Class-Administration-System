@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 11/04/2012 00:12:11
+-- Date Created: 11/06/2012 20:07:32
 -- Generated from EDMX file: C:\GitHub\BUTE-Class-Administration-System\BUTEClassAdministrationSystem\BUTEClassAdministrationModel\ClassAdministrationDatabase.edmx
 -- --------------------------------------------------
 
@@ -17,26 +17,26 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[FK_HallgatoKurzus]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[StudentSet] DROP CONSTRAINT [FK_HallgatoKurzus];
+IF OBJECT_ID(N'[dbo].[FK_StudentCourse]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[StudentSet] DROP CONSTRAINT [FK_StudentCourse];
 GO
-IF OBJECT_ID(N'[dbo].[FK_CsoportGyakorlatvezeto]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[GroupSet] DROP CONSTRAINT [FK_CsoportGyakorlatvezeto];
+IF OBJECT_ID(N'[dbo].[FK_GroupInstructor]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[GroupSet] DROP CONSTRAINT [FK_GroupInstructor];
 GO
-IF OBJECT_ID(N'[dbo].[FK_KurzusCsoport]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[GroupSet] DROP CONSTRAINT [FK_KurzusCsoport];
+IF OBJECT_ID(N'[dbo].[FK_CourseGroup]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[GroupSet] DROP CONSTRAINT [FK_CourseGroup];
 GO
-IF OBJECT_ID(N'[dbo].[FK_TeremKurzus_Room]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[TeremKurzus] DROP CONSTRAINT [FK_TeremKurzus_Room];
+IF OBJECT_ID(N'[dbo].[FK_RoomCourse_Room]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[RoomCourse] DROP CONSTRAINT [FK_RoomCourse_Room];
 GO
-IF OBJECT_ID(N'[dbo].[FK_TeremKurzus_Course]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[TeremKurzus] DROP CONSTRAINT [FK_TeremKurzus_Course];
+IF OBJECT_ID(N'[dbo].[FK_RoomCourse_Course]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[RoomCourse] DROP CONSTRAINT [FK_RoomCourse_Course];
 GO
-IF OBJECT_ID(N'[dbo].[FK_CsoportTerem]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[GroupSet] DROP CONSTRAINT [FK_CsoportTerem];
+IF OBJECT_ID(N'[dbo].[FK_GroupRoom]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[GroupSet] DROP CONSTRAINT [FK_GroupRoom];
 GO
-IF OBJECT_ID(N'[dbo].[FK_CsoportHallgato]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[StudentSet] DROP CONSTRAINT [FK_CsoportHallgato];
+IF OBJECT_ID(N'[dbo].[FK_GroupStudent]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[StudentSet] DROP CONSTRAINT [FK_GroupStudent];
 GO
 
 -- --------------------------------------------------
@@ -58,8 +58,8 @@ GO
 IF OBJECT_ID(N'[dbo].[CourseSet]', 'U') IS NOT NULL
     DROP TABLE [dbo].[CourseSet];
 GO
-IF OBJECT_ID(N'[dbo].[TeremKurzus]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[TeremKurzus];
+IF OBJECT_ID(N'[dbo].[RoomCourse]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[RoomCourse];
 GO
 
 -- --------------------------------------------------
@@ -71,9 +71,9 @@ CREATE TABLE [dbo].[StudentSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Neptun] nvarchar(max)  NOT NULL,
     [Name] nvarchar(max)  NOT NULL,
-    [Semester] nvarchar(max)  NOT NULL,
     [Course_Id] int  NULL,
-    [Group_Id] int  NULL
+    [Group_Id] int  NULL,
+    [Semester_Id] int  NOT NULL
 );
 GO
 
@@ -98,21 +98,28 @@ GO
 -- Creating table 'GroupSet'
 CREATE TABLE [dbo].[GroupSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [Semester] nvarchar(max)  NOT NULL,
     [Index] decimal(18,0)  NOT NULL,
     [Instructor_Id] int  NOT NULL,
     [Course_Id] int  NOT NULL,
-    [Room_Id] int  NOT NULL
+    [Room_Id] int  NOT NULL,
+    [Semester_Id] int  NOT NULL
 );
 GO
 
 -- Creating table 'CourseSet'
 CREATE TABLE [dbo].[CourseSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [Semester] nvarchar(max)  NOT NULL,
     [Day_of_week] decimal(18,0)  NOT NULL,
     [Week_parity] bit  NOT NULL,
-    [Starting_time] time  NOT NULL
+    [Starting_time] time  NOT NULL,
+    [Semester_Id] int  NOT NULL
+);
+GO
+
+-- Creating table 'SemesterSet'
+CREATE TABLE [dbo].[SemesterSet] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [Semester_name] nvarchar(max)  NOT NULL
 );
 GO
 
@@ -154,6 +161,12 @@ GO
 -- Creating primary key on [Id] in table 'CourseSet'
 ALTER TABLE [dbo].[CourseSet]
 ADD CONSTRAINT [PK_CourseSet]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'SemesterSet'
+ALTER TABLE [dbo].[SemesterSet]
+ADD CONSTRAINT [PK_SemesterSet]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
@@ -258,6 +271,48 @@ ADD CONSTRAINT [FK_GroupStudent]
 CREATE INDEX [IX_FK_GroupStudent]
 ON [dbo].[StudentSet]
     ([Group_Id]);
+GO
+
+-- Creating foreign key on [Semester_Id] in table 'GroupSet'
+ALTER TABLE [dbo].[GroupSet]
+ADD CONSTRAINT [FK_SemesterGroup]
+    FOREIGN KEY ([Semester_Id])
+    REFERENCES [dbo].[SemesterSet]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_SemesterGroup'
+CREATE INDEX [IX_FK_SemesterGroup]
+ON [dbo].[GroupSet]
+    ([Semester_Id]);
+GO
+
+-- Creating foreign key on [Semester_Id] in table 'StudentSet'
+ALTER TABLE [dbo].[StudentSet]
+ADD CONSTRAINT [FK_SemesterStudent]
+    FOREIGN KEY ([Semester_Id])
+    REFERENCES [dbo].[SemesterSet]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_SemesterStudent'
+CREATE INDEX [IX_FK_SemesterStudent]
+ON [dbo].[StudentSet]
+    ([Semester_Id]);
+GO
+
+-- Creating foreign key on [Semester_Id] in table 'CourseSet'
+ALTER TABLE [dbo].[CourseSet]
+ADD CONSTRAINT [FK_SemesterCourse]
+    FOREIGN KEY ([Semester_Id])
+    REFERENCES [dbo].[SemesterSet]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_SemesterCourse'
+CREATE INDEX [IX_FK_SemesterCourse]
+ON [dbo].[CourseSet]
+    ([Semester_Id]);
 GO
 
 -- --------------------------------------------------
