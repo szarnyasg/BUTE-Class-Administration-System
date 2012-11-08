@@ -44,7 +44,7 @@
         <Button
             Grid.Row="2"
             Grid.ColumnSpan="3"
-            Content="Inportálás Excelből"
+            Content="Importálás Excelből"
             Click="ImportFromExcel_Click"
             />
     </Grid>

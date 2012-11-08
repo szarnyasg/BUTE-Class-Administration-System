@@ -65,5 +65,6 @@ packages/
 *.testsettings
 
 #connection strings
-web.config
+Web.Config
+App.Config
 app.config

@@ -22,36 +22,17 @@ namespace BUTEClassAdministrationClient
 	/// </summary>
 	public partial class MainWindow : Window
 	{
-        StudentModelView smv;
-
 		public MainWindow()
 		{
 			InitializeComponent();
-            smv = new StudentModelView();
     	}
 
         private void InsertStudent_Click(object sender, RoutedEventArgs e)
         {
             InsertStudentWindow window = new InsertStudentWindow();
-            window.Show();
-
+			window.Show();
         }
-
-		/*
-		private void button2_Click(object sender, RoutedEventArgs e)
-		{
-			using (var service = new ClassAdministrationServiceClient())
-			{
-				Student first = service.ReadStudentsFromSemester("félév").First();
-				
-				List<Student> students = new List<Student>();
-				students.Add(first);
-
-				service.DeleteStudent(students.ToArray());
-			}
-		}
-		 * */
-
+		
         private void ImportFromExcel_Click(object sender, RoutedEventArgs e)
         {
 

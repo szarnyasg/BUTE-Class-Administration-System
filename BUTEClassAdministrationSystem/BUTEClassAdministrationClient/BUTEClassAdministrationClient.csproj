@@ -6,7 +6,7 @@
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{54EE4459-7788-4085-927E-C3794C91145D}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>BUTEClassAdministrationClient</RootNamespace>
     <AssemblyName>BUTEClassAdministrationClient</AssemblyName>
