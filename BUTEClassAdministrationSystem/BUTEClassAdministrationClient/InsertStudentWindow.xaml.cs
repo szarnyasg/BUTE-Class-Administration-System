@@ -26,9 +26,14 @@ namespace BUTEClassAdministrationClient
 
         public Semester semester { get; set; }
 
+
+
         public InsertStudentWindow()
         {
             InitializeComponent();
+
+           
+          //  svm = new StudentViewModel();
 
             // Automatically resize height relative to content 
             this.SizeToContent = SizeToContent.Height;

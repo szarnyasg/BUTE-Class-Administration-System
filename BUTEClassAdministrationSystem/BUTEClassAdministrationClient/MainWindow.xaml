@@ -5,8 +5,9 @@
         Title="MainWindow" Height="350" Width="525">
     
     <Window.Resources>
-        <c:StudentModelView x:Key="studentModelView"/>
-    </Window.Resources>
+        <!--<c:StudentModelView x:Key="studentModelView"/>
+    -->
+        </Window.Resources>
     
     <Grid Margin="8">
         <Grid.RowDefinitions>
@@ -27,15 +28,26 @@
             Grid.Column="0"
             Target="{Binding ElementName=semesterCmbBox}"
             />
+        <!--
         <ComboBox
             Name="semesterCmbBox"
             Grid.Row="0"
             Grid.Column="2"
             Width="100"
             HorizontalAlignment="Left"
-            ItemsSource="{Binding Path=Semesters, Source={StaticResource studentModelView}}">
+            ItemsSource="{Binding mwvm.ASD}">
         </ComboBox>
+-->
+        <TextBox
+            Name="nameTxtBox"
+            Grid.Row="0"
+            Grid.Column="2"
+            Text="{Binding xxx.ASD, Mode=TwoWay}"
+            />
+
         
+
+
         <Button
             Grid.Row="1"
             Grid.ColumnSpan="3"

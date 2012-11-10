@@ -22,8 +22,15 @@ namespace BUTEClassAdministrationClient
 	/// </summary>
 	public partial class MainWindow : Window
 	{
+        MainWindowViewModel mwvm = new MainWindowViewModel();
+
+        public MainWindowViewModel xxx { get; set; }
+
 		public MainWindow()
 		{
+            xxx = mwvm;
+
+            DataContext = this;
 			InitializeComponent();
     	}
 

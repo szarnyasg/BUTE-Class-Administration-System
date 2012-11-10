@@ -10,10 +10,17 @@ namespace BUTEClassAdministrationClient
     {
         public override ValidationResult Validate(object value, System.Globalization.CultureInfo cultureInfo)
         {
-            if (((string)value).Length > 0)
+            if (nameIsValid((string)value))
                 return new ValidationResult(true, null);
 
             return new ValidationResult(false, null);
         }
+
+        public static bool nameIsValid(string value)
+        {
+            return (value.Length > 0);
+        }
     }
+
+
 }

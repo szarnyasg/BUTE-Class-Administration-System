@@ -63,11 +63,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CommandReference.cs" />
+    <Compile Include="DelegateCommand.cs" />
     <Compile Include="EmailValidator.cs" />
     <Compile Include="InsertStudentWindow.xaml.cs">
       <DependentUpon>InsertStudentWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ExcelTools.cs" />
+    <Compile Include="MainWindowViewModel.cs" />
     <Compile Include="NameValidator.cs" />
     <Compile Include="NeptunValidator.cs" />
     <Compile Include="PrettyFormatter.cs" />
@@ -76,7 +79,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="StudentModelView.cs" />
+    <Compile Include="StudentViewModel.cs" />
     <Page Include="InsertStudentWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

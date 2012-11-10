@@ -4,9 +4,13 @@
         xmlns:c="clr-namespace:BUTEClassAdministrationClient"
                 Title="Hallgató felvétele" Width="400" ResizeMode="NoResize" VerticalAlignment="Top" HorizontalAlignment="Center" mc:Ignorable="d" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" d:DesignHeight="400" d:DesignWidth="400" SizeToContent="WidthAndHeight">
 
+
+    <Window.DataContext>
+        <c:StudentViewModel/>
+    </Window.DataContext>
+
+
     <Window.Resources>
-        <c:StudentModelView x:Key="studentModelView"/>
-       
         <ControlTemplate x:Key="nameValidationTemplate">
             <StackPanel Orientation="Vertical">
                 <AdornedElementPlaceholder/>
@@ -22,7 +26,7 @@
             <StackPanel Orientation="Vertical">
                 <AdornedElementPlaceholder/>
                 <Label
-                    Content="A neptun kód hibás!)"
+                    Content="A neptun kód hibás!"
                     Foreground="Red"
                     FontStyle="Italic"
                     />
@@ -67,7 +71,6 @@
             <TextBox.Text>
                 <Binding 
                     Path="Name" 
-                    Source="{StaticResource studentModelView}"
                     UpdateSourceTrigger="PropertyChanged"
                     >
                     <Binding.ValidationRules>
@@ -94,7 +97,6 @@
             <TextBox.Text>
                 <Binding
                     Path="Neptun"
-                    Source="{StaticResource studentModelView}"
                     UpdateSourceTrigger="PropertyChanged"
                     >
                     <Binding.ValidationRules>
@@ -116,7 +118,7 @@
             Name="coursesCmbBox"
             Grid.Row="4"
             Grid.Column="2"
-            ItemsSource="{Binding Path=Array, Source={StaticResource studentModelView}, Mode=OneTime}" SelectionChanged="coursesCmbBox_SelectionChanged" />
+            ItemsSource="{Binding Path=Array, Mode=OneTime}" SelectionChanged="coursesCmbBox_SelectionChanged" />
 
         <!-- BUTTONS -->
         <Grid
@@ -136,7 +138,7 @@
             <Button
                 Name="InsertButton"
                 Content="Felvesz"
-                Click="Insert"
+                Command="{Binding Path=SavePersonCommand}"
                 Grid.Row="0"
                 Grid.Column="0"
                 />
@@ -144,7 +146,6 @@
             <Button
                 Name="CanceslButton"
                 Content="Mégsem"
-                Click="Cancel"
                 Grid.Row="0"
                 Grid.Column="2"
                 />

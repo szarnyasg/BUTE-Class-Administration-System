@@ -11,12 +11,17 @@ namespace BUTEClassAdministrationClient
     {
         public override ValidationResult Validate(object value, System.Globalization.CultureInfo cultureInfo)
         {
-            string emailregex = @"^(?!\.)(""([^""\r\\]|\\[""\r\\])*""|([-a-z0-9!#$%&'*+/=?^_`{|}~]|(?<!\.)\.)*)(?<!\.)@[a-z0-9][\w\.-]*[a-z0-9]\.[a-z][a-z\.]*[a-z]$";
-
-            if (Regex.IsMatch((string)value, emailregex, RegexOptions.IgnoreCase))
+            if (emailIsValid((string)value))
                 return new ValidationResult(true, null);
 
             return new ValidationResult(false, null);
+        }
+
+        public static bool emailIsValid(string value)
+        {
+            string emailregex = @"^(?!\.)(""([^""\r\\]|\\[""\r\\])*""|([-a-z0-9!#$%&'*+/=?^_`{|}~]|(?<!\.)\.)*)(?<!\.)@[a-z0-9][\w\.-]*[a-z0-9]\.[a-z][a-z\.]*[a-z]$";
+            return Regex.IsMatch(value, emailregex, RegexOptions.IgnoreCase);
+
         }
     }
 }
