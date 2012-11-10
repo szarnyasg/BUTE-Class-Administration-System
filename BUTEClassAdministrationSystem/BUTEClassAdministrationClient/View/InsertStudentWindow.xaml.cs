@@ -34,17 +34,19 @@ namespace BUTEClassAdministrationClient
 
         #endregion
 
-        public InsertStudentWindow()
+        public InsertStudentWindow(Semester selectedSemester)
         {
             InitializeComponent();
 
             // Automatically resize height relative to content 
             this.SizeToContent = SizeToContent.Height;
-           
-            _studentViewModel = new StudentViewModel();
+
+            _studentViewModel = new StudentViewModel(selectedSemester);
 
             DataContext = this;
         }
+
+
 
 
     }

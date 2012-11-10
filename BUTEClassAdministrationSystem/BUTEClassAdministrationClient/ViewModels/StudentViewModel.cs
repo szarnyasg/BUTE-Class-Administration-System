@@ -56,13 +56,13 @@ namespace BUTEClassAdministrationClient
 
         #endregion
 
-        public StudentViewModel()
+        public StudentViewModel(Semester selectedSemester)
         {
             _student = new Student();
 
             Name = "";
             Neptun = "";
-
+            Semester = selectedSemester;
            
         }
 
@@ -88,8 +88,7 @@ namespace BUTEClassAdministrationClient
         {
             using (var service = new ClassAdministrationServiceClient())
             {
-                Semester = service.ReadSemesters().First();
-
+                
                 service.CreateStudents(new Student[] { _student });
                 _student.AcceptChanges();
 
