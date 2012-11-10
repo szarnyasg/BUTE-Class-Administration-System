@@ -4,12 +4,6 @@
         xmlns:c="clr-namespace:BUTEClassAdministrationClient"
                 Title="Hallgató felvétele" Width="400" ResizeMode="NoResize" VerticalAlignment="Top" HorizontalAlignment="Center" mc:Ignorable="d" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" d:DesignHeight="400" d:DesignWidth="400" SizeToContent="WidthAndHeight">
 
-
-    <Window.DataContext>
-        <c:StudentViewModel/>
-    </Window.DataContext>
-
-
     <Window.Resources>
         <ControlTemplate x:Key="nameValidationTemplate">
             <StackPanel Orientation="Vertical">
@@ -70,7 +64,7 @@
 
             <TextBox.Text>
                 <Binding 
-                    Path="Name" 
+                    Path="StudentViewModel.Name" 
                     UpdateSourceTrigger="PropertyChanged"
                     >
                     <Binding.ValidationRules>
@@ -96,7 +90,7 @@
 
             <TextBox.Text>
                 <Binding
-                    Path="Neptun"
+                    Path="StudentViewModel.Neptun"
                     UpdateSourceTrigger="PropertyChanged"
                     >
                     <Binding.ValidationRules>
@@ -118,7 +112,7 @@
             Name="coursesCmbBox"
             Grid.Row="4"
             Grid.Column="2"
-            ItemsSource="{Binding Path=Array, Mode=OneTime}" SelectionChanged="coursesCmbBox_SelectionChanged" />
+            ItemsSource="{Binding Path=Array, Mode=OneTime}"/>
 
         <!-- BUTTONS -->
         <Grid
@@ -138,7 +132,7 @@
             <Button
                 Name="InsertButton"
                 Content="Felvesz"
-                Command="{Binding Path=SavePersonCommand}"
+                Command="{Binding StudentViewModel.SaveStudentCommand}"
                 Grid.Row="0"
                 Grid.Column="0"
                 />

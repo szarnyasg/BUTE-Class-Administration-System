@@ -22,27 +22,34 @@ namespace BUTEClassAdministrationClient
 	/// </summary>
 	public partial class MainWindow : Window
 	{
-        MainWindowViewModel mwvm = new MainWindowViewModel();
+        MainWindowViewModel _mainWindowViewModel;
 
-        public MainWindowViewModel xxx { get; set; }
+        public MainWindowViewModel MainWindowViewModel 
+        {
+            get { return _mainWindowViewModel; }
+            set { _mainWindowViewModel = value; }
+        }
 
 		public MainWindow()
 		{
-            xxx = mwvm;
-
+            _mainWindowViewModel = new MainWindowViewModel();
+            
             DataContext = this;
-			InitializeComponent();
+
+            InitializeComponent();
     	}
 
         private void InsertStudent_Click(object sender, RoutedEventArgs e)
         {
             InsertStudentWindow window = new InsertStudentWindow();
-			window.Show();
+			window.ShowDialog();
         }
 		
         private void ImportFromExcel_Click(object sender, RoutedEventArgs e)
         {
+            Console.WriteLine(MainWindowViewModel.SelectedSemester.Semester_name);
 
+            return;
             Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
             dlg.FileName = "";
             dlg.DefaultExt = ".xlsx";

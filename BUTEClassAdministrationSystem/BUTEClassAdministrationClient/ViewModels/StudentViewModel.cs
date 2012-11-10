@@ -11,10 +11,13 @@ using System.ComponentModel;
 
 namespace BUTEClassAdministrationClient
 {
-    internal class StudentViewModel //: INotifyPropertyChanged
+    public class StudentViewModel //: INotifyPropertyChanged
     {
         public Student _student;
-        
+
+
+        #region Properties
+
         public string Name
         {
             get
@@ -51,6 +54,8 @@ namespace BUTEClassAdministrationClient
             }
         }
 
+        #endregion
+
         public StudentViewModel()
         {
             _student = new Student();
@@ -58,18 +63,19 @@ namespace BUTEClassAdministrationClient
             Name = "";
             Neptun = "";
 
+           
         }
 
-        #region savePersonCommand members
+        #region saveStudentCommand members
         
-        private DelegateCommand _savePersonCommand;
-        public ICommand SavePersonCommand
+        private DelegateCommand _saveStudentCommand;
+        public ICommand SaveStudentCommand
         {
             get
             {
-                if (_savePersonCommand == null)
-                    _savePersonCommand = new DelegateCommand(new Action(saveExecuted), new Func<bool>(saveCanExecuted));
-                return _savePersonCommand;
+                if (_saveStudentCommand == null)
+                    _saveStudentCommand = new DelegateCommand(new Action(saveExecuted), new Func<bool>(saveCanExecuted));
+                return _saveStudentCommand;
             }
         }
 
