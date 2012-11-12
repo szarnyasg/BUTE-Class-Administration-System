@@ -81,7 +81,9 @@
     <Compile Include="IClassAdministrationService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="..\BUTEClassAdministrationModel\ClassAdministrationModel.Context.tt">
       <Link>ClassAdministrationModel.Context.tt</Link>
