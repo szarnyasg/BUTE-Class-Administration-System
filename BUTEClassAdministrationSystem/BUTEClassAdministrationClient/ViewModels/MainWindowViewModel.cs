@@ -22,7 +22,6 @@ namespace BUTEClassAdministrationClient
         {
             get { return _selectedSemester; }
             set
-            
                 {
                     if (_selectedSemester != value)
                     {
@@ -59,7 +58,7 @@ namespace BUTEClassAdministrationClient
             }
         }
 
-        #region INotifyPropertyChanged methods
+        #region INotifyPropertyChanged memers
 
         private void NotifyPropertyChanged(string propertyName)
         {

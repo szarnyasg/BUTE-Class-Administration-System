@@ -74,7 +74,7 @@
             </TextBox.Text>
         </TextBox>
 
-            <!-- NEPTUN -->
+        <!-- NEPTUN -->
         <Label
             Content="Neptun:" 
             Grid.Row="2" 

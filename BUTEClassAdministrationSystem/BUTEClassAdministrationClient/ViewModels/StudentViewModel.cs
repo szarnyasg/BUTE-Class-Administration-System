@@ -11,7 +11,7 @@ using System.ComponentModel;
 
 namespace BUTEClassAdministrationClient
 {
-    public class StudentViewModel //: INotifyPropertyChanged
+    public class StudentViewModel : INotifyPropertyChanged
     {
 
         Window insertStudentWindow;
@@ -29,7 +29,11 @@ namespace BUTEClassAdministrationClient
             }
             set
             {
-                _student.Name = value;
+                if (_student.Name != value)
+                {
+                    _student.Name = value;
+                    NotifyPropertyChanged("Name");
+                }
             }
         }
 
@@ -41,7 +45,11 @@ namespace BUTEClassAdministrationClient
             }
             set
             {
-                _student.Neptun = value;
+                if (_student.Neptun != value)
+                {
+                    _student.Neptun = value;
+                    NotifyPropertyChanged("Neptun");
+                }
             }
         }
 
@@ -53,7 +61,11 @@ namespace BUTEClassAdministrationClient
             }
             set
             {
-                _student.Semester = value;
+                if (_student.Semester != value)
+                {
+                    _student.Semester = value;
+                    NotifyPropertyChanged("Semester");
+                }
             }
         }
 
@@ -108,6 +120,20 @@ namespace BUTEClassAdministrationClient
 
             }
         }
+
+        #endregion
+
+        #region INotifyPropertyChanged memers
+
+        private void NotifyPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         #endregion
 
