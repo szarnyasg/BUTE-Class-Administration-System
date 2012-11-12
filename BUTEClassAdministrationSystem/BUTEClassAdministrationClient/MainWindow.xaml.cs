@@ -41,8 +41,7 @@ namespace BUTEClassAdministrationClient
 
         private void InsertStudent_Click(object sender, RoutedEventArgs e)
         {
-            InsertStudentWindow window = new InsertStudentWindow(MainWindowViewModel.SelectedSemester);
-			window.ShowDialog();
+            StudentViewModel window = new StudentViewModel(MainWindowViewModel.SelectedSemester);
         }
 		
         private void ImportFromExcel_Click(object sender, RoutedEventArgs e)

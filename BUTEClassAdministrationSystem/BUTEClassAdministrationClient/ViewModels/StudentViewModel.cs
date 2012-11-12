@@ -13,6 +13,9 @@ namespace BUTEClassAdministrationClient
 {
     public class StudentViewModel //: INotifyPropertyChanged
     {
+
+        Window insertStudentWindow;
+
         public Student _student;
 
 
@@ -56,6 +59,8 @@ namespace BUTEClassAdministrationClient
 
         #endregion
 
+        #region Construktor
+
         public StudentViewModel(Semester selectedSemester)
         {
             _student = new Student();
@@ -63,11 +68,18 @@ namespace BUTEClassAdministrationClient
             Name = "";
             Neptun = "";
             Semester = selectedSemester;
-           
+
+            insertStudentWindow = new InsertStudentWindow();
+
+            insertStudentWindow.DataContext = this;
+
+            insertStudentWindow.ShowDialog();
         }
 
+        #endregion
+
         #region saveStudentCommand members
-        
+
         private DelegateCommand _saveStudentCommand;
         public ICommand SaveStudentCommand
         {
@@ -98,7 +110,6 @@ namespace BUTEClassAdministrationClient
         }
 
         #endregion
-
 
     }
 }

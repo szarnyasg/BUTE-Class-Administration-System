@@ -64,7 +64,7 @@
 
             <TextBox.Text>
                 <Binding 
-                    Path="StudentViewModel.Name" 
+                    Path="Name" 
                     UpdateSourceTrigger="PropertyChanged"
                     >
                     <Binding.ValidationRules>
@@ -90,7 +90,7 @@
 
             <TextBox.Text>
                 <Binding
-                    Path="StudentViewModel.Neptun"
+                    Path="Neptun"
                     UpdateSourceTrigger="PropertyChanged"
                     >
                     <Binding.ValidationRules>
@@ -132,7 +132,7 @@
             <Button
                 Name="InsertButton"
                 Content="Felvesz"
-                Command="{Binding StudentViewModel.SaveStudentCommand}"
+                Command="{Binding SaveStudentCommand}"
                 Grid.Row="0"
                 Grid.Column="0"
                 />

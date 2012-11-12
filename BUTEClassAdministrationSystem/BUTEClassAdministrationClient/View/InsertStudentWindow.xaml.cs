@@ -21,33 +21,15 @@ namespace BUTEClassAdministrationClient
     /// </summary>
     public partial class InsertStudentWindow : Window
     {
-        #region properties
         
-        private StudentViewModel _studentViewModel;
-        public StudentViewModel StudentViewModel 
-        {
-            get { return _studentViewModel; }
-            set {_studentViewModel = value;} 
-        }
 
-        public Semester semester { get; set; }
-
-        #endregion
-
-        public InsertStudentWindow(Semester selectedSemester)
+        public InsertStudentWindow()
         {
             InitializeComponent();
 
             // Automatically resize height relative to content 
             this.SizeToContent = SizeToContent.Height;
-
-            _studentViewModel = new StudentViewModel(selectedSemester);
-
-            DataContext = this;
         }
-
-
-
 
     }
 }
