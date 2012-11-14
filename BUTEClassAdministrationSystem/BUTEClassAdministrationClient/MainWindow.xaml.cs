@@ -46,9 +46,7 @@ namespace BUTEClassAdministrationClient
 		
         private void ImportFromExcel_Click(object sender, RoutedEventArgs e)
         {
-            Console.WriteLine(MainWindowViewModel.SelectedSemester.Semester_name);
 
-            return;
             Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
             dlg.FileName = "";
             dlg.DefaultExt = ".xlsx";

@@ -21,8 +21,6 @@ namespace BUTEClassAdministrationClient
     /// </summary>
     public partial class InsertStudentWindow : Window
     {
-        
-
         public InsertStudentWindow()
         {
             InitializeComponent();
@@ -30,6 +28,5 @@ namespace BUTEClassAdministrationClient
             // Automatically resize height relative to content 
             this.SizeToContent = SizeToContent.Height;
         }
-
     }
 }

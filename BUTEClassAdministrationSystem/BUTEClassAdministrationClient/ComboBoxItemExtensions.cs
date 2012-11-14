@@ -6,10 +6,7 @@ using BUTEClassAdministrationTypes;
 
 namespace BUTEClassAdministrationClient
 {
-    /// <summary>
-    /// This class provides us with an object to fill a ComboBox with
-    /// that can be bound to string fields in the binding object.
-    /// </summary>
+
     public class ComboBoxSemesterString
     {
         public string ValueString 
@@ -19,22 +16,18 @@ namespace BUTEClassAdministrationClient
         }
     }
 
-    /// <summary>
-    /// This class provides us with an object to fill a ComboBox with
-    /// that can be bound to 'ViewModelEnum.Colors' enum fields in the binding
-    ///  object while displaying a string values in the to user in the ComboBox.
-    /// </summary>
     public class ComboBoxSemesterPair
     {
-        public Semester SemesterObject 
-        { 
-            get; 
-            set; 
-        }
-        public string SemesterString 
-        { 
-            get; 
-            set; 
-        }
+        public Semester SemesterObject { get; set; } 
+        
+        public string SemesterString { get; set; }
     }
+
+    public class ComboBoxCoursePair
+    {
+        public Course CourseObject { get; set; }
+
+        public string CourseString { get; set; }
+    }
+
 }

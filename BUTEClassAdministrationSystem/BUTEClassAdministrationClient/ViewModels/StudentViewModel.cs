@@ -11,9 +11,8 @@ using System.ComponentModel;
 
 namespace BUTEClassAdministrationClient
 {
-    public class StudentViewModel : INotifyPropertyChanged
+    public class StudentViewModel : INotifyPropertyChanged, IDataErrorInfo
     {
-
         Window insertStudentWindow;
 
         public Student _student;
@@ -98,12 +97,12 @@ namespace BUTEClassAdministrationClient
             get
             {
                 if (_saveStudentCommand == null)
-                    _saveStudentCommand = new DelegateCommand(new Action(saveExecuted), new Func<bool>(saveCanExecuted));
+                    _saveStudentCommand = new DelegateCommand(new Action(saveExecuted), new Func<bool>(saveCanExecute));
                 return _saveStudentCommand;
             }
         }
 
-        public bool saveCanExecuted()
+        public bool saveCanExecute()
         {
             return NameValidator.nameIsValid(Name) && NeptunValidator.neptunIsValid(Neptun);
         }
@@ -118,12 +117,13 @@ namespace BUTEClassAdministrationClient
 
                 MessageBox.Show("Rekord beszúrva.");
 
+                insertStudentWindow.Close();
             }
         }
 
         #endregion
 
-        #region INotifyPropertyChanged memers
+        #region INotifyPropertyChanged members
 
         private void NotifyPropertyChanged(string propertyName)
         {
@@ -137,5 +137,15 @@ namespace BUTEClassAdministrationClient
 
         #endregion
 
+
+        public string Error
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public string this[string columnName]
+        {
+            get { throw new NotImplementedException(); }
+        }
     }
 }

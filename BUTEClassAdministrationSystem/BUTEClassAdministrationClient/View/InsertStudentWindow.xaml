@@ -20,7 +20,7 @@
             <StackPanel Orientation="Vertical">
                 <AdornedElementPlaceholder/>
                 <Label
-                    Content="A neptun kód hibás!"
+                    Content="A Neptun kód hibás!"
                     Foreground="Red"
                     FontStyle="Italic"
                     />
@@ -65,6 +65,7 @@
             <TextBox.Text>
                 <Binding 
                     Path="Name" 
+                    ValidatesOnDataErrors="True" 
                     UpdateSourceTrigger="PropertyChanged"
                     >
                     <Binding.ValidationRules>
@@ -86,33 +87,21 @@
             Name="neptunTxtBox"
             Grid.Row="2" 
             Grid.Column="2"
-            Validation.ErrorTemplate="{StaticResource neptunValidationTemplate}">
+            Validation.ErrorTemplate="{StaticResource neptunValidationTemplate}"
+            
+            >
 
             <TextBox.Text>
                 <Binding
                     Path="Neptun"
+                    ValidatesOnDataErrors="True"
                     UpdateSourceTrigger="PropertyChanged"
                     >
-                    <Binding.ValidationRules>
-                        <c:NeptunValidator/>
-                    </Binding.ValidationRules>
                 </Binding>
             </TextBox.Text>
-        </TextBox>
+            
 
-        <!-- COURSE -->
-        <Label
-            Content="Kurzus:"
-            Grid.Row="4"
-            Grid.Column="0"
-            HorizontalAlignment="Right"
-            Target="{Binding Path=coursesCmbBox}"
-            />
-        <ComboBox
-            Name="coursesCmbBox"
-            Grid.Row="4"
-            Grid.Column="2"
-            ItemsSource="{Binding Path=Array, Mode=OneTime}"/>
+        </TextBox>
 
         <!-- BUTTONS -->
         <Grid

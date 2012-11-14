@@ -18,10 +18,9 @@ namespace BUTEClassAdministrationClient
         }
 
         public static bool neptunIsValid(string value)
-        {
+        {   
             string neptunregex = @"^[A-Z][A-Z0-9]{5}$";
             return Regex.IsMatch(value, neptunregex, RegexOptions.IgnoreCase);
-
         }
     }
 }
