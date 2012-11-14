@@ -29,14 +29,14 @@ namespace BUTEClassAdministrationService
 
 		#region Student operations
 
-		public void CreateStudents(IEnumerable<Student> students)
+		public void CreateStudents(Student[] students)
 		{
 			using (ClassAdministrationEntityContext context = new ClassAdministrationEntityContext())
 			{
 				foreach (var student in students)
 				{
 					// skip duplicates
-					if (context.StudentSet.Where(Student => Student.Neptun == student.Neptun).Any())
+					if (context.StudentSet.ToList().Where(Student => Student.Neptun == student.Neptun).Any())
 					{
 						continue;
 					};
@@ -48,15 +48,15 @@ namespace BUTEClassAdministrationService
 			}
 		}
 
-		public IEnumerable<Student> ReadStudentsFromSemester(Semester semester)
+		public Student[] ReadStudentsFromSemester(Semester semester)
 		{
 			using (ClassAdministrationEntityContext context = new ClassAdministrationEntityContext())
 			{
-				return context.StudentSet.Where(Student => Student.Semester.Equals(semester)).ToList();
+				return context.StudentSet.ToList().Where(Student => Student.Semester.Equals(semester)).ToArray();
 			}
 		}
 
-		public void UpdateStudents(IEnumerable<Student> students)
+		public void UpdateStudents(Student[] students)
 		{
 			using (ClassAdministrationEntityContext context = new ClassAdministrationEntityContext())
 			{
@@ -68,7 +68,7 @@ namespace BUTEClassAdministrationService
 			}
 		}
 
-		public void DeleteStudent(IEnumerable<Student> students)
+		public void DeleteStudent(Student[] students)
 		{
 			using (ClassAdministrationEntityContext context = new ClassAdministrationEntityContext())
 			{
@@ -89,7 +89,7 @@ namespace BUTEClassAdministrationService
 
 		#region Course operations
 
-		public void CreateCourse(IEnumerable<Course> courses)
+		public void CreateCourse(Course[] courses)
 		{
 			using (ClassAdministrationEntityContext context = new ClassAdministrationEntityContext())
 			{
@@ -101,15 +101,26 @@ namespace BUTEClassAdministrationService
 			}
 		}
 
-		public IEnumerable<Course> ReadCoursesFromSemester(Semester semester)
+		public Course[] ReadCoursesFromSemester(Semester semester)
 		{
 			using (ClassAdministrationEntityContext context = new ClassAdministrationEntityContext())
 			{
-				return context.CourseSet.Where(Course => Course.Semester.Equals(semester)).ToList();
+                List<Course> courses = new List<Course>();
+
+                foreach (var course in context.CourseSet.ToList())
+                {
+                    if (course.Semester != null)
+                    {
+                        courses.Add(course);
+                    }
+                }
+
+                return courses.ToArray();
+                //return context.CourseSet.ToArray().Where(Course => Course.Semester.Equals(semester)).ToArray();
 			}
 		}
 
-		public void UpdateCourses(IEnumerable<Course> courses)
+		public void UpdateCourses(Course[] courses)
 		{
 			using (ClassAdministrationEntityContext context = new ClassAdministrationEntityContext())
 			{
@@ -121,7 +132,7 @@ namespace BUTEClassAdministrationService
 			}
 		}
 
-		public void DeleteCourses(IEnumerable<Course> courses)
+		public void DeleteCourses(Course[] courses)
 		{
 			using (ClassAdministrationEntityContext context = new ClassAdministrationEntityContext())
 			{
@@ -142,7 +153,7 @@ namespace BUTEClassAdministrationService
 
 		#region Group operations
 
-		public void CreateGroup(IEnumerable<Group> groups)
+		public void CreateGroup(Group[] groups)
 		{
 			using (ClassAdministrationEntityContext context = new ClassAdministrationEntityContext())
 			{
@@ -154,15 +165,15 @@ namespace BUTEClassAdministrationService
 			}
 		}
 
-		public IEnumerable<Group> ReadGroupsFromSemester(Semester semester)
+		public Group[] ReadGroupsFromSemester(Semester semester)
 		{
 			using (ClassAdministrationEntityContext context = new ClassAdministrationEntityContext())
 			{
-				return context.GroupSet.Where(Group => Group.Semester.Equals(semester)).ToList();
+				return context.GroupSet.ToList().Where(Group => Group.Semester.Equals(semester)).ToArray();
 			}
 		}
 
-		public void UpdateGroups(IEnumerable<Group> groups)
+		public void UpdateGroups(Group[] groups)
 		{
 			using (ClassAdministrationEntityContext context = new ClassAdministrationEntityContext())
 			{
@@ -174,7 +185,7 @@ namespace BUTEClassAdministrationService
 			}
 		}
 
-		public void DeleteGroups(IEnumerable<Group> groups)
+		public void DeleteGroups(Group[] groups)
 		{
 			using (ClassAdministrationEntityContext context = new ClassAdministrationEntityContext())
 			{
@@ -195,7 +206,7 @@ namespace BUTEClassAdministrationService
 
 		#region Instructor operations
 
-		public void CreateInstructor(IEnumerable<Instructor> instructors)
+		public void CreateInstructor(Instructor[] instructors)
 		{
 			using (ClassAdministrationEntityContext context = new ClassAdministrationEntityContext())
 			{
@@ -207,15 +218,15 @@ namespace BUTEClassAdministrationService
 			}
 		}
 
-		public IEnumerable<Instructor> ReadInstructors()
+		public Instructor[] ReadInstructors()
 		{
 			using (ClassAdministrationEntityContext context = new ClassAdministrationEntityContext())
 			{
-				return context.InstructorSet.ToList();
+				return context.InstructorSet.ToArray();
 			}
 		}
 
-		public void UpdateInstructors(IEnumerable<Instructor> instructors)
+		public void UpdateInstructors(Instructor[] instructors)
 		{
 			using (ClassAdministrationEntityContext context = new ClassAdministrationEntityContext())
 			{
@@ -227,7 +238,7 @@ namespace BUTEClassAdministrationService
 			}
 		}
 
-		public void DeleteInstructors(IEnumerable<Instructor> instructors)
+		public void DeleteInstructors(Instructor[] instructors)
 		{
 			using (ClassAdministrationEntityContext context = new ClassAdministrationEntityContext())
 			{

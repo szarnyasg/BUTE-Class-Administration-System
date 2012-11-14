@@ -14,6 +14,7 @@ namespace BUTEClassAdministrationService
 	public interface IClassAdministrationService
 	{
 		#region Semester operations
+
 		[OperationContract]
 		IEnumerable <Semester> ReadSemesters();
 
@@ -25,16 +26,16 @@ namespace BUTEClassAdministrationService
 		#region Student operations
 
 		[OperationContract]
-		void CreateStudents(IEnumerable<Student> students);
+		void CreateStudents(Student[] students);
 
 		[OperationContract]
-		IEnumerable<Student> ReadStudentsFromSemester(Semester semester);
+		Student[] ReadStudentsFromSemester(Semester semester);
 
 		[OperationContract]
-		void UpdateStudents(IEnumerable<Student> students);
+		void UpdateStudents(Student[] students);
 
 		[OperationContract]
-		void DeleteStudent(IEnumerable<Student> students);
+		void DeleteStudent(Student[] students);
 
 		#endregion
 
@@ -44,16 +45,16 @@ namespace BUTEClassAdministrationService
 		#region Course operations
 
 		[OperationContract]
-		void CreateCourse(IEnumerable<Course> courses);
+		void CreateCourse(Course[] courses);
 
 		[OperationContract]
-		IEnumerable<Course> ReadCoursesFromSemester(Semester semester);
+		Course[] ReadCoursesFromSemester(Semester semester);
 
 		[OperationContract]
-		void UpdateCourses(IEnumerable<Course> courses);
+		void UpdateCourses(Course[] courses);
 
 		[OperationContract]
-		void DeleteCourses(IEnumerable<Course> courses);
+		void DeleteCourses(Course[] courses);
 
 		#endregion
 
@@ -63,16 +64,16 @@ namespace BUTEClassAdministrationService
 		#region Group operations
 
 		[OperationContract]
-		void CreateGroup(IEnumerable<Group> groups);
+		void CreateGroup(Group[] groups);
 
 		[OperationContract]
-		IEnumerable<Group> ReadGroupsFromSemester(Semester semester);
+		Group[] ReadGroupsFromSemester(Semester semester);
 
 		[OperationContract]
-		void UpdateGroups(IEnumerable<Group> groups);
+		void UpdateGroups(Group[] groups);
 
 		[OperationContract]
-		void DeleteGroups(IEnumerable<Group> groups);
+		void DeleteGroups(Group[] groups);
 
 		#endregion
 
@@ -82,16 +83,16 @@ namespace BUTEClassAdministrationService
 		#region Instructor operations
 
 		[OperationContract]
-		void CreateInstructor(IEnumerable<Instructor> instructors);
+		void CreateInstructor(Instructor[] instructors);
 
 		[OperationContract]
-		IEnumerable<Instructor> ReadInstructors();
+		Instructor[] ReadInstructors();
 
 		[OperationContract]
-		void UpdateInstructors(IEnumerable<Instructor> instructors);
+		void UpdateInstructors(Instructor[] instructors);
 
 		[OperationContract]
-		void DeleteInstructors(IEnumerable<Instructor> instructors);
+		void DeleteInstructors(Instructor[] instructors);
 
 		#endregion
 

@@ -33,7 +33,7 @@ namespace BUTEClassAdministrationClient
 		public MainWindow()
 		{
             _mainWindowViewModel = new MainWindowViewModel();
-            
+
             DataContext = this;
 
             InitializeComponent();
@@ -41,6 +41,33 @@ namespace BUTEClassAdministrationClient
 
         private void InsertStudent_Click(object sender, RoutedEventArgs e)
         {
+            
+            using (var service = new ClassAdministrationServiceClient())
+            {
+                /*
+                Semester s = new Semester();
+                s.Semester_name = "felev";
+                
+                Course c = new Course();
+                c.Day_of_week = 5;
+                c.Week_parity = true;
+                c.Semester = s;
+
+                service.CreateCourse(new Course[] { c });
+                return;
+                */
+
+                Course[] courses = service.ReadCoursesFromSemester(service.ReadSemesters().First());
+                Console.WriteLine(courses.Count());
+                
+                foreach (var cc in courses)
+                {
+                    //Console.WriteLine(cc.);
+                }
+            }
+
+            return; 
+            
             StudentViewModel window = new StudentViewModel(MainWindowViewModel.SelectedSemester);
         }
 		

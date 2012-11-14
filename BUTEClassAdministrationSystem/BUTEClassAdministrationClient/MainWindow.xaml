@@ -19,6 +19,9 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="6"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="6"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         
@@ -29,8 +32,8 @@
             Target="{Binding ElementName=semesterCmbBox}"
             />
    
-        <ComboBox
-            Name="semesterCmbBox"
+        <c:ComboBoxWithCommand
+            x:Name="semesterCmbBox"
             Grid.Row="0"
             Grid.Column="2"
             Width="100"
@@ -38,8 +41,28 @@
             ItemsSource="{Binding MainWindowViewModel.SemesterPairs}"
             DisplayMemberPath="SemesterString"
             SelectedValuePath="SemesterObject"
-            SelectedValue="{Binding MainWindowViewModel.SelectedSemester}">
-        </ComboBox>
+            SelectedValue="{Binding MainWindowViewModel.SelectedSemester}"
+            Command="{Binding MainWindowViewModel.ChangeSemesterCommand}">
+        </c:ComboBoxWithCommand>
+
+        <Label
+            Content="Kurzus:"
+            Grid.Row="0"
+            Grid.Column="3"
+            Target="{Binding ElementName=courseCmbBox}"
+            />
+        
+        <c:ComboBoxWithCommand
+            x:Name="courseCmbBox"
+            Grid.Row="0"
+            Grid.Column="5"
+            HorizontalAlignment="Stretch"
+            ItemsSource="{Binding MainWindowViewModel.CoursePairs}"
+            DisplayMemberPath="CourseString"
+            SelectedValuePath="CourseObject"
+            SelectedValue="{Binding MainWindowViewModel.SelectedCourse}"
+            >
+        </c:ComboBoxWithCommand>
 
         <Button
             Grid.Row="1"
