@@ -23,8 +23,6 @@ namespace ConsoleApplicationDBDebug
 
 			using (ClassAdministrationEntityContext context = new ClassAdministrationEntityContext(ec))
 			{
-				Console.WriteLine("hello");
-
 				context.ContextOptions.LazyLoadingEnabled = false;
 				context.ContextOptions.ProxyCreationEnabled = false;
 
@@ -35,7 +33,7 @@ namespace ConsoleApplicationDBDebug
 				
 				foreach (var course in context.CourseSet.ToList<Course>())
 				{
-					context.LoadProperty(course, "Semester");
+					context.LoadProperty(course, o => o.Semester);
 					if (course.Semester == null)
 					{
 						Console.WriteLine("null");

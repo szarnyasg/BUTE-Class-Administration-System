@@ -78,8 +78,20 @@
     <Compile Include="ClassAdministrationService.svc.cs">
       <DependentUpon>ClassAdministrationService.svc</DependentUpon>
     </Compile>
+    <Compile Include="Implementations\CourseOperations.cs" />
+    <Compile Include="Implementations\GroupOperations.cs" />
+    <Compile Include="Implementations\InstructorOperations.cs" />
+    <Compile Include="Implementations\RoomOperations.cs" />
     <Compile Include="IClassAdministrationService.cs" />
+    <Compile Include="Interfaces\ICourseOperations.cs" />
+    <Compile Include="Interfaces\IGroupOperations.cs" />
+    <Compile Include="Interfaces\IInstructorOperations.cs" />
+    <Compile Include="Interfaces\IRoomOperations.cs" />
+    <Compile Include="Interfaces\ISemesterOperations.cs" />
+    <Compile Include="Interfaces\IStudentOperations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Implementations\SemesterOperations.cs" />
+    <Compile Include="Implementations\StudentOperations.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

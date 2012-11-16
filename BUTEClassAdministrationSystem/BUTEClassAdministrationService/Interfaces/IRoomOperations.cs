@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Serialization;
-using System.ServiceModel;
-using System.ServiceModel.Web;
 using System.Text;
-
+using System.ServiceModel;
 using BUTEClassAdministrationTypes;
 
 namespace BUTEClassAdministrationService
 {
-	public partial class ClassAdministrationService : IClassAdministrationService
+	[ServiceContract]
+	public interface IRoomOperations
 	{
+		[OperationContract]
+		Room[] ReadRooms();
 	}
 }
