@@ -21,11 +21,12 @@
     <MetadataSource Address="http://localhost:17271/ClassAdministrationService.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="ClassAdministrationService.disco" MetadataType="Disco" ID="3aca211e-0862-4c64-865f-f9c5478ba821" SourceId="1" SourceUrl="http://localhost:17271/ClassAdministrationService.svc?disco" />
-    <MetadataFile FileName="ClassAdministrationService.xsd" MetadataType="Schema" ID="d44a89b2-c8ac-4cfb-a3bc-81fa5e5d4463" SourceId="1" SourceUrl="http://localhost:17271/ClassAdministrationService.svc?xsd=xsd1" />
-    <MetadataFile FileName="ClassAdministrationService.wsdl" MetadataType="Wsdl" ID="e0812441-9efb-4ea4-bcf2-bd027d39a3c1" SourceId="1" SourceUrl="http://localhost:17271/ClassAdministrationService.svc?wsdl" />
-    <MetadataFile FileName="ClassAdministrationService1.xsd" MetadataType="Schema" ID="bcf71ea0-d16c-44ac-815c-e576ece4a2b7" SourceId="1" SourceUrl="http://localhost:17271/ClassAdministrationService.svc?xsd=xsd2" />
     <MetadataFile FileName="ClassAdministrationService2.xsd" MetadataType="Schema" ID="648d150b-f0f4-46e7-9fb5-cc92b8055b74" SourceId="1" SourceUrl="http://localhost:17271/ClassAdministrationService.svc?xsd=xsd0" />
+    <MetadataFile FileName="ClassAdministrationService.xsd" MetadataType="Schema" ID="d44a89b2-c8ac-4cfb-a3bc-81fa5e5d4463" SourceId="1" SourceUrl="http://localhost:17271/ClassAdministrationService.svc?xsd=xsd1" />
+    <MetadataFile FileName="ClassAdministrationService1.xsd" MetadataType="Schema" ID="bcf71ea0-d16c-44ac-815c-e576ece4a2b7" SourceId="1" SourceUrl="http://localhost:17271/ClassAdministrationService.svc?xsd=xsd2" />
+    <MetadataFile FileName="ClassAdministrationService.wsdl" MetadataType="Wsdl" ID="e0812441-9efb-4ea4-bcf2-bd027d39a3c1" SourceId="1" SourceUrl="http://localhost:17271/ClassAdministrationService.svc?wsdl" />
+    <MetadataFile FileName="ClassAdministrationService3.xsd" MetadataType="Schema" ID="16919e4e-0426-40d8-a101-9214c199c1b2" SourceId="1" SourceUrl="http://localhost:17271/ClassAdministrationService.svc?xsd=xsd3" />
+    <MetadataFile FileName="ClassAdministrationService.disco" MetadataType="Disco" ID="3aca211e-0862-4c64-865f-f9c5478ba821" SourceId="1" SourceUrl="http://localhost:17271/ClassAdministrationService.svc?disco" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

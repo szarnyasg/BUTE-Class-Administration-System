@@ -9,28 +9,29 @@ using BUTEClassAdministrationClient.ClassAdministrationServiceReference;
 using System.Windows;
 using System.ComponentModel;
 using System.Text.RegularExpressions;
+using BUTEClassAdministrationClient.View;
 
-namespace BUTEClassAdministrationClient
+namespace BUTEClassAdministrationClient.ViewModels
 {
-    public class StudentViewModel : INotifyPropertyChanged, IDataErrorInfo
+    public class InstructorViewModel : INotifyPropertyChanged, IDataErrorInfo
     {
-        Window insertStudentWindow;
+        Window insertInstructorWindow;
 
-        public Student _student;
+        private Instructor _instructor;
 
         #region Properties
 
-        public string Name
-        {
+        public string Name 
+        { 
             get
             {
-                return _student.Name;
+                return _instructor.Name;
             }
             set
             {
-                if (_student.Name != value)
+                if (_instructor.Name != value)
                 {
-                    _student.Name = value;
+                    _instructor.Name = value;
                     NotifyPropertyChanged("Name");
                 }
             }
@@ -40,127 +41,89 @@ namespace BUTEClassAdministrationClient
         {
             get
             {
-                return _student.Neptun;
+                return _instructor.Neptun;
             }
             set
             {
-                if (_student.Neptun != value)
+                if (_instructor.Neptun != value)
                 {
-                    _student.Neptun = value;
+                    _instructor.Neptun = value;
                     NotifyPropertyChanged("Neptun");
                 }
             }
         }
 
-        public Semester Semester
+        public string Email
         {
             get
             {
-                return _student.Semester;
+                return _instructor.Email;
             }
             set
             {
-                if (_student.Semester != value)
+                if (_instructor.Email != value)
                 {
-                    _student.Semester = value;
-                    NotifyPropertyChanged("Semester");
+                    _instructor.Email = value;
+                    NotifyPropertyChanged("Email");
                 }
             }
         }
-
-        public Course Course
-        {
-            get
-            {
-                return _student.Course;
-            }
-            set
-            {
-                if (_student.Course != value)
-                {
-                    _student.Course = value;
-                    NotifyPropertyChanged("Course");
-                }
-            }
-        }
-
-        public string CourseToString
-        {
-            get
-            {
-                return PrettyFormatter.dayFormatter(Convert.ToInt32(Course.Day_of_week)) + ' '
-                                            + Course.Starting_time + ' '
-                                            + PrettyFormatter.parityFormatter(Course.Week_parity);
-            }
-        }
-
-        public string SemesterToString
-        {
-            get
-            {
-                return Semester.Semester_name;
-            }
-        }
-
 
         #endregion
 
-        #region Construktor
+        #region Constructor
 
-        public StudentViewModel(Semester selectedSemester, Course selectedCourse)
+        public InstructorViewModel()
         {
-            _student = new Student();
-
+            _instructor =  new Instructor();
             Name = "";
             Neptun = "";
-            Semester = selectedSemester;
+            Email = "";
 
-            Course = selectedCourse;
+            insertInstructorWindow = new InsertInstructorWindow();
 
-            insertStudentWindow = new InsertStudentWindow();
+            insertInstructorWindow.DataContext = this;
 
-            insertStudentWindow.DataContext = this;
-
-            insertStudentWindow.ShowDialog();
+            insertInstructorWindow.ShowDialog();
         }
 
         #endregion
 
-        #region saveStudentCommand members
+        #region save instructor command members
 
-        private DelegateCommand _saveStudentCommand;
-        public ICommand SaveStudentCommand
+        private DelegateCommand _saveInstructorCommand;
+        public ICommand SaveInstructorCommand
         {
             get
             {
-                if (_saveStudentCommand == null)
-                    _saveStudentCommand = new DelegateCommand(new Action(saveExecuted), new Func<bool>(saveCanExecute));
-                return _saveStudentCommand;
+                if(_saveInstructorCommand == null)
+                    _saveInstructorCommand = new DelegateCommand(new Action(saveInstruktorExecuted), new Func<bool>(saveInstructorcanExecuted));
+                return _saveInstructorCommand;
             }
         }
 
-        public bool saveCanExecute()
-        {
-            return nameIsValid(Name) && neptunIsValid(Neptun);
-        }
-
-        public void saveExecuted()
+        public void saveInstruktorExecuted()
         {
             using (var service = new ClassAdministrationServiceClient())
             {
-                
-                service.CreateStudents(new Student[] { _student });
-                _student.AcceptChanges();
+
+                service.CreateInstructor(new Instructor[] { _instructor });
+                _instructor.AcceptChanges();
 
                 MessageBox.Show("Rekord beszúrva.");
 
-                insertStudentWindow.Close();
+                insertInstructorWindow.Close();
             }
         }
 
-        #endregion
+        public bool saveInstructorcanExecuted()
+        {
+            return nameIsValid(Name) && neptunIsValid(Neptun) && emailIsValid(Email);
+        }
 
-        #region cancelCommand members
+        #endregion 
+
+        #region cancel command members
 
         private DelegateCommand _cancelCommand;
         public ICommand CancelCommand
@@ -175,9 +138,8 @@ namespace BUTEClassAdministrationClient
 
         public void cancelExecuted()
         {
-            insertStudentWindow.Close();
+            insertInstructorWindow.Close();
         }
-    
 
         #endregion
 
@@ -204,23 +166,28 @@ namespace BUTEClassAdministrationClient
 
         public string this[string columnName]
         {
-            get { return validateStudent(columnName); }
+            get { return validateInstructor(columnName); }
         }
 
-        private string validateStudent(string propName)
+        private string validateInstructor(string propName)
         {
-            
+
             switch (propName)
             {
                 case "Name":
                     {
                         if (nameIsValid(Name)) return null;
-                        else return "Kérem adja meg a hallgató nevét!";
+                        else return "Kérem adja meg a gyakorlatvezető nevét!";
                     }
                 case "Neptun":
                     {
                         if (neptunIsValid(Neptun)) return null;
                         else return "A Neptunkód nincs megadva, vagy hibás formátumú.";
+                    }
+                case "Email":
+                    {
+                        if (emailIsValid(Email)) return null;
+                        else return "Az email nincs megadva, vagy hibás formátumú.";
                     }
                 default:
                     return "Nem leteyo properti validalas.";
@@ -247,5 +214,7 @@ namespace BUTEClassAdministrationClient
         }
 
         #endregion 
+
+
     }
 }

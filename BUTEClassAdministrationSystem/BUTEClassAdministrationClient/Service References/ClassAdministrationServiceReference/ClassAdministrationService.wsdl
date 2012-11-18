@@ -5,6 +5,7 @@
       <xsd:import schemaLocation="http://localhost:17271/ClassAdministrationService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
       <xsd:import schemaLocation="http://localhost:17271/ClassAdministrationService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:17271/ClassAdministrationService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/BUTEClassAdministrationTypes" />
+      <xsd:import schemaLocation="http://localhost:17271/ClassAdministrationService.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IClassAdministrationService_ReadSemesters_InputMessage">
@@ -24,6 +25,12 @@
   </wsdl:message>
   <wsdl:message name="IClassAdministrationService_ReadStudentsFromSemester_OutputMessage">
     <wsdl:part name="parameters" element="tns:ReadStudentsFromSemesterResponse" />
+  </wsdl:message>
+  <wsdl:message name="IClassAdministrationService_ReadStudentsFromSemesterAndCourse_InputMessage">
+    <wsdl:part name="parameters" element="tns:ReadStudentsFromSemesterAndCourse" />
+  </wsdl:message>
+  <wsdl:message name="IClassAdministrationService_ReadStudentsFromSemesterAndCourse_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ReadStudentsFromSemesterAndCourseResponse" />
   </wsdl:message>
   <wsdl:message name="IClassAdministrationService_UpdateStudents_InputMessage">
     <wsdl:part name="parameters" element="tns:UpdateStudents" />
@@ -73,6 +80,12 @@
   <wsdl:message name="IClassAdministrationService_ReadGroupsFromSemester_OutputMessage">
     <wsdl:part name="parameters" element="tns:ReadGroupsFromSemesterResponse" />
   </wsdl:message>
+  <wsdl:message name="IClassAdministrationService_ReadGroupsFromSemesterAndCourse_InputMessage">
+    <wsdl:part name="parameters" element="tns:ReadGroupsFromSemesterAndCourse" />
+  </wsdl:message>
+  <wsdl:message name="IClassAdministrationService_ReadGroupsFromSemesterAndCourse_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ReadGroupsFromSemesterAndCourseResponse" />
+  </wsdl:message>
   <wsdl:message name="IClassAdministrationService_UpdateGroups_InputMessage">
     <wsdl:part name="parameters" element="tns:UpdateGroups" />
   </wsdl:message>
@@ -117,82 +130,90 @@
   </wsdl:message>
   <wsdl:portType name="IClassAdministrationService">
     <wsdl:operation name="ReadSemesters">
-      <wsdl:input wsaw:Action="http://tempuri.org/IClassAdministrationService/ReadSemesters" message="tns:IClassAdministrationService_ReadSemesters_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IClassAdministrationService/ReadSemestersResponse" message="tns:IClassAdministrationService_ReadSemesters_OutputMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/ISemesterOperations/ReadSemesters" message="tns:IClassAdministrationService_ReadSemesters_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISemesterOperations/ReadSemestersResponse" message="tns:IClassAdministrationService_ReadSemesters_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="CreateStudents">
-      <wsdl:input wsaw:Action="http://tempuri.org/IClassAdministrationService/CreateStudents" message="tns:IClassAdministrationService_CreateStudents_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IClassAdministrationService/CreateStudentsResponse" message="tns:IClassAdministrationService_CreateStudents_OutputMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IStudentOperations/CreateStudents" message="tns:IClassAdministrationService_CreateStudents_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStudentOperations/CreateStudentsResponse" message="tns:IClassAdministrationService_CreateStudents_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="ReadStudentsFromSemester">
-      <wsdl:input wsaw:Action="http://tempuri.org/IClassAdministrationService/ReadStudentsFromSemester" message="tns:IClassAdministrationService_ReadStudentsFromSemester_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IClassAdministrationService/ReadStudentsFromSemesterResponse" message="tns:IClassAdministrationService_ReadStudentsFromSemester_OutputMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IStudentOperations/ReadStudentsFromSemester" message="tns:IClassAdministrationService_ReadStudentsFromSemester_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStudentOperations/ReadStudentsFromSemesterResponse" message="tns:IClassAdministrationService_ReadStudentsFromSemester_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadStudentsFromSemesterAndCourse">
+      <wsdl:input wsaw:Action="http://tempuri.org/IStudentOperations/ReadStudentsFromSemesterAndCourse" message="tns:IClassAdministrationService_ReadStudentsFromSemesterAndCourse_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStudentOperations/ReadStudentsFromSemesterAndCourseResponse" message="tns:IClassAdministrationService_ReadStudentsFromSemesterAndCourse_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="UpdateStudents">
-      <wsdl:input wsaw:Action="http://tempuri.org/IClassAdministrationService/UpdateStudents" message="tns:IClassAdministrationService_UpdateStudents_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IClassAdministrationService/UpdateStudentsResponse" message="tns:IClassAdministrationService_UpdateStudents_OutputMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IStudentOperations/UpdateStudents" message="tns:IClassAdministrationService_UpdateStudents_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStudentOperations/UpdateStudentsResponse" message="tns:IClassAdministrationService_UpdateStudents_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="DeleteStudent">
-      <wsdl:input wsaw:Action="http://tempuri.org/IClassAdministrationService/DeleteStudent" message="tns:IClassAdministrationService_DeleteStudent_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IClassAdministrationService/DeleteStudentResponse" message="tns:IClassAdministrationService_DeleteStudent_OutputMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IStudentOperations/DeleteStudent" message="tns:IClassAdministrationService_DeleteStudent_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStudentOperations/DeleteStudentResponse" message="tns:IClassAdministrationService_DeleteStudent_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="CreateCourse">
-      <wsdl:input wsaw:Action="http://tempuri.org/IClassAdministrationService/CreateCourse" message="tns:IClassAdministrationService_CreateCourse_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IClassAdministrationService/CreateCourseResponse" message="tns:IClassAdministrationService_CreateCourse_OutputMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/ICourseOperations/CreateCourse" message="tns:IClassAdministrationService_CreateCourse_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICourseOperations/CreateCourseResponse" message="tns:IClassAdministrationService_CreateCourse_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="ReadCoursesFromSemester">
-      <wsdl:input wsaw:Action="http://tempuri.org/IClassAdministrationService/ReadCoursesFromSemester" message="tns:IClassAdministrationService_ReadCoursesFromSemester_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IClassAdministrationService/ReadCoursesFromSemesterResponse" message="tns:IClassAdministrationService_ReadCoursesFromSemester_OutputMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/ICourseOperations/ReadCoursesFromSemester" message="tns:IClassAdministrationService_ReadCoursesFromSemester_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICourseOperations/ReadCoursesFromSemesterResponse" message="tns:IClassAdministrationService_ReadCoursesFromSemester_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="UpdateCourses">
-      <wsdl:input wsaw:Action="http://tempuri.org/IClassAdministrationService/UpdateCourses" message="tns:IClassAdministrationService_UpdateCourses_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IClassAdministrationService/UpdateCoursesResponse" message="tns:IClassAdministrationService_UpdateCourses_OutputMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/ICourseOperations/UpdateCourses" message="tns:IClassAdministrationService_UpdateCourses_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICourseOperations/UpdateCoursesResponse" message="tns:IClassAdministrationService_UpdateCourses_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="DeleteCourses">
-      <wsdl:input wsaw:Action="http://tempuri.org/IClassAdministrationService/DeleteCourses" message="tns:IClassAdministrationService_DeleteCourses_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IClassAdministrationService/DeleteCoursesResponse" message="tns:IClassAdministrationService_DeleteCourses_OutputMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/ICourseOperations/DeleteCourses" message="tns:IClassAdministrationService_DeleteCourses_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICourseOperations/DeleteCoursesResponse" message="tns:IClassAdministrationService_DeleteCourses_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="CreateGroup">
-      <wsdl:input wsaw:Action="http://tempuri.org/IClassAdministrationService/CreateGroup" message="tns:IClassAdministrationService_CreateGroup_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IClassAdministrationService/CreateGroupResponse" message="tns:IClassAdministrationService_CreateGroup_OutputMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IGroupOperations/CreateGroup" message="tns:IClassAdministrationService_CreateGroup_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGroupOperations/CreateGroupResponse" message="tns:IClassAdministrationService_CreateGroup_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="ReadGroupsFromSemester">
-      <wsdl:input wsaw:Action="http://tempuri.org/IClassAdministrationService/ReadGroupsFromSemester" message="tns:IClassAdministrationService_ReadGroupsFromSemester_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IClassAdministrationService/ReadGroupsFromSemesterResponse" message="tns:IClassAdministrationService_ReadGroupsFromSemester_OutputMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IGroupOperations/ReadGroupsFromSemester" message="tns:IClassAdministrationService_ReadGroupsFromSemester_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGroupOperations/ReadGroupsFromSemesterResponse" message="tns:IClassAdministrationService_ReadGroupsFromSemester_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadGroupsFromSemesterAndCourse">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGroupOperations/ReadGroupsFromSemesterAndCourse" message="tns:IClassAdministrationService_ReadGroupsFromSemesterAndCourse_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGroupOperations/ReadGroupsFromSemesterAndCourseResponse" message="tns:IClassAdministrationService_ReadGroupsFromSemesterAndCourse_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="UpdateGroups">
-      <wsdl:input wsaw:Action="http://tempuri.org/IClassAdministrationService/UpdateGroups" message="tns:IClassAdministrationService_UpdateGroups_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IClassAdministrationService/UpdateGroupsResponse" message="tns:IClassAdministrationService_UpdateGroups_OutputMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IGroupOperations/UpdateGroups" message="tns:IClassAdministrationService_UpdateGroups_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGroupOperations/UpdateGroupsResponse" message="tns:IClassAdministrationService_UpdateGroups_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="DeleteGroups">
-      <wsdl:input wsaw:Action="http://tempuri.org/IClassAdministrationService/DeleteGroups" message="tns:IClassAdministrationService_DeleteGroups_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IClassAdministrationService/DeleteGroupsResponse" message="tns:IClassAdministrationService_DeleteGroups_OutputMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IGroupOperations/DeleteGroups" message="tns:IClassAdministrationService_DeleteGroups_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGroupOperations/DeleteGroupsResponse" message="tns:IClassAdministrationService_DeleteGroups_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="CreateInstructor">
-      <wsdl:input wsaw:Action="http://tempuri.org/IClassAdministrationService/CreateInstructor" message="tns:IClassAdministrationService_CreateInstructor_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IClassAdministrationService/CreateInstructorResponse" message="tns:IClassAdministrationService_CreateInstructor_OutputMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IInstructorOperations/CreateInstructor" message="tns:IClassAdministrationService_CreateInstructor_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IInstructorOperations/CreateInstructorResponse" message="tns:IClassAdministrationService_CreateInstructor_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="ReadInstructors">
-      <wsdl:input wsaw:Action="http://tempuri.org/IClassAdministrationService/ReadInstructors" message="tns:IClassAdministrationService_ReadInstructors_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IClassAdministrationService/ReadInstructorsResponse" message="tns:IClassAdministrationService_ReadInstructors_OutputMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IInstructorOperations/ReadInstructors" message="tns:IClassAdministrationService_ReadInstructors_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IInstructorOperations/ReadInstructorsResponse" message="tns:IClassAdministrationService_ReadInstructors_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="UpdateInstructors">
-      <wsdl:input wsaw:Action="http://tempuri.org/IClassAdministrationService/UpdateInstructors" message="tns:IClassAdministrationService_UpdateInstructors_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IClassAdministrationService/UpdateInstructorsResponse" message="tns:IClassAdministrationService_UpdateInstructors_OutputMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IInstructorOperations/UpdateInstructors" message="tns:IClassAdministrationService_UpdateInstructors_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IInstructorOperations/UpdateInstructorsResponse" message="tns:IClassAdministrationService_UpdateInstructors_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="DeleteInstructors">
-      <wsdl:input wsaw:Action="http://tempuri.org/IClassAdministrationService/DeleteInstructors" message="tns:IClassAdministrationService_DeleteInstructors_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IClassAdministrationService/DeleteInstructorsResponse" message="tns:IClassAdministrationService_DeleteInstructors_OutputMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IInstructorOperations/DeleteInstructors" message="tns:IClassAdministrationService_DeleteInstructors_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IInstructorOperations/DeleteInstructorsResponse" message="tns:IClassAdministrationService_DeleteInstructors_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="ReadRooms">
-      <wsdl:input wsaw:Action="http://tempuri.org/IClassAdministrationService/ReadRooms" message="tns:IClassAdministrationService_ReadRooms_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IClassAdministrationService/ReadRoomsResponse" message="tns:IClassAdministrationService_ReadRooms_OutputMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IRoomOperations/ReadRooms" message="tns:IClassAdministrationService_ReadRooms_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRoomOperations/ReadRoomsResponse" message="tns:IClassAdministrationService_ReadRooms_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IClassAdministrationService" type="tns:IClassAdministrationService">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="ReadSemesters">
-      <soap:operation soapAction="http://tempuri.org/IClassAdministrationService/ReadSemesters" style="document" />
+      <soap:operation soapAction="http://tempuri.org/ISemesterOperations/ReadSemesters" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -201,7 +222,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="CreateStudents">
-      <soap:operation soapAction="http://tempuri.org/IClassAdministrationService/CreateStudents" style="document" />
+      <soap:operation soapAction="http://tempuri.org/IStudentOperations/CreateStudents" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -210,7 +231,16 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="ReadStudentsFromSemester">
-      <soap:operation soapAction="http://tempuri.org/IClassAdministrationService/ReadStudentsFromSemester" style="document" />
+      <soap:operation soapAction="http://tempuri.org/IStudentOperations/ReadStudentsFromSemester" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadStudentsFromSemesterAndCourse">
+      <soap:operation soapAction="http://tempuri.org/IStudentOperations/ReadStudentsFromSemesterAndCourse" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -219,7 +249,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="UpdateStudents">
-      <soap:operation soapAction="http://tempuri.org/IClassAdministrationService/UpdateStudents" style="document" />
+      <soap:operation soapAction="http://tempuri.org/IStudentOperations/UpdateStudents" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -228,7 +258,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="DeleteStudent">
-      <soap:operation soapAction="http://tempuri.org/IClassAdministrationService/DeleteStudent" style="document" />
+      <soap:operation soapAction="http://tempuri.org/IStudentOperations/DeleteStudent" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -237,7 +267,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="CreateCourse">
-      <soap:operation soapAction="http://tempuri.org/IClassAdministrationService/CreateCourse" style="document" />
+      <soap:operation soapAction="http://tempuri.org/ICourseOperations/CreateCourse" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -246,7 +276,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="ReadCoursesFromSemester">
-      <soap:operation soapAction="http://tempuri.org/IClassAdministrationService/ReadCoursesFromSemester" style="document" />
+      <soap:operation soapAction="http://tempuri.org/ICourseOperations/ReadCoursesFromSemester" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -255,7 +285,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="UpdateCourses">
-      <soap:operation soapAction="http://tempuri.org/IClassAdministrationService/UpdateCourses" style="document" />
+      <soap:operation soapAction="http://tempuri.org/ICourseOperations/UpdateCourses" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -264,7 +294,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="DeleteCourses">
-      <soap:operation soapAction="http://tempuri.org/IClassAdministrationService/DeleteCourses" style="document" />
+      <soap:operation soapAction="http://tempuri.org/ICourseOperations/DeleteCourses" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -273,7 +303,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="CreateGroup">
-      <soap:operation soapAction="http://tempuri.org/IClassAdministrationService/CreateGroup" style="document" />
+      <soap:operation soapAction="http://tempuri.org/IGroupOperations/CreateGroup" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -282,7 +312,16 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="ReadGroupsFromSemester">
-      <soap:operation soapAction="http://tempuri.org/IClassAdministrationService/ReadGroupsFromSemester" style="document" />
+      <soap:operation soapAction="http://tempuri.org/IGroupOperations/ReadGroupsFromSemester" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadGroupsFromSemesterAndCourse">
+      <soap:operation soapAction="http://tempuri.org/IGroupOperations/ReadGroupsFromSemesterAndCourse" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -291,7 +330,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="UpdateGroups">
-      <soap:operation soapAction="http://tempuri.org/IClassAdministrationService/UpdateGroups" style="document" />
+      <soap:operation soapAction="http://tempuri.org/IGroupOperations/UpdateGroups" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -300,7 +339,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="DeleteGroups">
-      <soap:operation soapAction="http://tempuri.org/IClassAdministrationService/DeleteGroups" style="document" />
+      <soap:operation soapAction="http://tempuri.org/IGroupOperations/DeleteGroups" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -309,7 +348,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="CreateInstructor">
-      <soap:operation soapAction="http://tempuri.org/IClassAdministrationService/CreateInstructor" style="document" />
+      <soap:operation soapAction="http://tempuri.org/IInstructorOperations/CreateInstructor" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -318,7 +357,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="ReadInstructors">
-      <soap:operation soapAction="http://tempuri.org/IClassAdministrationService/ReadInstructors" style="document" />
+      <soap:operation soapAction="http://tempuri.org/IInstructorOperations/ReadInstructors" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -327,7 +366,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="UpdateInstructors">
-      <soap:operation soapAction="http://tempuri.org/IClassAdministrationService/UpdateInstructors" style="document" />
+      <soap:operation soapAction="http://tempuri.org/IInstructorOperations/UpdateInstructors" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -336,7 +375,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="DeleteInstructors">
-      <soap:operation soapAction="http://tempuri.org/IClassAdministrationService/DeleteInstructors" style="document" />
+      <soap:operation soapAction="http://tempuri.org/IInstructorOperations/DeleteInstructors" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -345,7 +384,7 @@
       </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="ReadRooms">
-      <soap:operation soapAction="http://tempuri.org/IClassAdministrationService/ReadRooms" style="document" />
+      <soap:operation soapAction="http://tempuri.org/IRoomOperations/ReadRooms" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

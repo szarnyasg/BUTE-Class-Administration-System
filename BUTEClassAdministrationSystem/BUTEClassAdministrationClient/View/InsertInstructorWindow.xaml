@@ -1,10 +1,12 @@
-﻿<Window x:Class="BUTEClassAdministrationClient.InsertStudentWindow"
+﻿<Window x:Class="BUTEClassAdministrationClient.View.InsertInstructorWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:c="clr-namespace:BUTEClassAdministrationClient"
-        Title="Hallgató felvétele" Width="400" ResizeMode="NoResize" VerticalAlignment="Top" HorizontalAlignment="Center" mc:Ignorable="d" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" d:DesignHeight="400" d:DesignWidth="400" SizeToContent="WidthAndHeight">
-
-    <Grid Margin="8" Height="286">
+        Title="Gyakorlatvezető felvétele" 
+        Height="Auto"
+        Width="400" mc:Ignorable="d" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" SizeToContent="Height">
+    
+    <Grid Margin="8" Height="230">
 
         <Grid.Resources>
             <DataTemplate DataType="{x:Type ValidationError}">
@@ -29,12 +31,10 @@
             <RowDefinition Height="30"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="30"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="30"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="30"/>
+             <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
 
         <!--  NAME  -->
@@ -45,7 +45,7 @@
             HorizontalAlignment="Right"
             Target="{Binding ElementName=nameTxtBox}"
             />
-        
+
         <TextBox
             x:Name="nameTxtBox"
             Grid.Row="0"
@@ -96,37 +96,37 @@
             Content="{Binding ElementName=neptunTxtBox, Path=(Validation.Errors).CurrentItem}"
         />
 
-
-        <!-- Semester -->
+        <!-- Email -->
         <Label
-            Grid.Row="5"
-            Grid.Column="0"
+            Content="Email:"
             HorizontalAlignment="Right"
-            Content="Szemeszter:"
-            />
-        
-        <Label
-            Grid.Row="5"
-            Grid.Column="2"
-            Content="{Binding SemesterToString}"
-            />
-
-        <!-- Course -->
-        <Label
-            Grid.Row="6" 
+            Grid.Row="4"
             Grid.Column="0"
-            HorizontalAlignment="Right"
-            Content="Kurzus:"  />
-
-        <Label
-            Grid.Row="6"
-            Grid.Column="2"
-            Content="{Binding CourseToString}"
+            Target="{Binding ElementName=emailTxtBox}"
             />
+        <TextBox
+            x:Name="emailTxtBox"
+            Grid.Row="4"
+            Grid.Column="2"
+            Validation.ErrorTemplate="{x:Null}"
+            >
+            <TextBox.Text>
+                <Binding
+                    Path="Email"
+                    ValidatesOnDataErrors="True"
+                    UpdateSourceTrigger="PropertyChanged"
+                    />
+            </TextBox.Text>
+        </TextBox>
+
+        <ContentPresenter 
+            Grid.Row="5" Grid.Column="2"
+            Content="{Binding ElementName=emailTxtBox, Path=(Validation.Errors).CurrentItem}"
+        />
 
         <!-- BUTTONS -->
         <Grid
-            Grid.Row="8"
+            Grid.Row="6"
             Grid.Column="2">
 
             <Grid.ColumnDefinitions>
@@ -142,7 +142,7 @@
             <Button
                 Name="InsertButton"
                 Content="Felvesz"
-                Command="{Binding SaveStudentCommand}"
+                Command="{Binding SaveInstructorCommand}"
                 Grid.Row="0"
                 Grid.Column="0"
                 />
@@ -158,3 +158,4 @@
 
     </Grid>
 </Window>
+

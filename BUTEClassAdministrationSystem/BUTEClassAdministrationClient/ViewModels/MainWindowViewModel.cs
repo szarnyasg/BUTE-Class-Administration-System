@@ -6,6 +6,7 @@ using System.Windows.Input;
 using BUTEClassAdministrationClient.ClassAdministrationServiceReference;
 using BUTEClassAdministrationTypes;
 using System.ComponentModel;
+using BUTEClassAdministrationClient.ViewModels;
 
 
 
@@ -87,6 +88,7 @@ namespace BUTEClassAdministrationClient
         {
 
             SemesterPairs = new List<ComboBoxSemesterPair>();
+            CoursePairs = new List<ComboBoxCoursePair>();
 
             using (var service = new ClassAdministrationServiceClient())
             {
@@ -99,7 +101,7 @@ namespace BUTEClassAdministrationClient
 
             CoursePairs = new List<ComboBoxCoursePair>();
             CoursePairs.Add(new ComboBoxCoursePair() { CourseObject = new Course(), CourseString = "Kérem, válasszon szemesztert."});
-            
+
         }
 
         #region change selected item in semester combobox command members
@@ -110,45 +112,83 @@ namespace BUTEClassAdministrationClient
             get
             {
                 if (_changeSemesterCommand == null)
-                    _changeSemesterCommand = new DelegateCommand(new Action(saveExecuted));
+                    _changeSemesterCommand = new DelegateCommand(new Action(changeCourseCmbExecuted));
                 return _changeSemesterCommand;
             }
         }
 
-        public void saveExecuted()
+        public void changeCourseCmbExecuted()
         {
-            CoursePairs = new List<ComboBoxCoursePair>();
+            CoursePairs.Clear();
 
             using (var service = new ClassAdministrationServiceClient())
             {
-                Course[] courses = service.ReadCoursesFromSemester(SelectedSemester);
-                //Student[] sss = service.ReadStudentsFromSemester(SelectedSemester);
-                //Student[] sst = sss.Where(Student => Student.Course == mycourse).ToArray();
+                Course[] courses = service.ReadCoursesFromSemester(SelectedSemester.Id);
                 foreach (var course in courses)
                 {
                     CoursePairs.Add(new ComboBoxCoursePair() 
                     { 
                         CourseObject = course,
-                        CourseString = PrettyFormatter.dayFormatter(Convert.ToInt32(course.Day_of_week))
-                                            + course.Starting_time
+                        CourseString = PrettyFormatter.dayFormatter(Convert.ToInt32(course.Day_of_week)) + ' '
+                                            + course.Starting_time + ' '
                                             + PrettyFormatter.parityFormatter(course.Week_parity)
                                             
                     });
+                    NotifyPropertyChanged("CoursePairs");
                 }
             }
         }
 
         #endregion
 
-        private void Insert()
+        #region insert Student command members
+
+        private DelegateCommand _insertStudentCommand;
+        public ICommand InsertStudentCommand
         {
-            using (var service = new ClassAdministrationServiceClient())
+            get
             {
-                Semester[] semesters = service.ReadSemesters();
+                if (_insertStudentCommand == null)
+                    _insertStudentCommand = new DelegateCommand(new Action(insertStudentExecuted), new Func<bool>(insertStudenCanExecuted));
+                return _insertStudentCommand;
             }
         }
 
-        #region INotifyPropertyChanged memers
+        public void insertStudentExecuted()
+        {
+            StudentViewModel studentViewModel = new StudentViewModel(SelectedSemester, SelectedCourse);
+        }
+
+        public bool insertStudenCanExecuted()
+        {
+            if (SelectedSemester != null && SelectedCourse != null)
+                return true;
+            else return false;            
+        }
+
+        #endregion 
+
+        #region insert Instructor command members
+
+        private DelegateCommand _insertInstructorCommand;
+        public ICommand InsertInstructorCommand
+        {
+            get
+            {
+                if (_insertInstructorCommand == null)
+                    _insertInstructorCommand = new DelegateCommand(new Action(insertInstructorExecuted));
+                return _insertInstructorCommand;
+            }
+        }
+
+        public void insertInstructorExecuted()
+        {
+            InstructorViewModel studentViewModel = new InstructorViewModel();
+        }
+
+        #endregion
+
+        #region INotifyPropertyChanged members
 
         private void NotifyPropertyChanged(string propertyName)
         {
