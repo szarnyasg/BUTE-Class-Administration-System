@@ -47,7 +47,7 @@ namespace BUTEClassAdministrationTypes
         private int _id;
     
         [DataMember]
-        public decimal Index
+        public int Index
         {
             get { return _index; }
             set
@@ -59,7 +59,7 @@ namespace BUTEClassAdministrationTypes
                 }
             }
         }
-        private decimal _index;
+        private int _index;
 
         #endregion
         #region Navigation Properties

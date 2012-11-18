@@ -45,19 +45,19 @@ namespace BUTEClassAdministrationTypes
         private int _id;
     
         [DataMember]
-        public string Semester_name
+        public string Name
         {
-            get { return _semester_name; }
+            get { return _name; }
             set
             {
-                if (_semester_name != value)
+                if (_name != value)
                 {
-                    _semester_name = value;
-                    OnPropertyChanged("Semester_name");
+                    _name = value;
+                    OnPropertyChanged("Name");
                 }
             }
         }
-        private string _semester_name;
+        private string _name;
 
         #endregion
         #region Navigation Properties

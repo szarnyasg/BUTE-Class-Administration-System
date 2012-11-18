@@ -74,7 +74,7 @@ namespace BUTEClassAdministrationTypes
         private int _computer_count;
     
         [DataMember]
-        public decimal Seating_capacity
+        public int Seating_capacity
         {
             get { return _seating_capacity; }
             set
@@ -86,7 +86,7 @@ namespace BUTEClassAdministrationTypes
                 }
             }
         }
-        private decimal _seating_capacity;
+        private int _seating_capacity;
 
         #endregion
         #region Navigation Properties

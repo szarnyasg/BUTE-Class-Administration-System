@@ -98,7 +98,7 @@ namespace BUTEClassAdministrationClient
         {
             get
             {
-                return Semester.Semester_name;
+                return Semester.Name;
             }
         }
 

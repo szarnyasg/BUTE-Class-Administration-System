@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 11/06/2012 22:05:27
--- Generated from EDMX file: D:\bme\GITHUB\BUTE-Class-Administration-System\BUTEClassAdministrationSystem\BUTEClassAdministrationModel\ClassAdministrationDatabase.edmx
+-- Date Created: 11/18/2012 23:13:59
+-- Generated from EDMX file: C:\GitHub\BUTE-Class-Administration-System\BUTEClassAdministrationSystem\BUTEClassAdministrationModel\ClassAdministrationDatabase.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -94,7 +94,7 @@ CREATE TABLE [dbo].[RoomSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Name] nvarchar(max)  NOT NULL,
     [Computer_count] int  NOT NULL,
-    [Seating_capacity] decimal(18,0)  NOT NULL
+    [Seating_capacity] int  NOT NULL
 );
 GO
 
@@ -110,7 +110,7 @@ GO
 -- Creating table 'GroupSet'
 CREATE TABLE [dbo].[GroupSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [Index] decimal(18,0)  NOT NULL,
+    [Index] int  NOT NULL,
     [Instructor_Id] int  NOT NULL,
     [Course_Id] int  NOT NULL,
     [Room_Id] int  NOT NULL,
@@ -121,9 +121,9 @@ GO
 -- Creating table 'CourseSet'
 CREATE TABLE [dbo].[CourseSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [Day_of_week] decimal(18,0)  NOT NULL,
+    [Day_of_week] int  NOT NULL,
     [Week_parity] bit  NOT NULL,
-    [Starting_time] time  NOT NULL,
+    [Starting_time] nvarchar(max)  NOT NULL,
     [Semester_Id] int  NOT NULL
 );
 GO
@@ -131,7 +131,7 @@ GO
 -- Creating table 'SemesterSet'
 CREATE TABLE [dbo].[SemesterSet] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [Semester_name] nvarchar(max)  NOT NULL
+    [Name] nvarchar(max)  NOT NULL
 );
 GO
 

@@ -67,7 +67,6 @@
     <Compile Include="ComboBoxWithCommand.cs" />
     <Compile Include="DelegateComm\CommandReference.cs" />
     <Compile Include="DelegateComm\DelegateCommand.cs" />
-    <Compile Include="Validators\EmailValidator.cs" />
     <Compile Include="ViewModels\InstructorViewModel.cs" />
     <Compile Include="View\InsertInstructorWindow.xaml.cs">
       <DependentUpon>InsertInstructorWindow.xaml</DependentUpon>
@@ -77,8 +76,6 @@
     </Compile>
     <Compile Include="ExcelTools\ExcelTools.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
-    <Compile Include="Validators\NameValidator.cs" />
-    <Compile Include="Validators\NeptunValidator.cs" />
     <Compile Include="PrettyFormatter.cs" />
     <Compile Include="Service References\ClassAdministrationServiceReference\Reference.cs">
       <AutoGen>True</AutoGen>

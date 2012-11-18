@@ -95,7 +95,7 @@ namespace BUTEClassAdministrationClient
                 Semester[] semesters = service.ReadSemesters();
                 foreach (var semester in semesters)
                 {
-                    SemesterPairs.Add(new ComboBoxSemesterPair() { SemesterObject = semester, SemesterString = semester.Semester_name });
+                    SemesterPairs.Add(new ComboBoxSemesterPair() { SemesterObject = semester, SemesterString = semester.Name });
                 }
             }
 

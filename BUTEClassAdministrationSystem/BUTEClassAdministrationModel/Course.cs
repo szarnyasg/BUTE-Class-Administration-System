@@ -46,7 +46,7 @@ namespace BUTEClassAdministrationTypes
         private int _id;
     
         [DataMember]
-        public decimal Day_of_week
+        public int Day_of_week
         {
             get { return _day_of_week; }
             set
@@ -58,7 +58,7 @@ namespace BUTEClassAdministrationTypes
                 }
             }
         }
-        private decimal _day_of_week;
+        private int _day_of_week;
     
         [DataMember]
         public bool Week_parity
@@ -76,7 +76,7 @@ namespace BUTEClassAdministrationTypes
         private bool _week_parity;
     
         [DataMember]
-        public System.TimeSpan Starting_time
+        public string Starting_time
         {
             get { return _starting_time; }
             set
@@ -88,7 +88,7 @@ namespace BUTEClassAdministrationTypes
                 }
             }
         }
-        private System.TimeSpan _starting_time;
+        private string _starting_time;
 
         #endregion
         #region Navigation Properties
