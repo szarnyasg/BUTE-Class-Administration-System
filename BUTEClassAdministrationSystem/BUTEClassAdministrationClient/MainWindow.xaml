@@ -11,9 +11,11 @@
     <Grid Margin="8">
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
         
         <Grid.ColumnDefinitions>
@@ -73,6 +75,7 @@
             AutoGenerateColumns="False"
             IsReadOnly="True"
             ItemsSource="{Binding MainWindowViewModel.StudentsForDatagrid}"
+            SelectedItem="{Binding MainWindowViewModel.SelectedStudent}"
             >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Név" Width="220" Binding="{Binding Name}"/>
@@ -101,6 +104,23 @@
             Content="Importálás Excelből"
             Command="{Binding MainWindowViewModel.ImportFromExcelCommand}"
             />
+        
+        <Button
+            Grid.Row="4"
+            Grid.Column="0"
+            Grid.ColumnSpan="3"
+            Content="Hallgató modosítása"
+            Command="{Binding MainWindowViewModel.ModifyStudentCommand}"
+            />
+        
+        <Button
+            Grid.Row="5"
+            Grid.Column="0"
+            Grid.ColumnSpan="3"
+            Content="Beoszt"
+            Command="{Binding MainWindowViewModel.AssignCommand}"
+            />
+        
         
     </Grid>
 </Window>

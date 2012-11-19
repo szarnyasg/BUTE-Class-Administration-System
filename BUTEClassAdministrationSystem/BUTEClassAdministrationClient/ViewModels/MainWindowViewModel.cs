@@ -81,6 +81,21 @@ namespace BUTEClassAdministrationClient
 
         }
 
+        private Student _selectedStudent;
+
+        public Student SelectedStudent
+        {
+            get { return _selectedStudent; }
+            set
+            {
+                if (_selectedStudent != value)
+                {
+                    _selectedStudent = value;
+                    NotifyPropertyChanged("SelectedStudent");
+                }
+            }
+        }
+
         private ObservableCollection<Student> _studentsForDatagrid;
         public ObservableCollection<Student> StudentsForDatagrid
         {
@@ -245,7 +260,36 @@ namespace BUTEClassAdministrationClient
         }
 
         #endregion 
-        
+
+        #region modify student command members
+        #endregion
+
+        #region assign command members
+
+        private DelegateCommand _assignCommand;
+        public ICommand AssignCommand
+        {
+            get
+            {
+                if (_assignCommand == null)
+                    _assignCommand = new DelegateCommand(new Action(assignExecuted), new Func<bool>(assignCanExecuted));
+                return _assignCommand;
+            }
+        }
+
+        public void assignExecuted()
+        {
+            // ide ird amit akarsz 
+        }
+
+        public bool assignCanExecuted()
+        {
+            return (SelectedSemester != null);
+        }
+
+        #endregion
+
+
         #region change datagrid source
 
         private DelegateCommand _changeDatagridCommand;
@@ -281,6 +325,7 @@ namespace BUTEClassAdministrationClient
         }
 
         #endregion
+
 
     }
 
