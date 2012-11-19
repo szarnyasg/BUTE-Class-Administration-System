@@ -7,6 +7,7 @@ using BUTEClassAdministrationClient.ClassAdministrationServiceReference;
 using BUTEClassAdministrationTypes;
 using System.ComponentModel;
 using BUTEClassAdministrationClient.ViewModels;
+using System.Collections.ObjectModel;
 
 
 
@@ -49,9 +50,9 @@ namespace BUTEClassAdministrationClient
              
         }
 
-        private List<ComboBoxCoursePair> _coursePairs;
+        private ObservableCollection<ComboBoxCoursePair> _coursePairs;
 
-        public List<ComboBoxCoursePair> CoursePairs
+        public ObservableCollection<ComboBoxCoursePair> CoursePairs
         {
             get { return _coursePairs; }
             set
@@ -88,7 +89,6 @@ namespace BUTEClassAdministrationClient
         {
 
             SemesterPairs = new List<ComboBoxSemesterPair>();
-            CoursePairs = new List<ComboBoxCoursePair>();
 
             using (var service = new ClassAdministrationServiceClient())
             {
@@ -99,7 +99,7 @@ namespace BUTEClassAdministrationClient
                 }
             }
 
-            CoursePairs = new List<ComboBoxCoursePair>();
+            CoursePairs = new ObservableCollection<ComboBoxCoursePair>();
             CoursePairs.Add(new ComboBoxCoursePair() { CourseObject = new Course(), CourseString = "Kérem, válasszon szemesztert."});
 
         }
@@ -134,7 +134,6 @@ namespace BUTEClassAdministrationClient
                                             + PrettyFormatter.parityFormatter(course.Week_parity)
                                             
                     });
-                    NotifyPropertyChanged("CoursePairs");
                 }
             }
         }
@@ -161,9 +160,7 @@ namespace BUTEClassAdministrationClient
 
         public bool insertStudenCanExecuted()
         {
-            if (SelectedSemester != null && SelectedCourse != null)
-                return true;
-            else return false;            
+            return (SelectedSemester != null && SelectedCourse != null);
         }
 
         #endregion 
@@ -187,6 +184,52 @@ namespace BUTEClassAdministrationClient
         }
 
         #endregion
+
+        #region improt from excel command members
+
+        DelegateCommand _importFromExcelCommand;
+        public ICommand ImportFromExcelCommand
+        {
+            get
+            {
+                if (_importFromExcelCommand == null)
+                    _importFromExcelCommand = new DelegateCommand(new Action(importFromExcelExecuted), new Func<bool>(importFromExcelCanExecuted));
+                return _importFromExcelCommand;
+            }
+        }
+
+        public void importFromExcelExecuted()
+        {
+            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+            dlg.FileName = "";
+            dlg.DefaultExt = ".xlsx";
+            dlg.Filter = "Excel-fájl | *.xls; *.xlsx";
+
+            bool? result = dlg.ShowDialog();
+
+            if (result == false)
+            {
+                return;
+            }
+
+            string filename = dlg.FileName;
+
+            using (var service = new ClassAdministrationServiceClient())
+            {
+                Semester semester = service.ReadSemesters().First();
+                IEnumerable<Student> students = ExcelTools.ImportFromExcel(filename, semester);
+
+                service.CreateStudents(students.ToArray());
+                Console.WriteLine(students.Count());
+            }
+        }
+
+        public bool importFromExcelCanExecuted()
+        {
+            return (SelectedSemester != null) && (SelectedCourse != null);
+        }
+
+        #endregion 
 
         #region INotifyPropertyChanged members
 

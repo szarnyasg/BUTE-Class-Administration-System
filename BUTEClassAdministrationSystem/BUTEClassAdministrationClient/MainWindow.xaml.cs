@@ -39,32 +39,8 @@ namespace BUTEClassAdministrationClient
             InitializeComponent();
     	}
 
-        private void ImportFromExcel_Click(object sender, RoutedEventArgs e)
-        {
 
-            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
-            dlg.FileName = "";
-            dlg.DefaultExt = ".xlsx";
-            dlg.Filter = "Excel-fájl | *.xls; *.xlsx";
 
-            bool? result = dlg.ShowDialog();
-
-            if (result == false)
-            {
-                return;
-            }
-
-            string filename = dlg.FileName;
-
-			using (var service = new ClassAdministrationServiceClient())
-			{
-				Semester semester = service.ReadSemesters().First();
-				IEnumerable<Student> students = ExcelTools.ImportFromExcel(filename, semester);
-
-                service.CreateStudents(students.ToArray());
-                Console.WriteLine(students.Count());
-            }
-
-        }
-	}
+    }
 }
+
