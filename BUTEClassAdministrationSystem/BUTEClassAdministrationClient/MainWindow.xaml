@@ -109,7 +109,7 @@
             Grid.Row="4"
             Grid.Column="0"
             Grid.ColumnSpan="3"
-            Content="Hallgató modosítása"
+            Content="Hallgató módosítása"
             Command="{Binding MainWindowViewModel.ModifyStudentCommand}"
             />
         

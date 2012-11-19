@@ -213,7 +213,7 @@ namespace BUTEClassAdministrationClient
 
         #endregion
 
-        #region improt from excel command members
+        #region import from excel command members
 
         DelegateCommand _importFromExcelCommand;
         public ICommand ImportFromExcelCommand
@@ -273,7 +273,7 @@ namespace BUTEClassAdministrationClient
 
         public void modifyStudentExecuted()
         {
-            StudentViewModel studentViewModel = new StudentViewModel(SelectedStudent);
+            StudentViewModel studentViewModel = new StudentViewModel(SelectedStudent, SelectedSemester, SelectedCourse);
         }
 
         public bool modifyStudenCanExecuted()
@@ -398,9 +398,11 @@ namespace BUTEClassAdministrationClient
         {
             StudentsForDatagrid.Clear();
 
+			if (SelectedCourse == null) return;
+
             using (var service = new ClassAdministrationServiceClient())
-            {
-                Student[] students = service.ReadStudentsFromCourse(SelectedCourse.Id);
+            {                
+				Student[] students = service.ReadStudentsFromCourse(SelectedCourse.Id);
        
                 foreach (var student in students)
                 {
