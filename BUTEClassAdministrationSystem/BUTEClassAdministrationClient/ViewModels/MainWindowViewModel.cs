@@ -116,7 +116,6 @@ namespace BUTEClassAdministrationClient
 
         public MainWindowViewModel()
         {
-
             SemesterPairs = new List<ComboBoxSemesterPair>();
 
             using (var service = new ClassAdministrationServiceClient())
@@ -131,7 +130,6 @@ namespace BUTEClassAdministrationClient
             CoursePairs = new ObservableCollection<ComboBoxCoursePair>();
             
             StudentsForDatagrid = new ObservableCollection<Student>();
-
         }
 
         #region change selected item in semester combobox command members
@@ -298,14 +296,86 @@ namespace BUTEClassAdministrationClient
             }
         }
 
+		private Group newGroup(List<Room>.Enumerator roomEnumerator, List<Instructor>.Enumerator instructorEnumerator)
+		{
+			Group group = new Group();
+
+			roomEnumerator.MoveNext();
+			group.Room = roomEnumerator.Current;
+
+			instructorEnumerator.MoveNext();
+			group.Instructor = instructorEnumerator.Current;
+
+			return group;
+		}
+
         public void assignExecuted()
         {
-            // ide ird amit akarsz 
+			// ide ird amit akarsz 
+
+			using (var service = new ClassAdministrationServiceClient())
+			{
+				List<Course> courses = service.ReadCoursesFromSemester(SelectedSemester.Id).ToList();
+
+				List<Instructor> instructors = service.ReadInstructors().ToList();
+				List<Instructor>.Enumerator instructorEnumerator = instructors.GetEnumerator();
+
+				List<Room> rooms = service.ReadRooms().ToList();
+				List<Room>.Enumerator roomEnumerator = rooms.GetEnumerator();
+
+				List<Group> groups = new List<Group>();
+
+				foreach (var course in courses)
+				{
+					Console.WriteLine("# " + course.Id);
+
+					groups.Add(newGroup(roomEnumerator, instructorEnumerator));				
+					
+					List<Student> students = service.ReadStudentsFromCourse(course.Id).ToList();
+					foreach (var student in students)
+					{
+						Group group = groups.Last();
+						if (group.Room.Computer_count == group.Student.Count())
+						{
+							groups.Add(newGroup(roomEnumerator, instructorEnumerator));
+							group = groups.Last();
+						}
+
+
+						student.Group = group;
+						group.Student.Add(student);
+						//group.Student.Room();
+
+
+					}
+
+					foreach (var student in students)
+					{
+						
+
+						Console.WriteLine(student.Name);
+					}
+
+
+					foreach (var item in groups)
+					{
+						Console.WriteLine(item);
+						List<Student> groupsStudents = item.Student.ToList();
+						
+
+						
+					}
+
+
+
+				}
+			}
+
         }
 
         public bool assignCanExecuted()
         {
-            return (SelectedSemester != null);
+			return (SelectedSemester != null);
         }
 
         #endregion
@@ -330,8 +400,7 @@ namespace BUTEClassAdministrationClient
 
             using (var service = new ClassAdministrationServiceClient())
             {
-
-                Student[] students = service.ReadStudentsFromSemesterAndCourse(SelectedSemester.Id, SelectedCourse.Id);
+                Student[] students = service.ReadStudentsFromCourse(SelectedCourse.Id);
        
                 foreach (var student in students)
                 {

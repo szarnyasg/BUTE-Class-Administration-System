@@ -17,7 +17,7 @@ namespace BUTEClassAdministrationService
 		Student[] ReadStudentsFromSemester(int semesterId);
 
 		[OperationContract]
-		Student[] ReadStudentsFromSemesterAndCourse(int semesterId, int courseId);
+		Student[] ReadStudentsFromCourse(int courseId);
 
 		[OperationContract]
 		void UpdateStudents(Student[] students);

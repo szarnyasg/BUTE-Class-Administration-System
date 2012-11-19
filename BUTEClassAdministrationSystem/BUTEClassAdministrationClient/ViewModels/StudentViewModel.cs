@@ -190,7 +190,7 @@ namespace BUTEClassAdministrationClient
         {
             using (var service = new ClassAdministrationServiceClient())
             {
-                service.UpdateStudents();
+                //service.UpdateStudents();
                 _student.AcceptChanges();
             }
 

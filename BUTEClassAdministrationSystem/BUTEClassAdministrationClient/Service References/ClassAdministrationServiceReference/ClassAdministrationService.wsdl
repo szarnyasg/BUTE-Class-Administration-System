@@ -26,11 +26,11 @@
   <wsdl:message name="IClassAdministrationService_ReadStudentsFromSemester_OutputMessage">
     <wsdl:part name="parameters" element="tns:ReadStudentsFromSemesterResponse" />
   </wsdl:message>
-  <wsdl:message name="IClassAdministrationService_ReadStudentsFromSemesterAndCourse_InputMessage">
-    <wsdl:part name="parameters" element="tns:ReadStudentsFromSemesterAndCourse" />
+  <wsdl:message name="IClassAdministrationService_ReadStudentsFromCourse_InputMessage">
+    <wsdl:part name="parameters" element="tns:ReadStudentsFromCourse" />
   </wsdl:message>
-  <wsdl:message name="IClassAdministrationService_ReadStudentsFromSemesterAndCourse_OutputMessage">
-    <wsdl:part name="parameters" element="tns:ReadStudentsFromSemesterAndCourseResponse" />
+  <wsdl:message name="IClassAdministrationService_ReadStudentsFromCourse_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ReadStudentsFromCourseResponse" />
   </wsdl:message>
   <wsdl:message name="IClassAdministrationService_UpdateStudents_InputMessage">
     <wsdl:part name="parameters" element="tns:UpdateStudents" />
@@ -141,9 +141,9 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IStudentOperations/ReadStudentsFromSemester" message="tns:IClassAdministrationService_ReadStudentsFromSemester_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IStudentOperations/ReadStudentsFromSemesterResponse" message="tns:IClassAdministrationService_ReadStudentsFromSemester_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="ReadStudentsFromSemesterAndCourse">
-      <wsdl:input wsaw:Action="http://tempuri.org/IStudentOperations/ReadStudentsFromSemesterAndCourse" message="tns:IClassAdministrationService_ReadStudentsFromSemesterAndCourse_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IStudentOperations/ReadStudentsFromSemesterAndCourseResponse" message="tns:IClassAdministrationService_ReadStudentsFromSemesterAndCourse_OutputMessage" />
+    <wsdl:operation name="ReadStudentsFromCourse">
+      <wsdl:input wsaw:Action="http://tempuri.org/IStudentOperations/ReadStudentsFromCourse" message="tns:IClassAdministrationService_ReadStudentsFromCourse_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStudentOperations/ReadStudentsFromCourseResponse" message="tns:IClassAdministrationService_ReadStudentsFromCourse_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="UpdateStudents">
       <wsdl:input wsaw:Action="http://tempuri.org/IStudentOperations/UpdateStudents" message="tns:IClassAdministrationService_UpdateStudents_InputMessage" />
@@ -239,8 +239,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="ReadStudentsFromSemesterAndCourse">
-      <soap:operation soapAction="http://tempuri.org/IStudentOperations/ReadStudentsFromSemesterAndCourse" style="document" />
+    <wsdl:operation name="ReadStudentsFromCourse">
+      <soap:operation soapAction="http://tempuri.org/IStudentOperations/ReadStudentsFromCourse" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

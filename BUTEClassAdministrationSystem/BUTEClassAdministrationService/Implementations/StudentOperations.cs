@@ -35,11 +35,12 @@ namespace BUTEClassAdministrationService
 			}
 		}
 
-		public Student[] ReadStudentsFromSemesterAndCourse(int semesterId, int courseId)
+
+		public Student[] ReadStudentsFromCourse(int courseId)
 		{
 			using (ClassAdministrationEntityContext context = new ClassAdministrationEntityContext())
 			{
-				return context.StudentSet.Where(student => student.Semester.Id == semesterId && student.Course.Id == courseId).ToArray();
+				return context.StudentSet.Where(student => student.Course.Id == courseId).ToArray();
 			}
 		}
 

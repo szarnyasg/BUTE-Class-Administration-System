@@ -40,18 +40,17 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="ReadStudentsFromSemesterAndCourse">
+  <xs:element name="ReadStudentsFromCourse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="semesterId" type="xs:int" />
         <xs:element minOccurs="0" name="courseId" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="ReadStudentsFromSemesterAndCourseResponse">
+  <xs:element name="ReadStudentsFromCourseResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/BUTEClassAdministrationTypes" minOccurs="0" name="ReadStudentsFromSemesterAndCourseResult" nillable="true" type="q4:ArrayOfStudent" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/BUTEClassAdministrationTypes" minOccurs="0" name="ReadStudentsFromCourseResult" nillable="true" type="q4:ArrayOfStudent" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

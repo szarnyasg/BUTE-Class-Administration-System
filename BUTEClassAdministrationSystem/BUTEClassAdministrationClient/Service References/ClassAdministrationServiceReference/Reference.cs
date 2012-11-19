@@ -61,8 +61,8 @@ namespace BUTEClassAdministrationClient.ClassAdministrationServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentOperations/ReadStudentsFromSemester", ReplyAction="http://tempuri.org/IStudentOperations/ReadStudentsFromSemesterResponse")]
         BUTEClassAdministrationTypes.Student[] ReadStudentsFromSemester(int semesterId);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentOperations/ReadStudentsFromSemesterAndCourse", ReplyAction="http://tempuri.org/IStudentOperations/ReadStudentsFromSemesterAndCourseResponse")]
-        BUTEClassAdministrationTypes.Student[] ReadStudentsFromSemesterAndCourse(int semesterId, int courseId);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentOperations/ReadStudentsFromCourse", ReplyAction="http://tempuri.org/IStudentOperations/ReadStudentsFromCourseResponse")]
+        BUTEClassAdministrationTypes.Student[] ReadStudentsFromCourse(int courseId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentOperations/UpdateStudents", ReplyAction="http://tempuri.org/IStudentOperations/UpdateStudentsResponse")]
         void UpdateStudents(BUTEClassAdministrationTypes.Student[] students);
@@ -152,8 +152,8 @@ namespace BUTEClassAdministrationClient.ClassAdministrationServiceReference {
             return base.Channel.ReadStudentsFromSemester(semesterId);
         }
         
-        public BUTEClassAdministrationTypes.Student[] ReadStudentsFromSemesterAndCourse(int semesterId, int courseId) {
-            return base.Channel.ReadStudentsFromSemesterAndCourse(semesterId, courseId);
+        public BUTEClassAdministrationTypes.Student[] ReadStudentsFromCourse(int courseId) {
+            return base.Channel.ReadStudentsFromCourse(courseId);
         }
         
         public void UpdateStudents(BUTEClassAdministrationTypes.Student[] students) {
