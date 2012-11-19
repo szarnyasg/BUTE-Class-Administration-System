@@ -88,6 +88,8 @@ namespace BUTEClassAdministrationClient
             }
         }
 
+        public Student SelectedStudent { get; set; }
+
         public string CourseToString
         {
             get
@@ -129,15 +131,18 @@ namespace BUTEClassAdministrationClient
             insertStudentWindow.ShowDialog();
         }
 
-        public StudentViewModel(Student selectedStudent)
+        public StudentViewModel(Student selectedStudent, Semester selectedSemester, Course selectedCourse)
         {
             modify = true;
+
+            SelectedStudent = selectedStudent;
 
             _student = new Student();
 
             _student.clone(selectedStudent);
-            Semester = selectedStudent.Semester;
-            Course = selectedStudent.Course;
+
+            Semester = selectedSemester;
+            Course = selectedCourse;
 
             insertStudentWindow = new InsertStudentWindow();
 
@@ -188,9 +193,12 @@ namespace BUTEClassAdministrationClient
 
         public void modifyExecuted()
         {
+            SelectedStudent.clone(_student);
+
+
             using (var service = new ClassAdministrationServiceClient())
             {
-                service.UpdateStudents();
+                service.UpdateStudents(new Student[]{ SelectedStudent });
                 _student.AcceptChanges();
             }
 

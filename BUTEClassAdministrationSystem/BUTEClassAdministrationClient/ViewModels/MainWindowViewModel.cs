@@ -275,7 +275,7 @@ namespace BUTEClassAdministrationClient
 
         public void modifyStudentExecuted()
         {
-            StudentViewModel studentViewModel = new StudentViewModel(SelectedStudent);
+            StudentViewModel studentViewModel = new StudentViewModel(SelectedStudent, SelectedSemester, SelectedCourse);
         }
 
         public bool modifyStudenCanExecuted()
