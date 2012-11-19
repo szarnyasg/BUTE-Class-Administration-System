@@ -9,14 +9,15 @@ using BUTEClassAdministrationClient.ClassAdministrationServiceReference;
 using System.Windows;
 using System.ComponentModel;
 using System.Text.RegularExpressions;
+using BUTEClassAdministrationClient.ViewModels;
 
 namespace BUTEClassAdministrationClient
 {
-    public class StudentViewModel : INotifyPropertyChanged, IDataErrorInfo
+    public class StudentViewModel : ViewModelBase, IDataErrorInfo
     {
         Window insertStudentWindow;
 
-        public Student _student;
+        private Student _student;
 
         #region Properties
 
@@ -178,20 +179,6 @@ namespace BUTEClassAdministrationClient
             insertStudentWindow.Close();
         }
     
-
-        #endregion
-
-        #region INotifyPropertyChanged members
-
-        private void NotifyPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         #endregion
 

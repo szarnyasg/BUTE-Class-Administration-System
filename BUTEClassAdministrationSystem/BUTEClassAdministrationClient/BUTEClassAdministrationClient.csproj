@@ -68,6 +68,7 @@
     <Compile Include="DelegateComm\CommandReference.cs" />
     <Compile Include="DelegateComm\DelegateCommand.cs" />
     <Compile Include="ViewModels\InstructorViewModel.cs" />
+    <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="View\InsertInstructorWindow.xaml.cs">
       <DependentUpon>InsertInstructorWindow.xaml</DependentUpon>
     </Compile>

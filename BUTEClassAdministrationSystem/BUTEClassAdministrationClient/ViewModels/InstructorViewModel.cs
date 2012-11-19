@@ -13,7 +13,7 @@ using BUTEClassAdministrationClient.View;
 
 namespace BUTEClassAdministrationClient.ViewModels
 {
-    public class InstructorViewModel : INotifyPropertyChanged, IDataErrorInfo
+    public class InstructorViewModel : ViewModelBase, IDataErrorInfo
     {
         Window insertInstructorWindow;
 
@@ -140,20 +140,6 @@ namespace BUTEClassAdministrationClient.ViewModels
         {
             insertInstructorWindow.Close();
         }
-
-        #endregion
-
-        #region INotifyPropertyChanged members
-
-        private void NotifyPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         #endregion
 

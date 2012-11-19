@@ -5,7 +5,6 @@ using System.Text;
 using System.Windows.Input;
 using BUTEClassAdministrationClient.ClassAdministrationServiceReference;
 using BUTEClassAdministrationTypes;
-using System.ComponentModel;
 using BUTEClassAdministrationClient.ViewModels;
 using System.Collections.ObjectModel;
 
@@ -13,7 +12,7 @@ using System.Collections.ObjectModel;
 
 namespace BUTEClassAdministrationClient
 {
-    public class MainWindowViewModel : INotifyPropertyChanged
+    public class MainWindowViewModel : ViewModelBase
     {
 
         #region Fields, properties
@@ -82,6 +81,21 @@ namespace BUTEClassAdministrationClient
 
         }
 
+        private ObservableCollection<Student> _studentsForDatagrid;
+        public ObservableCollection<Student> StudentsForDatagrid
+        {
+            get {return _studentsForDatagrid; }
+            set
+            {
+                if (_studentsForDatagrid != value)
+                {
+                    _studentsForDatagrid = value;
+                    NotifyPropertyChanged("StudentsForDatagrid");
+                }
+            }
+        }
+
+
         #endregion
 
 
@@ -100,7 +114,8 @@ namespace BUTEClassAdministrationClient
             }
 
             CoursePairs = new ObservableCollection<ComboBoxCoursePair>();
-            CoursePairs.Add(new ComboBoxCoursePair() { CourseObject = new Course(), CourseString = "Kérem, válasszon szemesztert."});
+            
+            StudentsForDatagrid = new ObservableCollection<Student>();
 
         }
 
@@ -230,20 +245,43 @@ namespace BUTEClassAdministrationClient
         }
 
         #endregion 
+        
+        #region change datagrid source
 
-        #region INotifyPropertyChanged members
-
-        private void NotifyPropertyChanged(string propertyName)
+        private DelegateCommand _changeDatagridCommand;
+        public ICommand ChangeDatagridCommand
         {
-            if (PropertyChanged != null)
+            get
             {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+                if (_changeDatagridCommand == null)
+                    _changeDatagridCommand = new DelegateCommand(new Action(changeDatagridExecuted), new Func<bool>(changeExecutedCanExecuted));
+                return _changeDatagridCommand;
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public void changeDatagridExecuted()
+        {
+            StudentsForDatagrid.Clear();
+
+            using (var service = new ClassAdministrationServiceClient())
+            {
+
+                Student[] students = service.ReadStudentsFromSemesterAndCourse(SelectedSemester.Id, SelectedCourse.Id);
+       
+                foreach (var student in students)
+                {
+                    StudentsForDatagrid.Add(student);
+                }
+            }
+        }
+
+        public bool changeExecutedCanExecuted()
+        {
+            return (SelectedSemester != null);
+        }
 
         #endregion
+
     }
 
 }
