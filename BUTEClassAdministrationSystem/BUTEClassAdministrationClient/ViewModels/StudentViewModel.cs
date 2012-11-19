@@ -15,6 +15,9 @@ namespace BUTEClassAdministrationClient
 {
     public class StudentViewModel : ViewModelBase, IDataErrorInfo
     {
+
+        bool modify = false;
+
         Window insertStudentWindow;
 
         private Student _student;
@@ -106,16 +109,17 @@ namespace BUTEClassAdministrationClient
 
         #endregion
 
-        #region Construktor
+        #region Constructors
 
         public StudentViewModel(Semester selectedSemester, Course selectedCourse)
         {
+            modify = false;
+
             _student = new Student();
 
             Name = "";
             Neptun = "";
             Semester = selectedSemester;
-
             Course = selectedCourse;
 
             insertStudentWindow = new InsertStudentWindow();
@@ -125,22 +129,45 @@ namespace BUTEClassAdministrationClient
             insertStudentWindow.ShowDialog();
         }
 
+        public StudentViewModel(Student selectedStudent)
+        {
+            modify = true;
+
+            _student = new Student();
+
+            _student.clone(selectedStudent);
+            Semester = selectedStudent.Semester;
+            Course = selectedStudent.Course;
+
+            insertStudentWindow = new InsertStudentWindow();
+
+            insertStudentWindow.DataContext = this;
+
+            insertStudentWindow.ShowDialog();
+        }
+
+
         #endregion
 
-        #region saveStudentCommand members
+        #region save or modify studentCommand members
 
-        private DelegateCommand _saveStudentCommand;
-        public ICommand SaveStudentCommand
+        private DelegateCommand _studentCommand;
+        public ICommand StudentCommand
         {
             get
             {
-                if (_saveStudentCommand == null)
-                    _saveStudentCommand = new DelegateCommand(new Action(saveExecuted), new Func<bool>(saveCanExecute));
-                return _saveStudentCommand;
+                if (_studentCommand == null)
+                {
+                    if (modify)
+                        _studentCommand = new DelegateCommand(new Action(modifyExecuted), new Func<bool>(saveOrModifyCanExecuted));
+                    else
+                        _studentCommand = new DelegateCommand(new Action(saveExecuted), new Func<bool>(saveOrModifyCanExecuted));
+                }
+                return _studentCommand;
             }
         }
 
-        public bool saveCanExecute()
+        public bool saveOrModifyCanExecuted()
         {
             return nameIsValid(Name) && neptunIsValid(Neptun);
         }
@@ -152,11 +179,24 @@ namespace BUTEClassAdministrationClient
                 
                 service.CreateStudents(new Student[] { _student });
                 _student.AcceptChanges();
-
-                MessageBox.Show("Rekord beszúrva.");
-
-                insertStudentWindow.Close();
             }
+
+            MessageBox.Show("Rekord beszúrva.");
+
+            insertStudentWindow.Close();
+        }
+
+        public void modifyExecuted()
+        {
+            using (var service = new ClassAdministrationServiceClient())
+            {
+                service.UpdateStudents();
+                _student.AcceptChanges();
+            }
+
+            MessageBox.Show("Rekord módosítva.");
+
+            insertStudentWindow.Close();
         }
 
         #endregion

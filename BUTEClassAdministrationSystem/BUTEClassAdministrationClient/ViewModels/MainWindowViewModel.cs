@@ -262,6 +262,27 @@ namespace BUTEClassAdministrationClient
         #endregion 
 
         #region modify student command members
+        private DelegateCommand _modifyStudentCommand;
+        public ICommand ModifyStudentCommand
+        {
+            get
+            {
+                if (_modifyStudentCommand == null)
+                    _modifyStudentCommand = new DelegateCommand(new Action(modifyStudentExecuted), new Func<bool>(modifyStudenCanExecuted));
+                return _modifyStudentCommand;
+            }
+        }
+
+        public void modifyStudentExecuted()
+        {
+            StudentViewModel studentViewModel = new StudentViewModel(SelectedStudent);
+        }
+
+        public bool modifyStudenCanExecuted()
+        {
+            return (SelectedStudent != null);
+        }
+
         #endregion
 
         #region assign command members

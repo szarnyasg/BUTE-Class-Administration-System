@@ -142,7 +142,7 @@
             <Button
                 Name="InsertButton"
                 Content="Felvesz"
-                Command="{Binding SaveStudentCommand}"
+                Command="{Binding StudentCommand}"
                 Grid.Row="0"
                 Grid.Column="0"
                 />
