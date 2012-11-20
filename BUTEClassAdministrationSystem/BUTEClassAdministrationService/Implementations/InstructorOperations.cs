@@ -48,12 +48,6 @@ namespace BUTEClassAdministrationService
 				{
 					var entity = new Instructor { Id = instructorId };
 					
-					/*
-					Entities.Attach(entity);
-					context.Entities.DeleteObject(entity);
-					context.SaveChanges();
-					context.DeleteObject();					
-					*/
 				}
 			}
 		}

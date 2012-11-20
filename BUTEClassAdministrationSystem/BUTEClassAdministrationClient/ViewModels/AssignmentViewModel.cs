@@ -11,7 +11,7 @@ namespace BUTEClassAdministrationClient.ViewModels
 {
 	public class AssignmentViewModel : ViewModelBase
 	{
-		public AssignmentWindow AssignmentWindow { get; set; }
+		private AssignmentWindow _assignmentWindow;
 
 		public AssignmentViewModel(List<Group> groups)
         {
@@ -21,9 +21,9 @@ namespace BUTEClassAdministrationClient.ViewModels
 				GroupsForDatagrid.Add(group);
 			}
 
-			AssignmentWindow = new AssignmentWindow();
-			AssignmentWindow.DataContext = this;
-			AssignmentWindow.ShowDialog();
+			_assignmentWindow = new AssignmentWindow();
+			_assignmentWindow.DataContext = this;
+			_assignmentWindow.ShowDialog();
         }
 
 

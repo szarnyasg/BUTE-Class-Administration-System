@@ -8,7 +8,7 @@
             Grid.Column="1"
             Grid.Row="1"            
             IsReadOnly="True"
-            ItemsSource="{Binding AssignmentViewModel.GroupsForDatagrid}"
+            ItemsSource="{Binding GroupsForDatagrid}"
             >
     </DataGrid>
 

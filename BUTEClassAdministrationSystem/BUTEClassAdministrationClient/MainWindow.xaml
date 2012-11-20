@@ -47,11 +47,11 @@
             Grid.Column="2"
             Width="100"
             HorizontalAlignment="Left"
-            ItemsSource="{Binding MainWindowViewModel.SemesterPairs}"
+            ItemsSource="{Binding SemesterPairs}"
             DisplayMemberPath="SemesterString"
             SelectedValuePath="SemesterObject"
-            SelectedValue="{Binding MainWindowViewModel.SelectedSemester}"
-            Command="{Binding MainWindowViewModel.ChangeSemesterCommand}">
+            SelectedValue="{Binding SelectedSemester}"
+            Command="{Binding ChangeSemesterCommand}">
     </c:ComboBoxWithCommand>
 
     <Label
@@ -66,11 +66,11 @@
             Grid.Row="0"
             Grid.Column="5"
             HorizontalAlignment="Stretch"
-            ItemsSource="{Binding MainWindowViewModel.CoursePairs}"
+            ItemsSource="{Binding CoursePairs}"
             DisplayMemberPath="CourseString"
             SelectedValuePath="CourseObject"
-            SelectedValue="{Binding MainWindowViewModel.SelectedCourse}"
-            Command="{Binding MainWindowViewModel.ChangeCourseCommand}"
+            SelectedValue="{Binding SelectedCourse}"
+            Command="{Binding ChangeCourseCommand}"
             >
     </c:ComboBoxWithCommand>
 
@@ -81,8 +81,8 @@
             Grid.RowSpan="13"
             AutoGenerateColumns="False"
             IsReadOnly="True"
-            ItemsSource="{Binding MainWindowViewModel.StudentsForDatagrid}"
-            SelectedItem="{Binding MainWindowViewModel.SelectedStudent}"
+            ItemsSource="{Binding StudentsForDatagrid}"
+            SelectedItem="{Binding SelectedStudent}"
             >
       <DataGrid.Columns>
         <DataGridTextColumn Header="Név" Width="220" Binding="{Binding Name}"/>
@@ -95,7 +95,7 @@
             Grid.Row="1"
             Grid.ColumnSpan="3"
             Content="Hallgató felvétele"
-            Command="{Binding MainWindowViewModel.InsertStudentCommand}"
+            Command="{Binding InsertStudentCommand}"
             />
 
     <Button
@@ -103,7 +103,7 @@
             Grid.Column="0"
             Grid.ColumnSpan="3"
             Content="Hallgató módosítása"
-            Command="{Binding MainWindowViewModel.ModifyStudentCommand}"
+            Command="{Binding ModifyStudentCommand}"
             />
 
     <Button
@@ -111,7 +111,7 @@
             Grid.Column="0"
             Grid.ColumnSpan="3"
             Content="Hallgató törlése"
-            Command="{Binding MainWindowViewModel.DeleteStudentCommand}"
+            Command="{Binding DeleteStudentCommand}"
             />
 
     <c:ComboBoxWithCommand
@@ -120,10 +120,10 @@
             Grid.Column="0"
             Grid.ColumnSpan="3"
             HorizontalAlignment="Stretch"
-            ItemsSource="{Binding MainWindowViewModel.TargetCoursePairs}"
+            ItemsSource="{Binding TargetCoursePairs}"
             DisplayMemberPath="CourseString"
             SelectedValuePath="CourseObject"
-            SelectedValue="{Binding MainWindowViewModel.SelectedTargetCourse}"
+            SelectedValue="{Binding SelectedTargetCourse}"
             >
     </c:ComboBoxWithCommand>
 
@@ -132,7 +132,7 @@
             Grid.Column="0"
             Grid.ColumnSpan="3"
             Content="Hallgató mozgatása"
-            Command="{Binding MainWindowViewModel.MoveStudentCommand}"
+            Command="{Binding MoveStudentCommand}"
             />
 
     <Button
@@ -140,14 +140,14 @@
             Grid.ColumnSpan="3"
             Grid.Row="8"
             Grid.Column="0"
-            Command="{Binding MainWindowViewModel.InsertInstructorCommand}"
+            Command="{Binding InsertInstructorCommand}"
             />
 
     <Button
             Grid.Row="10"
             Grid.ColumnSpan="3"
             Content="Importálás Excelből"
-            Command="{Binding MainWindowViewModel.ImportFromExcelCommand}"
+            Command="{Binding ImportFromExcelCommand}"
             />
 
 
@@ -156,9 +156,8 @@
             Grid.Column="0"
             Grid.ColumnSpan="3"
             Content="Beoszt"
-            Command="{Binding MainWindowViewModel.AssignCommand}"
+            Command="{Binding AssignCommand}"
             />
-
 
   </Grid>
 </Window>
