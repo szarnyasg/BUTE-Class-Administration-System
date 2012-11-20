@@ -112,7 +112,6 @@ namespace BUTEClassAdministrationClient
 
         #endregion
 
-
         public MainWindowViewModel()
         {
             SemesterPairs = new List<ComboBoxSemesterPair>();
@@ -183,6 +182,7 @@ namespace BUTEClassAdministrationClient
         public void insertStudentExecuted()
         {
             StudentViewModel studentViewModel = new StudentViewModel(SelectedSemester, SelectedCourse);
+            changeDatagridExecuted();
         }
 
         public bool insertStudenCanExecuted()
@@ -409,7 +409,6 @@ namespace BUTEClassAdministrationClient
         }
 
         #endregion
-
 
         #region change datagrid source
 
