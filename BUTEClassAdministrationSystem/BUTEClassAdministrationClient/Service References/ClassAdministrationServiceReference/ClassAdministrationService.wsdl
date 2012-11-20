@@ -44,6 +44,12 @@
   <wsdl:message name="IClassAdministrationService_DeleteStudents_OutputMessage">
     <wsdl:part name="parameters" element="tns:DeleteStudentsResponse" />
   </wsdl:message>
+  <wsdl:message name="IClassAdministrationService_MoveStudent_InputMessage">
+    <wsdl:part name="parameters" element="tns:MoveStudent" />
+  </wsdl:message>
+  <wsdl:message name="IClassAdministrationService_MoveStudent_OutputMessage">
+    <wsdl:part name="parameters" element="tns:MoveStudentResponse" />
+  </wsdl:message>
   <wsdl:message name="IClassAdministrationService_CreateCourse_InputMessage">
     <wsdl:part name="parameters" element="tns:CreateCourse" />
   </wsdl:message>
@@ -159,6 +165,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IStudentOperations/DeleteStudents" message="tns:IClassAdministrationService_DeleteStudents_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IStudentOperations/DeleteStudentsResponse" message="tns:IClassAdministrationService_DeleteStudents_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="MoveStudent">
+      <wsdl:input wsaw:Action="http://tempuri.org/IStudentOperations/MoveStudent" message="tns:IClassAdministrationService_MoveStudent_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStudentOperations/MoveStudentResponse" message="tns:IClassAdministrationService_MoveStudent_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="CreateCourse">
       <wsdl:input wsaw:Action="http://tempuri.org/ICourseOperations/CreateCourse" message="tns:IClassAdministrationService_CreateCourse_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ICourseOperations/CreateCourseResponse" message="tns:IClassAdministrationService_CreateCourse_OutputMessage" />
@@ -269,6 +279,15 @@
     </wsdl:operation>
     <wsdl:operation name="DeleteStudents">
       <soap:operation soapAction="http://tempuri.org/IStudentOperations/DeleteStudents" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MoveStudent">
+      <soap:operation soapAction="http://tempuri.org/IStudentOperations/MoveStudent" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

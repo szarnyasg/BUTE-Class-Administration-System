@@ -16,7 +16,9 @@ namespace BUTEClassAdministrationClient
 
         #region Fields, properties
 
-        private List<ComboBoxSemesterPair> _semesterPairs;
+		#region SemesterPairs property
+
+		private List<ComboBoxSemesterPair> _semesterPairs;
 
         public List<ComboBoxSemesterPair> SemesterPairs
         {
@@ -29,10 +31,13 @@ namespace BUTEClassAdministrationClient
                         NotifyPropertyChanged("SemesterPairs");
                     }
                 }
-             
         }
 
-        private Semester _selectedSemester;
+		#endregion
+
+		#region SelectedSemester property
+
+		private Semester _selectedSemester;
 
         public Semester SelectedSemester 
         {
@@ -44,11 +49,14 @@ namespace BUTEClassAdministrationClient
                         _selectedSemester = value;
                         NotifyPropertyChanged("SelectedSemester");
                     }
-                }
-             
+                }    
         }
 
-        private ObservableCollection<ComboBoxCoursePair> _coursePairs;
+		#endregion
+
+		#region CoursePairs property
+
+		private ObservableCollection<ComboBoxCoursePair> _coursePairs;
 
         public ObservableCollection<ComboBoxCoursePair> CoursePairs
         {
@@ -63,8 +71,12 @@ namespace BUTEClassAdministrationClient
             }
 
         }
+		
+		#endregion
 
-        private Course _selectedCourse;
+		#region SelectedCourse property
+
+		private Course _selectedCourse;
 
         public Course SelectedCourse
         {
@@ -77,10 +89,51 @@ namespace BUTEClassAdministrationClient
                     NotifyPropertyChanged("SelectedCourse");
                 }
             }
-
         }
 
-        private Student _selectedStudent;
+		#endregion
+
+		#region TargetCoursePairs
+
+		private ObservableCollection<ComboBoxCoursePair> _targetCoursePairs;
+
+		public ObservableCollection<ComboBoxCoursePair> TargetCoursePairs
+		{
+			get { return _targetCoursePairs; }
+			set
+			{
+				if (_targetCoursePairs != value)
+				{
+					_targetCoursePairs = value;
+					NotifyPropertyChanged("TargetCoursePairs");
+				}
+			}
+		}
+
+		#endregion
+
+		#region SelectedTargetCourse property
+
+		private Course _selectedTargetCourse;
+
+		public Course SelectedTargetCourse
+		{
+			get { return _selectedTargetCourse; }
+			set
+			{
+				if (_selectedTargetCourse != value)
+				{
+					_selectedTargetCourse = value;
+					NotifyPropertyChanged("SelectedTargetCourse");
+				}
+			}
+		}
+
+		#endregion
+
+		#region SelectedStudent
+
+		private Student _selectedStudent;
 
         public Student SelectedStudent
         {
@@ -95,7 +148,11 @@ namespace BUTEClassAdministrationClient
             }
         }
 
-        private ObservableCollection<Student> _studentsForDatagrid;
+		#endregion
+
+		#region StudentsForDataGrid
+
+		private ObservableCollection<Student> _studentsForDatagrid;
         public ObservableCollection<Student> StudentsForDatagrid
         {
             get {return _studentsForDatagrid; }
@@ -109,10 +166,13 @@ namespace BUTEClassAdministrationClient
             }
         }
 
+		#endregion
 
-        #endregion
+		#endregion
 
-        public MainWindowViewModel()
+		#region Constructor
+
+		public MainWindowViewModel()
         {
             SemesterPairs = new List<ComboBoxSemesterPair>();
 
@@ -126,13 +186,15 @@ namespace BUTEClassAdministrationClient
             }
 
             CoursePairs = new ObservableCollection<ComboBoxCoursePair>();
-            
+			TargetCoursePairs = new ObservableCollection<ComboBoxCoursePair>();            
             StudentsForDatagrid = new ObservableCollection<Student>();
         }
 
-        #region change selected item in semester combobox command members
+		#endregion
 
-        private DelegateCommand _changeSemesterCommand;
+		#region change selected item in semester combobox command members
+
+		private DelegateCommand _changeSemesterCommand;
         public ICommand ChangeSemesterCommand
         {
             get
@@ -182,7 +244,7 @@ namespace BUTEClassAdministrationClient
         public void insertStudentExecuted()
         {
             StudentViewModel studentViewModel = new StudentViewModel(SelectedSemester, SelectedCourse);
-            changeDatagridExecuted();
+            changeCourseExecuted();
         }
 
         public bool insertStudenCanExecuted()
@@ -302,13 +364,43 @@ namespace BUTEClassAdministrationClient
 				//MessageBox.Show("Rekord törölve.");
 				
 				// refresh datagrid
-				changeDatagridExecuted();
+				changeCourseExecuted();
 			}
 		}
 
 		public bool deleteStudenCanExecuted()
 		{
 			return (SelectedStudent != null);
+		}
+
+		#endregion
+
+		#region move student command members
+		private DelegateCommand _moveStudentCommand;
+		public ICommand MoveStudentCommand
+		{
+			get
+			{
+				if (_moveStudentCommand == null)
+					_moveStudentCommand = new DelegateCommand(new Action(moveStudentExecuted), new Func<bool>(moveStudenCanExecuted));
+				return _moveStudentCommand;
+			}
+		}
+
+		public void moveStudentExecuted()
+		{
+			using (var service = new ClassAdministrationServiceClient())
+			{
+				service.MoveStudent(SelectedStudent.Id, SelectedTargetCourse.Id);
+
+				// refresh datagrid
+				changeCourseExecuted();
+			}
+		}
+
+		public bool moveStudenCanExecuted()
+		{
+			return (SelectedStudent != null) && (SelectedTargetCourse != null);
 		}
 
 		#endregion
@@ -332,8 +424,13 @@ namespace BUTEClassAdministrationClient
 			Group group = new Group();
 			group.Course = course;
 
-			roomEnumerator.MoveNext();
+			if (!roomEnumerator.MoveNext())
+			{
+				throw new Exception("Nincs elég terem a beosztáshoz");
+			}
+
 			group.Room = roomEnumerator.Current;
+
 			Console.WriteLine(roomEnumerator.Current.Name);
 
 			instructorEnumerator.MoveNext();
@@ -353,52 +450,64 @@ namespace BUTEClassAdministrationClient
 
 				List<Group> groups = new List<Group>();
 
-				foreach (var course in courses)
+				try
 				{
-					Console.WriteLine("################### " + course.Id + " ####################");
 
-					List<Student> students = service.ReadStudentsFromCourse(course.Id).ToList();
-
-					// no group for empty courses --> continue with the other courses
-					if (students.Count() == 0) continue;
-
-					List<Room> rooms = service.ReadRoomsFromCourse(course.Id).ToList();
-					List<Room>.Enumerator roomEnumerator = rooms.GetEnumerator();
-
-					// create new group
-					groups.Add(newGroup(ref roomEnumerator, ref instructorEnumerator, course));				
-					
-					foreach (var student in students)
+					foreach (var course in courses)
 					{
-						Group group = groups.Last();
+						Console.WriteLine("################### " + course.Id + " ####################");
 
-						// if we reached the maximum computer count, add new group
-						if (group.Student.Count() == group.Room.Computer_count)
+						List<Student> students = service.ReadStudentsFromCourse(course.Id).ToList();
+
+						// no group for empty courses --> continue with the other courses
+						if (students.Count() == 0) continue;
+
+						List<Room> rooms = service.ReadRoomsFromCourse(course.Id).ToList();
+						List<Room>.Enumerator roomEnumerator = rooms.GetEnumerator();
+
+						Console.WriteLine(course.Id);
+						Console.WriteLine(rooms.Count());
+
+						// create new group
+						groups.Add(newGroup(ref roomEnumerator, ref instructorEnumerator, course));
+
+						foreach (var student in students)
 						{
-							groups.Add(newGroup(ref roomEnumerator, ref instructorEnumerator, course));
-							group = groups.Last();
+							Group group = groups.Last();
+
+							// if we reached the maximum computer count, add new group
+							if (group.Student.Count() == group.Room.Computer_count)
+							{
+								groups.Add(newGroup(ref roomEnumerator, ref instructorEnumerator, course));
+								group = groups.Last();
+							}
+
+							// set the students group and add the student to the collection
+							student.Group = group;
+							group.Student.Add(student);
 						}
 
-						// set the students group and add the student to the collection
-						student.Group = group;
-						group.Student.Add(student);
-					}
-
-					Console.WriteLine("Groups in course");
-					Console.WriteLine("================");
-					foreach (var item in groups)
-					{
-						Console.WriteLine(item);
-						List<Student> groupsStudents = item.Student.ToList();
-
-						Console.WriteLine("Room " + item.Room);
-						foreach (var st in groupsStudents)
+						Console.WriteLine("Groups in course");
+						Console.WriteLine("================");
+						foreach (var item in groups)
 						{
-							Console.WriteLine(st.Name);
+							Console.WriteLine(item);
+							List<Student> groupsStudents = item.Student.ToList();
+
+							Console.WriteLine("Room " + item.Room);
+							foreach (var st in groupsStudents)
+							{
+								Console.WriteLine(st.Name);
+							}
 						}
-						
 					}
+
+				} catch (Exception e) {
+					MessageBox.Show(e.ToString());
 				}
+
+				// UI				
+				AssignmentViewModel assignmentViewModel = new AssignmentViewModel(groups);
 			}
 
         }
@@ -410,26 +519,27 @@ namespace BUTEClassAdministrationClient
 
         #endregion
 
-        #region change datagrid source
+        #region change course command members
 
-        private DelegateCommand _changeDatagridCommand;
-        public ICommand ChangeDatagridCommand
+        private DelegateCommand _changeCourseCommand;
+        public ICommand ChangeCourseCommand
         {
             get
             {
-                if (_changeDatagridCommand == null)
-                    _changeDatagridCommand = new DelegateCommand(new Action(changeDatagridExecuted), new Func<bool>(changeExecutedCanExecuted));
-                return _changeDatagridCommand;
+                if (_changeCourseCommand == null)
+                    _changeCourseCommand = new DelegateCommand(new Action(changeCourseExecuted), new Func<bool>(changeCourseCanExecuted));
+                return _changeCourseCommand;
             }
         }
 
-        public void changeDatagridExecuted()
+        public void changeCourseExecuted()
         {
             StudentsForDatagrid.Clear();
 
 			if (SelectedCourse == null) return;
 
-            using (var service = new ClassAdministrationServiceClient())
+            // load datagrid with students
+			using (var service = new ClassAdministrationServiceClient())
             {                
 				Student[] students = service.ReadStudentsFromCourse(SelectedCourse.Id);
        
@@ -438,16 +548,25 @@ namespace BUTEClassAdministrationClient
                     StudentsForDatagrid.Add(student);
                 }
             }
+
+			// load target course combobox
+			TargetCoursePairs.Clear();
+			foreach (var coursePair in CoursePairs)
+			{
+				if (((Course)coursePair.CourseObject).Id != SelectedCourse.Id)
+				{
+					TargetCoursePairs.Add(coursePair);
+				}
+			}
+
         }
 
-        public bool changeExecutedCanExecuted()
+        public bool changeCourseCanExecuted()
         {
             return (SelectedSemester != null);
         }
 
         #endregion
 
-
     }
-
 }

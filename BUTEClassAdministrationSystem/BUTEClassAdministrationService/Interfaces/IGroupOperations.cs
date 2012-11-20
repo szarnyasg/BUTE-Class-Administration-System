@@ -14,10 +14,10 @@ namespace BUTEClassAdministrationService
 		void CreateGroup(Group[] groups);
 
 		[OperationContract]
-		Group[] ReadGroupsFromSemester(Semester semesterId);
+		Group[] ReadGroupsFromSemester(int semesterId);
 
 		[OperationContract]
-		Group[] ReadGroupsFromSemesterAndCourse(int semesterId, int courseId);
+		Group[] ReadGroupsFromCourse(int courseId);
 
 		[OperationContract]
 		void UpdateGroups(Group[] groups);

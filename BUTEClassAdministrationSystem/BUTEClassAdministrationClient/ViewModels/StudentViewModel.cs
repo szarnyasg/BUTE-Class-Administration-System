@@ -15,16 +15,19 @@ namespace BUTEClassAdministrationClient
 {
     public class StudentViewModel : ViewModelBase, IDataErrorInfo
     {
-
         bool modify = false;
 
         Window insertStudentWindow;
 
-        private Student _student;
+		#region Fields
 
-        #region Properties
+		private Student _student;
 
-        public string Name
+		#endregion
+
+		#region Properties
+
+		public string Name
         {
             get
             {
@@ -125,9 +128,7 @@ namespace BUTEClassAdministrationClient
             Course = selectedCourse;
 
             insertStudentWindow = new InsertStudentWindow();
-
             insertStudentWindow.DataContext = this;
-
             insertStudentWindow.ShowDialog();
         }
 

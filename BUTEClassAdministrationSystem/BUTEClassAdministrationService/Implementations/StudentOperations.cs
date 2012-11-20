@@ -71,5 +71,19 @@ namespace BUTEClassAdministrationService
 				context.SaveChanges();
 			}
 		}
+
+		public void MoveStudent(int studentId, int courseId)
+		{
+			using (ClassAdministrationEntityContext context = new ClassAdministrationEntityContext())
+			{
+				Student student = context.StudentSet.Where(s => s.Id == studentId).First();
+				Course course = context.CourseSet.Where(c => c.Id == courseId).First();
+
+				student.Course = course;
+
+				context.StudentSet.ApplyChanges(student);
+				context.SaveChanges();
+			}
+		}
 	}
 }

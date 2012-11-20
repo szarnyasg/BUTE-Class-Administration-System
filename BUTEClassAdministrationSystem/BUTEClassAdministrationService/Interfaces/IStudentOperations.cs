@@ -24,5 +24,8 @@ namespace BUTEClassAdministrationService
 
 		[OperationContract]
 		void DeleteStudents(int[] studentIds);
+
+		[OperationContract]
+		void MoveStudent(int studentId, int courseId);
 	}
 }

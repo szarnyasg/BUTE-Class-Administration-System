@@ -20,15 +20,15 @@ namespace BUTEClassAdministrationService
 			}
 		}
 
-		public Group[] ReadGroupsFromSemester(Semester semester)
+		public Group[] ReadGroupsFromSemester(int semesterId)
 		{
 			using (ClassAdministrationEntityContext context = new ClassAdministrationEntityContext())
 			{
-				return context.GroupSet.ToList().Where(Group => Group.Semester.Equals(semester)).ToArray();
+				throw new NotImplementedException();
 			}
 		}
 
-		public Group[] ReadGroupsFromSemesterAndCourse(int semesterId, int courseId)
+		public Group[] ReadGroupsFromCourse(int courseId)
 		{
 			throw new NotImplementedException();
 		}

@@ -70,6 +70,9 @@ namespace BUTEClassAdministrationClient.ClassAdministrationServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentOperations/DeleteStudents", ReplyAction="http://tempuri.org/IStudentOperations/DeleteStudentsResponse")]
         void DeleteStudents(int[] studentIds);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentOperations/MoveStudent", ReplyAction="http://tempuri.org/IStudentOperations/MoveStudentResponse")]
+        void MoveStudent(int studentId, int courseId);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICourseOperations/CreateCourse", ReplyAction="http://tempuri.org/ICourseOperations/CreateCourseResponse")]
         void CreateCourse(BUTEClassAdministrationTypes.Course[] courses);
         
@@ -165,6 +168,10 @@ namespace BUTEClassAdministrationClient.ClassAdministrationServiceReference {
         
         public void DeleteStudents(int[] studentIds) {
             base.Channel.DeleteStudents(studentIds);
+        }
+        
+        public void MoveStudent(int studentId, int courseId) {
+            base.Channel.MoveStudent(studentId, courseId);
         }
         
         public void CreateCourse(BUTEClassAdministrationTypes.Course[] courses) {
