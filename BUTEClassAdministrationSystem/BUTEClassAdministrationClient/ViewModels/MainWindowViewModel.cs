@@ -7,8 +7,7 @@ using BUTEClassAdministrationClient.ClassAdministrationServiceReference;
 using BUTEClassAdministrationTypes;
 using BUTEClassAdministrationClient.ViewModels;
 using System.Collections.ObjectModel;
-
-
+using System.Windows;
 
 namespace BUTEClassAdministrationClient
 {
@@ -283,6 +282,37 @@ namespace BUTEClassAdministrationClient
 
         #endregion
 
+		#region delete student command members
+		private DelegateCommand _deleteStudentCommand;
+		public ICommand DeleteStudentCommand
+		{
+			get
+			{
+				if (_deleteStudentCommand == null)
+					_deleteStudentCommand = new DelegateCommand(new Action(deleteStudentExecuted), new Func<bool>(deleteStudenCanExecuted));
+				return _deleteStudentCommand;
+			}
+		}
+
+		public void deleteStudentExecuted()
+		{
+			using (var service = new ClassAdministrationServiceClient())
+			{
+				service.DeleteStudents(new int[] { SelectedStudent.Id });
+				//MessageBox.Show("Rekord törölve.");
+				
+				// refresh datagrid
+				changeDatagridExecuted();
+			}
+		}
+
+		public bool deleteStudenCanExecuted()
+		{
+			return (SelectedStudent != null);
+		}
+
+		#endregion
+
         #region assign command members
 
         private DelegateCommand _assignCommand;
@@ -296,12 +326,15 @@ namespace BUTEClassAdministrationClient
             }
         }
 
-		private Group newGroup(List<Room>.Enumerator roomEnumerator, List<Instructor>.Enumerator instructorEnumerator)
+		private Group newGroup(ref List<Room>.Enumerator roomEnumerator, ref List<Instructor>.Enumerator instructorEnumerator, Course course)
 		{
+			//Console.WriteLine("---------> new group");
 			Group group = new Group();
+			group.Course = course;
 
 			roomEnumerator.MoveNext();
 			group.Room = roomEnumerator.Current;
+			Console.WriteLine(roomEnumerator.Current.Name);
 
 			instructorEnumerator.MoveNext();
 			group.Instructor = instructorEnumerator.Current;
@@ -311,8 +344,6 @@ namespace BUTEClassAdministrationClient
 
         public void assignExecuted()
         {
-			// ide ird amit akarsz 
-
 			using (var service = new ClassAdministrationServiceClient())
 			{
 				List<Course> courses = service.ReadCoursesFromSemester(SelectedSemester.Id).ToList();
@@ -320,54 +351,53 @@ namespace BUTEClassAdministrationClient
 				List<Instructor> instructors = service.ReadInstructors().ToList();
 				List<Instructor>.Enumerator instructorEnumerator = instructors.GetEnumerator();
 
-				List<Room> rooms = service.ReadRooms().ToList();
-				List<Room>.Enumerator roomEnumerator = rooms.GetEnumerator();
-
 				List<Group> groups = new List<Group>();
 
 				foreach (var course in courses)
 				{
-					Console.WriteLine("# " + course.Id);
+					Console.WriteLine("################### " + course.Id + " ####################");
 
-					groups.Add(newGroup(roomEnumerator, instructorEnumerator));				
-					
 					List<Student> students = service.ReadStudentsFromCourse(course.Id).ToList();
+
+					// no group for empty courses --> continue with the other courses
+					if (students.Count() == 0) continue;
+
+					List<Room> rooms = service.ReadRoomsFromCourse(course.Id).ToList();
+					List<Room>.Enumerator roomEnumerator = rooms.GetEnumerator();
+
+					// create new group
+					groups.Add(newGroup(ref roomEnumerator, ref instructorEnumerator, course));				
+					
 					foreach (var student in students)
 					{
 						Group group = groups.Last();
-						if (group.Room.Computer_count == group.Student.Count())
+
+						// if we reached the maximum computer count, add new group
+						if (group.Student.Count() == group.Room.Computer_count)
 						{
-							groups.Add(newGroup(roomEnumerator, instructorEnumerator));
+							groups.Add(newGroup(ref roomEnumerator, ref instructorEnumerator, course));
 							group = groups.Last();
 						}
 
-
+						// set the students group and add the student to the collection
 						student.Group = group;
 						group.Student.Add(student);
-						//group.Student.Room();
-
-
 					}
 
-					foreach (var student in students)
-					{
-						
-
-						Console.WriteLine(student.Name);
-					}
-
-
+					Console.WriteLine("Groups in course");
+					Console.WriteLine("================");
 					foreach (var item in groups)
 					{
 						Console.WriteLine(item);
 						List<Student> groupsStudents = item.Student.ToList();
-						
 
+						Console.WriteLine("Room " + item.Room);
+						foreach (var st in groupsStudents)
+						{
+							Console.WriteLine(st.Name);
+						}
 						
 					}
-
-
-
 				}
 			}
 

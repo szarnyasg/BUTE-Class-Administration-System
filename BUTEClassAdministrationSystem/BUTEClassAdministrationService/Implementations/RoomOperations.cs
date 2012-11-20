@@ -15,5 +15,13 @@ namespace BUTEClassAdministrationService
 				return context.RoomSet.ToArray();
 			}
 		}
+
+		public Room[] ReadRoomsFromCourse(int courseId)
+		{
+			using (ClassAdministrationEntityContext context = new ClassAdministrationEntityContext())
+			{
+				return context.RoomSet.Where(room => room.Course.Any(course => course.Id == courseId)).ToArray();
+			}
+		}
 	}
 }

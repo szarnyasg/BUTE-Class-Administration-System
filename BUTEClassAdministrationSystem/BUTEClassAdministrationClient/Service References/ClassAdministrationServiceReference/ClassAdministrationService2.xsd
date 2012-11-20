@@ -66,14 +66,14 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="DeleteStudent">
+  <xs:element name="DeleteStudents">
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q6="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="studentIds" nillable="true" type="q6:ArrayOfint" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="DeleteStudentResponse">
+  <xs:element name="DeleteStudentsResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
@@ -250,6 +250,20 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/BUTEClassAdministrationTypes" minOccurs="0" name="ReadRoomsResult" nillable="true" type="q20:ArrayOfRoom" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ReadRoomsFromCourse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="courseId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ReadRoomsFromCourseResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/BUTEClassAdministrationTypes" minOccurs="0" name="ReadRoomsFromCourseResult" nillable="true" type="q21:ArrayOfRoom" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

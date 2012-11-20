@@ -67,8 +67,8 @@ namespace BUTEClassAdministrationClient.ClassAdministrationServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentOperations/UpdateStudents", ReplyAction="http://tempuri.org/IStudentOperations/UpdateStudentsResponse")]
         void UpdateStudents(BUTEClassAdministrationTypes.Student[] students);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentOperations/DeleteStudent", ReplyAction="http://tempuri.org/IStudentOperations/DeleteStudentResponse")]
-        void DeleteStudent(int[] studentIds);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStudentOperations/DeleteStudents", ReplyAction="http://tempuri.org/IStudentOperations/DeleteStudentsResponse")]
+        void DeleteStudents(int[] studentIds);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICourseOperations/CreateCourse", ReplyAction="http://tempuri.org/ICourseOperations/CreateCourseResponse")]
         void CreateCourse(BUTEClassAdministrationTypes.Course[] courses);
@@ -111,6 +111,9 @@ namespace BUTEClassAdministrationClient.ClassAdministrationServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRoomOperations/ReadRooms", ReplyAction="http://tempuri.org/IRoomOperations/ReadRoomsResponse")]
         BUTEClassAdministrationTypes.Room[] ReadRooms();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRoomOperations/ReadRoomsFromCourse", ReplyAction="http://tempuri.org/IRoomOperations/ReadRoomsFromCourseResponse")]
+        BUTEClassAdministrationTypes.Room[] ReadRoomsFromCourse(int courseId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -160,8 +163,8 @@ namespace BUTEClassAdministrationClient.ClassAdministrationServiceReference {
             base.Channel.UpdateStudents(students);
         }
         
-        public void DeleteStudent(int[] studentIds) {
-            base.Channel.DeleteStudent(studentIds);
+        public void DeleteStudents(int[] studentIds) {
+            base.Channel.DeleteStudents(studentIds);
         }
         
         public void CreateCourse(BUTEClassAdministrationTypes.Course[] courses) {
@@ -218,6 +221,10 @@ namespace BUTEClassAdministrationClient.ClassAdministrationServiceReference {
         
         public BUTEClassAdministrationTypes.Room[] ReadRooms() {
             return base.Channel.ReadRooms();
+        }
+        
+        public BUTEClassAdministrationTypes.Room[] ReadRoomsFromCourse(int courseId) {
+            return base.Channel.ReadRoomsFromCourse(courseId);
         }
     }
 }

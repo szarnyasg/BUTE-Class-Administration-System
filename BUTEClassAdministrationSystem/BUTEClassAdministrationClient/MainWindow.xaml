@@ -6,35 +6,39 @@
         Height="350" 
         Width="525"        
         >
-    
-    <Grid Margin="8">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="6"/>
-            <ColumnDefinition Width="100"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="6"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        
-        <Label
+
+  <Grid Margin="8">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="30"/>
+      <RowDefinition Height="30"/>
+      <RowDefinition Height="30"/>
+      <RowDefinition Height="30"/>
+      <RowDefinition Height="10"/>
+      <RowDefinition Height="30"/>
+      <RowDefinition Height="10"/>
+      <RowDefinition Height="30"/>
+      <RowDefinition Height="10"/>
+      <RowDefinition Height="30"/>
+      <RowDefinition Height="*"/>
+    </Grid.RowDefinitions>
+
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="Auto"/>
+      <ColumnDefinition Width="6"/>
+      <ColumnDefinition Width="100"/>
+      <ColumnDefinition Width="Auto"/>
+      <ColumnDefinition Width="6"/>
+      <ColumnDefinition Width="*"/>
+    </Grid.ColumnDefinitions>
+
+    <Label
             Content="Félév:"
             Grid.Row="0"
             Grid.Column="0"
             Target="{Binding ElementName=semesterCmbBox}"
             />
-   
-        <c:ComboBoxWithCommand
+
+    <c:ComboBoxWithCommand
             x:Name="semesterCmbBox"
             Grid.Row="0"
             Grid.Column="2"
@@ -45,16 +49,16 @@
             SelectedValuePath="SemesterObject"
             SelectedValue="{Binding MainWindowViewModel.SelectedSemester}"
             Command="{Binding MainWindowViewModel.ChangeSemesterCommand}">
-        </c:ComboBoxWithCommand>
+    </c:ComboBoxWithCommand>
 
-        <Label
+    <Label
             Content="Kurzus:"
             Grid.Row="0"
             Grid.Column="3"
             Target="{Binding ElementName=courseCmbBox}"
             />
-        
-        <c:ComboBoxWithCommand
+
+    <c:ComboBoxWithCommand
             x:Name="courseCmbBox"
             Grid.Row="0"
             Grid.Column="5"
@@ -65,62 +69,73 @@
             SelectedValue="{Binding MainWindowViewModel.SelectedCourse}"
             Command="{Binding MainWindowViewModel.ChangeDatagridCommand}"
             >
-        </c:ComboBoxWithCommand>
+    </c:ComboBoxWithCommand>
 
-        <DataGrid
+    <DataGrid
             Grid.Column="3"
             Grid.Row="1"
             Grid.ColumnSpan="3"
-            Grid.RowSpan="6"
+            Grid.RowSpan="10"
             AutoGenerateColumns="False"
             IsReadOnly="True"
             ItemsSource="{Binding MainWindowViewModel.StudentsForDatagrid}"
             SelectedItem="{Binding MainWindowViewModel.SelectedStudent}"
             >
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Név" Width="220" Binding="{Binding Name}"/>
-                <DataGridTextColumn Header="Neptun" Width="*" Binding="{Binding Neptun}"/>
-            </DataGrid.Columns>
-        </DataGrid>
-        
-        
-        <Button
+      <DataGrid.Columns>
+        <DataGridTextColumn Header="Név" Width="220" Binding="{Binding Name}"/>
+        <DataGridTextColumn Header="Neptun" Width="*" Binding="{Binding Neptun}"/>
+      </DataGrid.Columns>
+    </DataGrid>
+
+
+    <Button
             Grid.Row="1"
             Grid.ColumnSpan="3"
             Content="Hallgató felvétele"
             Command="{Binding MainWindowViewModel.InsertStudentCommand}"
             />
-        <Button
-            Content="Gyakorlatvezető felvétele"
-            Grid.ColumnSpan="3"
+
+    <Button
             Grid.Row="2"
-            Grid.Column="0"
-            Command="{Binding MainWindowViewModel.InsertInstructorCommand}"
-            />
-        
-        <Button
-            Grid.Row="3"
-            Grid.ColumnSpan="3"
-            Content="Importálás Excelből"
-            Command="{Binding MainWindowViewModel.ImportFromExcelCommand}"
-            />
-        
-        <Button
-            Grid.Row="4"
             Grid.Column="0"
             Grid.ColumnSpan="3"
             Content="Hallgató módosítása"
             Command="{Binding MainWindowViewModel.ModifyStudentCommand}"
             />
-        
-        <Button
+
+    <Button
+            Grid.Row="3"
+            Grid.Column="0"
+            Grid.ColumnSpan="3"
+            Content="Hallgató törlése"
+            Command="{Binding MainWindowViewModel.DeleteStudentCommand}"
+            />
+
+    
+    <Button
+            Content="Gyakorlatvezető felvétele"
+            Grid.ColumnSpan="3"
             Grid.Row="5"
+            Grid.Column="0"
+            Command="{Binding MainWindowViewModel.InsertInstructorCommand}"
+            />
+
+    <Button
+            Grid.Row="7"
+            Grid.ColumnSpan="3"
+            Content="Importálás Excelből"
+            Command="{Binding MainWindowViewModel.ImportFromExcelCommand}"
+            />
+
+
+    <Button
+            Grid.Row="9"
             Grid.Column="0"
             Grid.ColumnSpan="3"
             Content="Beoszt"
             Command="{Binding MainWindowViewModel.AssignCommand}"
             />
-        
-        
-    </Grid>
+
+
+  </Grid>
 </Window>

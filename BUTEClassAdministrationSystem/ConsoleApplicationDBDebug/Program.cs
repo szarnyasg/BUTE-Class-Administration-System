@@ -23,23 +23,19 @@ namespace ConsoleApplicationDBDebug
 
 			using (ClassAdministrationEntityContext context = new ClassAdministrationEntityContext(ec))
 			{
-				context.ContextOptions.LazyLoadingEnabled = false;
-				context.ContextOptions.ProxyCreationEnabled = false;
+				int[] studentIds = { 14 };
 
-				/*
-				List<Semester> semesters = context.SemesterSet.ToList();
-				*/
-				List<Course> courses = new List<Course>();				
+				var students = context.StudentSet.Where(student => studentIds.Contains(student.Id));
 				
-				foreach (var course in context.CourseSet.ToList<Course>())
+				foreach (var student in students)
 				{
-					context.LoadProperty(course, o => o.Semester);
-					if (course.Semester == null)
-					{
-						Console.WriteLine("null");
-					}
+					context.DeleteObject(student);
 				}
+
+				context.SaveChanges();
 			}
+
+			Console.ReadLine();
 		}
 	}
 }

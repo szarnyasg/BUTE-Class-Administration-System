@@ -38,11 +38,11 @@
   <wsdl:message name="IClassAdministrationService_UpdateStudents_OutputMessage">
     <wsdl:part name="parameters" element="tns:UpdateStudentsResponse" />
   </wsdl:message>
-  <wsdl:message name="IClassAdministrationService_DeleteStudent_InputMessage">
-    <wsdl:part name="parameters" element="tns:DeleteStudent" />
+  <wsdl:message name="IClassAdministrationService_DeleteStudents_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteStudents" />
   </wsdl:message>
-  <wsdl:message name="IClassAdministrationService_DeleteStudent_OutputMessage">
-    <wsdl:part name="parameters" element="tns:DeleteStudentResponse" />
+  <wsdl:message name="IClassAdministrationService_DeleteStudents_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteStudentsResponse" />
   </wsdl:message>
   <wsdl:message name="IClassAdministrationService_CreateCourse_InputMessage">
     <wsdl:part name="parameters" element="tns:CreateCourse" />
@@ -128,6 +128,12 @@
   <wsdl:message name="IClassAdministrationService_ReadRooms_OutputMessage">
     <wsdl:part name="parameters" element="tns:ReadRoomsResponse" />
   </wsdl:message>
+  <wsdl:message name="IClassAdministrationService_ReadRoomsFromCourse_InputMessage">
+    <wsdl:part name="parameters" element="tns:ReadRoomsFromCourse" />
+  </wsdl:message>
+  <wsdl:message name="IClassAdministrationService_ReadRoomsFromCourse_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ReadRoomsFromCourseResponse" />
+  </wsdl:message>
   <wsdl:portType name="IClassAdministrationService">
     <wsdl:operation name="ReadSemesters">
       <wsdl:input wsaw:Action="http://tempuri.org/ISemesterOperations/ReadSemesters" message="tns:IClassAdministrationService_ReadSemesters_InputMessage" />
@@ -149,9 +155,9 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IStudentOperations/UpdateStudents" message="tns:IClassAdministrationService_UpdateStudents_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IStudentOperations/UpdateStudentsResponse" message="tns:IClassAdministrationService_UpdateStudents_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="DeleteStudent">
-      <wsdl:input wsaw:Action="http://tempuri.org/IStudentOperations/DeleteStudent" message="tns:IClassAdministrationService_DeleteStudent_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IStudentOperations/DeleteStudentResponse" message="tns:IClassAdministrationService_DeleteStudent_OutputMessage" />
+    <wsdl:operation name="DeleteStudents">
+      <wsdl:input wsaw:Action="http://tempuri.org/IStudentOperations/DeleteStudents" message="tns:IClassAdministrationService_DeleteStudents_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStudentOperations/DeleteStudentsResponse" message="tns:IClassAdministrationService_DeleteStudents_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="CreateCourse">
       <wsdl:input wsaw:Action="http://tempuri.org/ICourseOperations/CreateCourse" message="tns:IClassAdministrationService_CreateCourse_InputMessage" />
@@ -209,6 +215,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IRoomOperations/ReadRooms" message="tns:IClassAdministrationService_ReadRooms_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IRoomOperations/ReadRoomsResponse" message="tns:IClassAdministrationService_ReadRooms_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="ReadRoomsFromCourse">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRoomOperations/ReadRoomsFromCourse" message="tns:IClassAdministrationService_ReadRoomsFromCourse_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRoomOperations/ReadRoomsFromCourseResponse" message="tns:IClassAdministrationService_ReadRoomsFromCourse_OutputMessage" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IClassAdministrationService" type="tns:IClassAdministrationService">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -257,8 +267,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="DeleteStudent">
-      <soap:operation soapAction="http://tempuri.org/IStudentOperations/DeleteStudent" style="document" />
+    <wsdl:operation name="DeleteStudents">
+      <soap:operation soapAction="http://tempuri.org/IStudentOperations/DeleteStudents" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -385,6 +395,15 @@
     </wsdl:operation>
     <wsdl:operation name="ReadRooms">
       <soap:operation soapAction="http://tempuri.org/IRoomOperations/ReadRooms" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadRoomsFromCourse">
+      <soap:operation soapAction="http://tempuri.org/IRoomOperations/ReadRoomsFromCourse" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

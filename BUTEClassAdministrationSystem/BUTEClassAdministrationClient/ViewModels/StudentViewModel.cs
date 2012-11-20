@@ -181,7 +181,6 @@ namespace BUTEClassAdministrationClient
         {
             using (var service = new ClassAdministrationServiceClient())
             {
-                
                 service.CreateStudents(new Student[] { _student });
                 _student.AcceptChanges();
             }

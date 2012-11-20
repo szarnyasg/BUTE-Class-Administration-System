@@ -12,5 +12,8 @@ namespace BUTEClassAdministrationService
 	{
 		[OperationContract]
 		Room[] ReadRooms();
+
+		[OperationContract]
+		Room[] ReadRoomsFromCourse(int courseId);
 	}
 }

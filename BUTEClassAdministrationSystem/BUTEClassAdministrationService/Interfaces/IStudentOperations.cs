@@ -23,6 +23,6 @@ namespace BUTEClassAdministrationService
 		void UpdateStudents(Student[] students);
 
 		[OperationContract]
-		void DeleteStudent(int[] studentIds);
+		void DeleteStudents(int[] studentIds);
 	}
 }

@@ -57,25 +57,19 @@ namespace BUTEClassAdministrationService
 			}
 		}
 
-		public void DeleteStudent(Student[] students)
+		public void DeleteStudents(int[] studentIds)
 		{
 			using (ClassAdministrationEntityContext context = new ClassAdministrationEntityContext())
 			{
+				var students = context.StudentSet.Where(student => studentIds.Contains(student.Id));
+
 				foreach (var student in students)
 				{
-					student.ChangeTracker.State = BUTEClassAdministrationTypes.ObjectState.Deleted;
-					context.StudentSet.ApplyChanges(student);
+					context.DeleteObject(student);
 				}
 
 				context.SaveChanges();
 			}
 		}
-
-
-		public void DeleteStudent(int[] studentIds)
-		{
-			throw new NotImplementedException();
-		}
-
 	}
 }
