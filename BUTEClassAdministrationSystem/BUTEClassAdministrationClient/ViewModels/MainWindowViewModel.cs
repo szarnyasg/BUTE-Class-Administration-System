@@ -269,7 +269,7 @@ namespace BUTEClassAdministrationClient
 
         public void InstructorExecuted()
         {
-            ListOFInstructorsViewModel instructorViewModel = new ListOFInstructorsViewModel();
+            ListOfInstructorsViewModel instructorViewModel = new ListOfInstructorsViewModel();
         }
 
         #endregion
