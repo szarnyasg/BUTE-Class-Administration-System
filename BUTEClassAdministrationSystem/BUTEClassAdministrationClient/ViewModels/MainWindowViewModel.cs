@@ -254,22 +254,22 @@ namespace BUTEClassAdministrationClient
 
         #endregion 
 
-        #region insert Instructor command members
+        #region show Instructor window command members
 
-        private DelegateCommand _insertInstructorCommand;
-        public ICommand InsertInstructorCommand
+        private DelegateCommand _instructorCommand;
+        public ICommand InstructorCommand
         {
             get
             {
-                if (_insertInstructorCommand == null)
-                    _insertInstructorCommand = new DelegateCommand(new Action(insertInstructorExecuted));
-                return _insertInstructorCommand;
+                if (_instructorCommand == null)
+                    _instructorCommand = new DelegateCommand(new Action(InstructorExecuted));
+                return _instructorCommand;
             }
         }
 
-        public void insertInstructorExecuted()
+        public void InstructorExecuted()
         {
-            InstructorViewModel studentViewModel = new InstructorViewModel();
+            ListOFInstructorsViewModel instructorViewModel = new ListOFInstructorsViewModel();
         }
 
         #endregion
@@ -351,7 +351,7 @@ namespace BUTEClassAdministrationClient
 			get
 			{
 				if (_deleteStudentCommand == null)
-					_deleteStudentCommand = new DelegateCommand(new Action(deleteStudentExecuted), new Func<bool>(deleteStudenCanExecuted));
+					_deleteStudentCommand = new DelegateCommand(new Action(deleteStudentExecuted), new Func<bool>(deleteStudentCanExecuted));
 				return _deleteStudentCommand;
 			}
 		}
@@ -368,7 +368,7 @@ namespace BUTEClassAdministrationClient
 			}
 		}
 
-		public bool deleteStudenCanExecuted()
+		public bool deleteStudentCanExecuted()
 		{
 			return (SelectedStudent != null);
 		}

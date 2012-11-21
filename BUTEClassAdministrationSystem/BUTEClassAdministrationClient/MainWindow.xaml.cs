@@ -39,8 +39,6 @@ namespace BUTEClassAdministrationClient
             InitializeComponent();
     	}
 
-
-
     }
 }
 

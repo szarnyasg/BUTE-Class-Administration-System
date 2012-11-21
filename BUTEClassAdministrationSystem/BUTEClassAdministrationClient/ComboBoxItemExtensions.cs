@@ -30,4 +30,11 @@ namespace BUTEClassAdministrationClient
         public string CourseString { get; set; }
     }
 
+    public class ComboBoxGroupPair
+    {
+        public Group GroupObject { get; set; }
+
+        public string GroupString { get; set; }
+    }
+
 }

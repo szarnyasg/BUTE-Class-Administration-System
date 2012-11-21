@@ -141,7 +141,7 @@
 
             <Button
                 Name="InsertButton"
-                Content="Felvesz"
+                Content="Végrehajt"
                 Command="{Binding StudentCommand}"
                 Grid.Row="0"
                 Grid.Column="0"

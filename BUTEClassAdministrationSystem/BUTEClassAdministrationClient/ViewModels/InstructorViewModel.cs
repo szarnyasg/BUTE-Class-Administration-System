@@ -17,6 +17,8 @@ namespace BUTEClassAdministrationClient.ViewModels
     {
         Window insertInstructorWindow;
 
+        bool modify;
+
         private Instructor _instructor;
 
         #region Properties
@@ -69,16 +71,34 @@ namespace BUTEClassAdministrationClient.ViewModels
             }
         }
 
+        public Instructor ModifyableInstructor { get; set; }
+
         #endregion
 
-        #region Constructor
+        #region Constructors
 
         public InstructorViewModel()
         {
+            modify = false;
             _instructor =  new Instructor();
             Name = "";
             Neptun = "";
             Email = "";
+
+            insertInstructorWindow = new InsertInstructorWindow();
+
+            insertInstructorWindow.DataContext = this;
+
+            insertInstructorWindow.ShowDialog();
+        }
+
+        public InstructorViewModel(Instructor selectedInstructor)
+        {
+            ModifyableInstructor = selectedInstructor;
+
+            modify = true;
+            _instructor = new Instructor();
+            _instructor.clone(selectedInstructor);
 
             insertInstructorWindow = new InsertInstructorWindow();
 
@@ -96,27 +116,46 @@ namespace BUTEClassAdministrationClient.ViewModels
         {
             get
             {
-                if(_saveInstructorCommand == null)
-                    _saveInstructorCommand = new DelegateCommand(new Action(saveInstruktorExecuted), new Func<bool>(saveInstructorcanExecuted));
+                if (_saveInstructorCommand == null)
+                {
+                    if(modify)
+                        _saveInstructorCommand = new DelegateCommand(new Action(modifyInstructorExecuted), new Func<bool>(saveOrModifyInstructorCanExecuted));
+                    else
+                        _saveInstructorCommand = new DelegateCommand(new Action(saveInstructorExecuted), new Func<bool>(saveOrModifyInstructorCanExecuted));
+                }
                 return _saveInstructorCommand;
             }
         }
 
-        public void saveInstruktorExecuted()
+        public void modifyInstructorExecuted()
+        {
+            ModifyableInstructor.clone(_instructor);
+
+            using (var service = new ClassAdministrationServiceClient())
+            {
+                service.UpdateInstructors(new Instructor[] { ModifyableInstructor });
+                _instructor.AcceptChanges();
+            }
+
+            MessageBox.Show("Rekord módosítva.");
+
+            insertInstructorWindow.Close();
+        }
+
+        public void saveInstructorExecuted()
         {
             using (var service = new ClassAdministrationServiceClient())
             {
-
                 service.CreateInstructor(new Instructor[] { _instructor });
                 _instructor.AcceptChanges();
-
-                MessageBox.Show("Rekord beszúrva.");
-
-                insertInstructorWindow.Close();
             }
+
+            MessageBox.Show("Rekord beszúrva.");
+
+            insertInstructorWindow.Close();
         }
 
-        public bool saveInstructorcanExecuted()
+        public bool saveOrModifyInstructorCanExecuted()
         {
             return nameIsValid(Name) && neptunIsValid(Neptun) && emailIsValid(Email);
         }

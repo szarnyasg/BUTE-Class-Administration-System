@@ -82,8 +82,7 @@
             AutoGenerateColumns="False"
             IsReadOnly="True"
             ItemsSource="{Binding MainWindowViewModel.StudentsForDatagrid}"
-            SelectedItem="{Binding MainWindowViewModel.SelectedStudent}"
-            >
+            SelectedItem="{Binding MainWindowViewModel.SelectedStudent}">
       <DataGrid.Columns>
         <DataGridTextColumn Header="Név" Width="220" Binding="{Binding Name}"/>
         <DataGridTextColumn Header="Neptun" Width="*" Binding="{Binding Neptun}"/>
@@ -136,11 +135,11 @@
             />
 
     <Button
-            Content="Gyakorlatvezető felvétele"
+            Content="Gyakorlatvezetők"
             Grid.ColumnSpan="3"
             Grid.Row="8"
             Grid.Column="0"
-            Command="{Binding MainWindowViewModel.InsertInstructorCommand}"
+            Command="{Binding MainWindowViewModel.InstructorCommand}"
             />
 
     <Button

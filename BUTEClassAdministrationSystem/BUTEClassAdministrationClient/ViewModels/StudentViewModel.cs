@@ -15,7 +15,7 @@ namespace BUTEClassAdministrationClient
 {
     public class StudentViewModel : ViewModelBase, IDataErrorInfo
     {
-        bool modify = false;
+        bool modify;
 
         Window insertStudentWindow;
 
@@ -91,7 +91,7 @@ namespace BUTEClassAdministrationClient
             }
         }
 
-        public Student SelectedStudent { get; set; }
+        public Student ModifyableStudent { get; set; }
 
         public string CourseToString
         {
@@ -128,7 +128,9 @@ namespace BUTEClassAdministrationClient
             Course = selectedCourse;
 
             insertStudentWindow = new InsertStudentWindow();
+
             insertStudentWindow.DataContext = this;
+
             insertStudentWindow.ShowDialog();
         }
 
@@ -136,7 +138,7 @@ namespace BUTEClassAdministrationClient
         {
             modify = true;
 
-            SelectedStudent = selectedStudent;
+            ModifyableStudent = selectedStudent;
 
             _student = new Student();
 
@@ -193,12 +195,11 @@ namespace BUTEClassAdministrationClient
 
         public void modifyExecuted()
         {
-            SelectedStudent.clone(_student);
-
+            ModifyableStudent.clone(_student);
 
             using (var service = new ClassAdministrationServiceClient())
             {
-                service.UpdateStudents(new Student[] { SelectedStudent });
+                service.UpdateStudents(new Student[] { ModifyableStudent });
                 _student.AcceptChanges();
             }
 

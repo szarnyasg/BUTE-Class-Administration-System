@@ -71,6 +71,7 @@
       <Link>Student.cs</Link>
       <DependentUpon>ClassAdministrationModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="InstructorWithClone.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StudentWithClone.cs" />
   </ItemGroup>

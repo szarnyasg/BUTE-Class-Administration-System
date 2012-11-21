@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using BUTEClassAdministrationTypes;
 using BUTEClassAdministrationClient.ClassAdministrationServiceReference;
 using BUTEClassAdministrationClient.View;
+using System.Windows.Input;
 
 namespace BUTEClassAdministrationClient.ViewModels
 {
@@ -13,12 +14,52 @@ namespace BUTEClassAdministrationClient.ViewModels
 	{
 		public AssignmentWindow AssignmentWindow { get; set; }
 
-		public AssignmentViewModel(List<Group> groups)
+        private Group _selectedGroup;
+        public Group SelectedGroup 
+        { 
+            get{ return _selectedGroup; } 
+            set
+            {
+                if (_selectedGroup != value)
+                {
+                    _selectedGroup = value;
+                    NotifyPropertyChanged("SelectedGroup");
+                }
+            }     
+        }
+
+        #region GroupsForDataGrid
+
+        private ObservableCollection<ComboBoxGroupPair> _groupsForComboBox;
+        public ObservableCollection<ComboBoxGroupPair> GroupsForCombobox
         {
-			GroupsForDatagrid = new ObservableCollection<Group>();
+            get { Console.WriteLine(_groupsForComboBox.Count()); return _groupsForComboBox; }
+            set
+            {
+                if (_groupsForComboBox != value)
+                {
+                    _groupsForComboBox = value;
+                    NotifyPropertyChanged("GroupsForCombobox");
+                }
+            }
+        }
+
+        #endregion
+
+        #region constructor
+
+        public AssignmentViewModel(List<Group> groups)
+        {
+            GroupsForCombobox = new ObservableCollection<ComboBoxGroupPair>();
 			foreach (var group in groups)
 			{
-				GroupsForDatagrid.Add(group);
+                GroupsForCombobox.Add(new ComboBoxGroupPair() { 
+                    GroupObject = group ,
+                    GroupString = PrettyFormatter.dayFormatter(Convert.ToInt32(group.Course.Day_of_week)) + ' '
+                                            + group.Course.Starting_time + ' '
+                                            + PrettyFormatter.parityFormatter(group.Course.Week_parity) + ' '
+                                            + group.Room.Name
+                });
 			}
 
 			AssignmentWindow = new AssignmentWindow();
@@ -26,24 +67,46 @@ namespace BUTEClassAdministrationClient.ViewModels
 			AssignmentWindow.ShowDialog();
         }
 
+        #endregion
 
-		#region GroupsForDataGrid
+        #region close command
 
-		private ObservableCollection<Group> _groupsForDatagrid;
-		public ObservableCollection<Group> GroupsForDatagrid
-		{
-			get { Console.WriteLine(_groupsForDatagrid.Count()); return _groupsForDatagrid; }
-			set
-			{
-				if (_groupsForDatagrid != value)
-				{
-					_groupsForDatagrid = value;
-					NotifyPropertyChanged("GroupsForDatagrid");
-				}
-			}
-		}
+        private DelegateCommand _closeCommand;
+        public ICommand CloseCommand
+        {
+            get
+            {
+                if (_closeCommand == null)
+                    _closeCommand = new DelegateCommand(new Action(closeExecuted));
+                return _closeCommand;
+            }
+        }
 
-		#endregion
+        public void closeExecuted()
+        {
+            AssignmentWindow.Close();
+        }
 
-	}
+        #endregion
+
+        #region cmbChange command
+
+        private DelegateCommand _groupChange;
+        public ICommand GroupChange
+        {
+            get
+            {
+                if (_groupChange == null)
+                    _groupChange = new DelegateCommand(new Action(changeExecuted));
+                return _groupChange;
+            }
+        }
+
+        public void changeExecuted()
+        {
+            // implementálásra vár
+        }
+
+        #endregion
+    }
 }
