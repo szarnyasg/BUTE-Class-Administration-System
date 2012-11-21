@@ -12,7 +12,7 @@ namespace BUTEClassAdministrationClient.ViewModels
 {
 	public class AssignmentViewModel : ViewModelBase
 	{
-		public AssignmentWindow AssignmentWindow { get; set; }
+		private AssignmentWindow _assignmentWindow;
 
         private Group _selectedGroup;
         public Group SelectedGroup 
@@ -62,9 +62,9 @@ namespace BUTEClassAdministrationClient.ViewModels
                 });
 			}
 
-			AssignmentWindow = new AssignmentWindow();
-			AssignmentWindow.DataContext = this;
-			AssignmentWindow.ShowDialog();
+			_assignmentWindow = new AssignmentWindow();
+			_assignmentWindow.DataContext = this;
+			_assignmentWindow.ShowDialog();
         }
 
         #endregion
@@ -84,7 +84,7 @@ namespace BUTEClassAdministrationClient.ViewModels
 
         public void closeExecuted()
         {
-            AssignmentWindow.Close();
+            _assignmentWindow.Close();
         }
 
         #endregion

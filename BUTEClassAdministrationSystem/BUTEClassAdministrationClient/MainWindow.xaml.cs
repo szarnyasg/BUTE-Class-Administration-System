@@ -24,17 +24,12 @@ namespace BUTEClassAdministrationClient
 	{
         MainWindowViewModel _mainWindowViewModel;
 
-        public MainWindowViewModel MainWindowViewModel 
-        {
-            get { return _mainWindowViewModel; }
-            set { _mainWindowViewModel = value; }
-        }
-
 		public MainWindow()
 		{
             _mainWindowViewModel = new MainWindowViewModel();
 
-            DataContext = this;
+            //DataContext = this;
+			DataContext = _mainWindowViewModel;
 
             InitializeComponent();
     	}

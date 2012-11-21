@@ -44,17 +44,15 @@ namespace BUTEClassAdministrationService
 		{
 			using (ClassAdministrationEntityContext context = new ClassAdministrationEntityContext())
 			{
-				foreach (var instructorId in instructorIds)
+
+				var instructors = context.InstructorSet.Where(instructor => instructorIds.Contains(instructor.Id));
+
+				foreach (var instructor in instructors)
 				{
-					var entity = new Instructor { Id = instructorId };
-					
-					/*
-					Entities.Attach(entity);
-					context.Entities.DeleteObject(entity);
-					context.SaveChanges();
-					context.DeleteObject();					
-					*/
+					context.DeleteObject(instructor);
 				}
+
+				context.SaveChanges();
 			}
 		}
 	}

@@ -108,6 +108,7 @@
             IsDefault="True"
             Command="{Binding CloseCommand}"
             />
-        
-  </Grid>
+
+    </Grid>
+    
 </Window>
