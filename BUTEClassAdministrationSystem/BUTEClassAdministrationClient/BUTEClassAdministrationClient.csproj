@@ -69,7 +69,7 @@
     <Compile Include="DelegateComm\DelegateCommand.cs" />
     <Compile Include="ViewModels\AssignmentViewModel.cs" />
     <Compile Include="ViewModels\InstructorViewModel.cs" />
-    <Compile Include="ViewModels\ListOFInstructorsViewModel.cs" />
+    <Compile Include="ViewModels\ListOfInstructorsViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="View\AssignmentWindow.xaml.cs">
       <DependentUpon>AssignmentWindow.xaml</DependentUpon>

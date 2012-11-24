@@ -27,8 +27,6 @@ namespace BUTEClassAdministrationClient
 		public MainWindow()
 		{
             _mainWindowViewModel = new MainWindowViewModel();
-
-            //DataContext = this;
 			DataContext = _mainWindowViewModel;
 
             InitializeComponent();

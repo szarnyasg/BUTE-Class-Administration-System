@@ -14,7 +14,9 @@ namespace BUTEClassAdministrationClient.ViewModels
 	{
 		private AssignmentWindow _assignmentWindow;
 
-        private Group _selectedGroup;
+		#region SelectedGroup
+
+		private Group _selectedGroup;
         public Group SelectedGroup 
         { 
             get{ return _selectedGroup; } 
@@ -23,14 +25,77 @@ namespace BUTEClassAdministrationClient.ViewModels
                 if (_selectedGroup != value)
                 {
                     _selectedGroup = value;
-                    NotifyPropertyChanged("SelectedGroup");
+					NotifyPropertyChanged("SelectedGroup");
+					NotifyPropertyChanged("Time");
+					NotifyPropertyChanged("Room");
+					NotifyPropertyChanged("Instructor");
                 }
             }     
         }
 
-        #region GroupsForDataGrid
+		#endregion
 
-        private ObservableCollection<ComboBoxGroupPair> _groupsForComboBox;
+		#region StudentsForDatagrid
+
+		private ObservableCollection<Student> _studentsForDatagrid;
+		public ObservableCollection<Student> StudentsForDatagrid
+		{
+			get { return _studentsForDatagrid; }
+			set
+			{
+				if (_studentsForDatagrid != value)
+				{
+					_studentsForDatagrid = value;
+					NotifyPropertyChanged("StudentsForDatagrid");
+				}
+			}
+		}
+		
+		#endregion
+
+		#region group properties
+
+		public String Time
+		{
+			get
+			{
+				return SelectedGroup != null ? SelectedGroup.Course.Starting_time.ToString() : "";
+			}
+		}
+
+		public String Room
+		{
+			get
+			{
+				return SelectedGroup != null ? SelectedGroup.Room.Name : "";
+			}
+		}
+
+		public String Instructor
+		{
+			get
+			{
+				return SelectedGroup != null ? SelectedGroup.Instructor.Name : "";
+			}
+		}
+
+		#endregion
+		
+		#region Students property
+
+		public ObservableCollection<Student> Students
+		{
+			get
+			{
+				return SelectedGroup == null ? new ObservableCollection<Student>() : SelectedGroup.Student;
+			}
+		}
+
+		#endregion
+
+		#region GroupsForComboBox
+
+		private ObservableCollection<ComboBoxGroupPair> _groupsForComboBox;
         public ObservableCollection<ComboBoxGroupPair> GroupsForCombobox
         {
             get { Console.WriteLine(_groupsForComboBox.Count()); return _groupsForComboBox; }
@@ -66,6 +131,8 @@ namespace BUTEClassAdministrationClient.ViewModels
                                             + group.Room.Name
                 });
 			}
+
+			StudentsForDatagrid = new ObservableCollection<Student>();
 
 			_assignmentWindow = new AssignmentWindow();
 			_assignmentWindow.DataContext = this;
@@ -143,9 +210,116 @@ namespace BUTEClassAdministrationClient.ViewModels
 
         public void changeExecuted()
         {
-            // implementálásra vár
+			StudentsForDatagrid.Clear();
+			if (SelectedGroup == null) return;
+
+			// load datagrid with students
+			foreach (var student in SelectedGroup.Student)
+			{
+				StudentsForDatagrid.Add(student);
+			}
+
+			/*
+			// load target course combobox
+			TargetGroupPairs.Clear();
+			foreach (var coursePair in GroupsForCombobox)
+			{
+				if (((Course)coursePair.CourseObject).Id != SelectedCourse.Id)
+				{
+					TargetCoursePairs.Add(coursePair);
+				}
+			}
+			 */
         }
 
         #endregion
+
+		#region TargetGroupPairs
+
+		private ObservableCollection<ComboBoxCoursePair> _targetGroupPairs;
+
+		public ObservableCollection<ComboBoxCoursePair> TargetGroupPairs
+		{
+			get { return _targetGroupPairs; }
+			set
+			{
+				if (_targetGroupPairs != value)
+				{
+					_targetGroupPairs = value;
+					NotifyPropertyChanged("TargetGroupPairs");
+				}
+			}
+		}
+
+		#endregion
+
+		#region SelectedTargetGroup property
+
+		private Course _selectedTargetGroup;
+
+		public Course SelectedTargetGroup
+		{
+			get { return _selectedTargetGroup; }
+			set
+			{
+				if (_selectedTargetGroup != value)
+				{
+					_selectedTargetGroup = value;
+					NotifyPropertyChanged("SelectedTargetGroup");
+				}
+			}
+		}
+
+		#endregion
+
+		#region move student command members
+		private DelegateCommand _moveStudentCommand;
+		public ICommand MoveStudentCommand
+		{
+			get
+			{
+				if (_moveStudentCommand == null)
+					_moveStudentCommand = new DelegateCommand(new Action(moveStudentExecuted), new Func<bool>(moveStudenCanExecuted));
+				return _moveStudentCommand;
+			}
+		}
+
+		public void moveStudentExecuted()
+		{
+			using (var service = new ClassAdministrationServiceClient())
+			{
+				//service.MoveStudent(SelectedStudent.Id, SelectedTargetCourse.Id);
+
+				// refresh datagrid
+				//changeCourseExecuted();
+			}
+		}
+
+		public bool moveStudenCanExecuted()
+		{
+			return (SelectedStudent != null) && (SelectedTargetGroup != null);
+		}
+
+		#endregion
+
+		#region SelectedStudent
+
+		private Student _selectedStudent;
+
+		public Student SelectedStudent
+		{
+			get { return _selectedStudent; }
+			set
+			{
+				if (_selectedStudent != value)
+				{
+					_selectedStudent = value;
+					NotifyPropertyChanged("SelectedStudent");
+				}
+			}
+		}
+
+		#endregion
+
     }
 }
