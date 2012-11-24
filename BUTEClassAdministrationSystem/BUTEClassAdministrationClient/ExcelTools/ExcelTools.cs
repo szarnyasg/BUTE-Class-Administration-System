@@ -15,7 +15,7 @@ namespace BUTEClassAdministrationClient
 
 		public static void ExportToExcel(string filename)
 		{
-			throw new NotImplementedException();
+			Console.WriteLine("Export");
 		}
 
 		public static IEnumerable<Student> ImportFromExcel(string filename, Semester semester)

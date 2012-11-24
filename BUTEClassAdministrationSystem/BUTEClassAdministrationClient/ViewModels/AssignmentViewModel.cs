@@ -50,6 +50,11 @@ namespace BUTEClassAdministrationClient.ViewModels
 
         public AssignmentViewModel(List<Group> groups)
         {
+			foreach (var group in groups)
+			{
+				Console.WriteLine(group.Instructor.Name);
+			}
+
             GroupsForCombobox = new ObservableCollection<ComboBoxGroupPair>();
 			foreach (var group in groups)
 			{
@@ -89,7 +94,41 @@ namespace BUTEClassAdministrationClient.ViewModels
 
         #endregion
 
-        #region cmbChange command
+		#region export to Excel command
+
+		private DelegateCommand _exportToExcelCommand;
+		public ICommand ExportToExcelCommand
+		{
+			get
+			{
+				if (_exportToExcelCommand == null)
+					_exportToExcelCommand = new DelegateCommand(new Action(exportToExcelExecuted));
+				return _exportToExcelCommand;
+			}
+		}
+
+		public void exportToExcelExecuted()
+		{
+			Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
+			dlg.FileName = "";
+			dlg.DefaultExt = ".xlsx";
+			dlg.Filter = "Excel-fájl | *.xls; *.xlsx";
+
+			bool? result = dlg.ShowDialog();
+
+			if (result == false)
+			{
+				return;
+			}
+
+			string filename = dlg.FileName;
+
+			ExcelTools.ExportToExcel(filename);
+		}
+
+		#endregion
+		
+		#region cmbChange command
 
         private DelegateCommand _groupChange;
         public ICommand GroupChange

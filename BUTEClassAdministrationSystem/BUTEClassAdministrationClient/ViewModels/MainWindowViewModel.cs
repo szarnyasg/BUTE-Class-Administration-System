@@ -174,7 +174,10 @@ namespace BUTEClassAdministrationClient
 
 		public MainWindowViewModel()
         {
-            SemesterPairs = new List<ComboBoxSemesterPair>();
+			AppDomain currentDomain = AppDomain.CurrentDomain;
+			currentDomain.UnhandledException += new UnhandledExceptionEventHandler(BUTEClassAdministrationExceptionHandler);
+			
+			SemesterPairs = new List<ComboBoxSemesterPair>();
 
             using (var service = new ClassAdministrationServiceClient())
             {
@@ -191,6 +194,13 @@ namespace BUTEClassAdministrationClient
         }
 
 		#endregion
+
+		void BUTEClassAdministrationExceptionHandler(object sender, UnhandledExceptionEventArgs args)
+		{
+			Exception e = (Exception)args.ExceptionObject;
+			Console.WriteLine("MyHandler caught exception.");
+		}
+
 
 		#region change selected item in semester combobox command members
 
@@ -503,7 +513,9 @@ namespace BUTEClassAdministrationClient
 					}
 
 				} catch (Exception e) {
-					MessageBox.Show(e.ToString());
+					//MessageBox.Show(e.ToString()); // TODO
+					// throw the exception
+					throw e;
 				}
 
 				// UI				

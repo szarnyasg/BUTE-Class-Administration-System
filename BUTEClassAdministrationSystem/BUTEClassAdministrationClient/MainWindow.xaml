@@ -26,26 +26,21 @@
     </Grid.RowDefinitions>
 
     <Grid.ColumnDefinitions>
-      <ColumnDefinition Width="Auto"/>
+      <ColumnDefinition Width="20"/>
+      <ColumnDefinition Width="20" />
       <ColumnDefinition Width="6"/>
-      <ColumnDefinition Width="100"/>
+      <ColumnDefinition Width="120"/>
       <ColumnDefinition Width="Auto"/>
       <ColumnDefinition Width="6"/>
       <ColumnDefinition Width="*"/>
     </Grid.ColumnDefinitions>
 
     <Label
-            Content="Félév:"
-            Grid.Row="0"
-            Grid.Column="0"
-            Target="{Binding ElementName=semesterCmbBox}"
-            />
+            Content="Félév:" Target="{Binding ElementName=semesterCmbBox}" Grid.ColumnSpan="2" />
 
     <c:ComboBoxWithCommand
-            x:Name="semesterCmbBox"
-            Grid.Row="0"
-            Grid.Column="2"
-            Width="100"
+            x:Name="semesterCmbBox" Grid.Column="3"
+            Width="120"
             HorizontalAlignment="Left"
             ItemsSource="{Binding SemesterPairs}"
             DisplayMemberPath="SemesterString"
@@ -55,16 +50,12 @@
     </c:ComboBoxWithCommand>
 
     <Label
-            Content="Kurzus:"
-            Grid.Row="0"
-            Grid.Column="3"
+            Content="Kurzus:" Grid.Column="4"
             Target="{Binding ElementName=courseCmbBox}"
             />
 
     <c:ComboBoxWithCommand
-            x:Name="courseCmbBox"
-            Grid.Row="0"
-            Grid.Column="5"
+            x:Name="courseCmbBox" Grid.Column="6"
             HorizontalAlignment="Stretch"
             ItemsSource="{Binding CoursePairs}"
             DisplayMemberPath="CourseString"
@@ -75,7 +66,7 @@
     </c:ComboBoxWithCommand>
 
     <DataGrid
-            Grid.Column="3"
+            Grid.Column="4"
             Grid.Row="1"
             Grid.ColumnSpan="3"
             Grid.RowSpan="13"
@@ -93,32 +84,26 @@
 
     <Button
             Grid.Row="1"
-            Grid.ColumnSpan="3"
+            Grid.ColumnSpan="4"
             Content="Hallgató felvétele"
             Command="{Binding InsertStudentCommand}"
             />
 
     <Button
-            Grid.Row="2"
-            Grid.Column="0"
-            Grid.ColumnSpan="3"
+            Grid.Row="2" Grid.ColumnSpan="4"
             Content="Hallgató módosítása"
             Command="{Binding ModifyStudentCommand}"
             />
 
     <Button
-            Grid.Row="3"
-            Grid.Column="0"
-            Grid.ColumnSpan="3"
+            Grid.Row="3" Grid.ColumnSpan="4"
             Content="Hallgató törlése"
             Command="{Binding DeleteStudentCommand}"
             />
 
     <c:ComboBoxWithCommand
             x:Name="targetCourseCmbBox"
-            Grid.Row="5"
-            Grid.Column="0"
-            Grid.ColumnSpan="3"
+            Grid.Row="5" Grid.ColumnSpan="4"
             HorizontalAlignment="Stretch"
             ItemsSource="{Binding TargetCoursePairs}"
             DisplayMemberPath="CourseString"
@@ -128,33 +113,27 @@
     </c:ComboBoxWithCommand>
 
     <Button
-            Grid.Row="6"
-            Grid.Column="0"
-            Grid.ColumnSpan="3"
+            Grid.Row="6" Grid.ColumnSpan="4"
             Content="Hallgató mozgatása"
             Command="{Binding MoveStudentCommand}"
             />
 
     <Button
             Content="Gyakorlatvezetők"
-            Grid.ColumnSpan="3"
-            Grid.Row="8"
-            Grid.Column="0"
-            Command="{Binding InstructorCommand}"
+            Grid.ColumnSpan="4"
+            Grid.Row="8" Command="{Binding InstructorCommand}"
             />
 
     <Button
             Grid.Row="10"
-            Grid.ColumnSpan="3"
+            Grid.ColumnSpan="4"
             Content="Importálás Excelből"
             Command="{Binding ImportFromExcelCommand}"
             />
 
 
     <Button
-            Grid.Row="12"
-            Grid.Column="0"
-            Grid.ColumnSpan="3"
+            Grid.Row="12" Grid.ColumnSpan="4"
             Content="Beoszt"
             Command="{Binding AssignCommand}"
             />

@@ -98,16 +98,30 @@
         </DataGrid>
 
         <!-- Button -->
-        <Button
-            Margin="4"
-            HorizontalAlignment="Right"
+        <WrapPanel
             Grid.Column="2"
             Grid.Row="7"
-            Width="80"
+            HorizontalAlignment="Right"
+          >
+
+          <Button
+            Margin="4"
+            Width="120"
+            Content="Exportálás Excelbe"
+            IsDefault="True"
+            Command="{Binding ExportToExcelCommand}"
+            />
+
+          <Button
+            Margin="4"
+            Width="120"
             Content="Ok"
             IsDefault="True"
             Command="{Binding CloseCommand}"
             />
+
+    </WrapPanel>
+     
 
     </Grid>
     
