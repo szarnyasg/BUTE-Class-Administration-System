@@ -24,30 +24,36 @@ namespace BUTEClassAdministrationService
 		{
 			using (ClassAdministrationEntityContext context = new ClassAdministrationEntityContext())
 			{
-				throw new NotImplementedException();
+				List<Group> groups = context.GroupSet.Where(group => group.Semester.Id == semesterId).ToList();
+				foreach (var group in groups)
+				{
+					context.LoadProperty(group, "Room");
+					context.LoadProperty(group, "Semester");
+					context.LoadProperty(group, "Course");
+					context.LoadProperty(group, "Instructor");
+					context.LoadProperty(group, "Student");
+				}
+				return groups.ToArray();
 			}
 		}
 
-		public Group[] ReadGroupsFromCourse(int courseId)
-		{
-			throw new NotImplementedException();
-		}
-
-		public void UpdateGroups(Group[] groups)
+		public void DeleteGroups(int semesterId)
 		{
 			using (ClassAdministrationEntityContext context = new ClassAdministrationEntityContext())
 			{
+				var groups = context.GroupSet.Where(group => group.Semester.Id == semesterId);
+
 				foreach (var group in groups)
 				{
-					context.GroupSet.ApplyChanges(group);
+					foreach (var student in group.Student)
+					{
+						student.Group = null;
+					}
+					context.DeleteObject(group);
 				}
+
 				context.SaveChanges();
 			}
-		}
-
-		public void DeleteGroups(int[] groupIds)
-		{
-			throw new NotImplementedException();
 		}
 	}
 }

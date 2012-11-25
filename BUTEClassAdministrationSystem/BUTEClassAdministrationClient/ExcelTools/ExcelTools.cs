@@ -142,7 +142,7 @@ namespace BUTEClassAdministrationClient
 			// throw exception if a required a column does not exist
 			if (nameColumnIndex == null || neptunColumnIndex == null)
 			{
-				throw new Exception("Nem találhatók a szükséges oszlopok.");
+				throw new BUTEClassAdministrationException("Nem találhatók a szükséges oszlopok.");
 			}
 
 			// use List as an IEnumerable implementation

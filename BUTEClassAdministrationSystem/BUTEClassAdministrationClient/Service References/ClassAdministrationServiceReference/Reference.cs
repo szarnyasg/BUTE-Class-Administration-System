@@ -89,16 +89,10 @@ namespace BUTEClassAdministrationClient.ClassAdministrationServiceReference {
         void CreateGroup(BUTEClassAdministrationTypes.Group[] groups);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGroupOperations/ReadGroupsFromSemester", ReplyAction="http://tempuri.org/IGroupOperations/ReadGroupsFromSemesterResponse")]
-        BUTEClassAdministrationTypes.Group[] ReadGroupsFromSemester(BUTEClassAdministrationTypes.Semester semesterId);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGroupOperations/ReadGroupsFromSemesterAndCourse", ReplyAction="http://tempuri.org/IGroupOperations/ReadGroupsFromSemesterAndCourseResponse")]
-        BUTEClassAdministrationTypes.Group[] ReadGroupsFromSemesterAndCourse(int semesterId, int courseId);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGroupOperations/UpdateGroups", ReplyAction="http://tempuri.org/IGroupOperations/UpdateGroupsResponse")]
-        void UpdateGroups(BUTEClassAdministrationTypes.Group[] groups);
+        BUTEClassAdministrationTypes.Group[] ReadGroupsFromSemester(int semesterId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGroupOperations/DeleteGroups", ReplyAction="http://tempuri.org/IGroupOperations/DeleteGroupsResponse")]
-        void DeleteGroups(int[] groupIds);
+        void DeleteGroups(int semesterId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IInstructorOperations/CreateInstructor", ReplyAction="http://tempuri.org/IInstructorOperations/CreateInstructorResponse")]
         void CreateInstructor(BUTEClassAdministrationTypes.Instructor[] instructors);
@@ -194,20 +188,12 @@ namespace BUTEClassAdministrationClient.ClassAdministrationServiceReference {
             base.Channel.CreateGroup(groups);
         }
         
-        public BUTEClassAdministrationTypes.Group[] ReadGroupsFromSemester(BUTEClassAdministrationTypes.Semester semesterId) {
+        public BUTEClassAdministrationTypes.Group[] ReadGroupsFromSemester(int semesterId) {
             return base.Channel.ReadGroupsFromSemester(semesterId);
         }
         
-        public BUTEClassAdministrationTypes.Group[] ReadGroupsFromSemesterAndCourse(int semesterId, int courseId) {
-            return base.Channel.ReadGroupsFromSemesterAndCourse(semesterId, courseId);
-        }
-        
-        public void UpdateGroups(BUTEClassAdministrationTypes.Group[] groups) {
-            base.Channel.UpdateGroups(groups);
-        }
-        
-        public void DeleteGroups(int[] groupIds) {
-            base.Channel.DeleteGroups(groupIds);
+        public void DeleteGroups(int semesterId) {
+            base.Channel.DeleteGroups(semesterId);
         }
         
         public void CreateInstructor(BUTEClassAdministrationTypes.Instructor[] instructors) {

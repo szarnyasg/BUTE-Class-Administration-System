@@ -17,13 +17,7 @@ namespace BUTEClassAdministrationService
 		Group[] ReadGroupsFromSemester(int semesterId);
 
 		[OperationContract]
-		Group[] ReadGroupsFromCourse(int courseId);
-
-		[OperationContract]
-		void UpdateGroups(Group[] groups);
-
-		[OperationContract]
-		void DeleteGroups(int[] groupIds);
+		void DeleteGroups(int semesterId);
 
 	}
 }

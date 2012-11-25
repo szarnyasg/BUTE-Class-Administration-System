@@ -98,7 +98,7 @@ namespace BUTEClassAdministrationClient.ViewModels
 		private ObservableCollection<ComboBoxGroupPair> _groupsForComboBox;
         public ObservableCollection<ComboBoxGroupPair> GroupsForCombobox
         {
-            get { Console.WriteLine(_groupsForComboBox.Count()); return _groupsForComboBox; }
+            get { return _groupsForComboBox; }
             set
             {
                 if (_groupsForComboBox != value)
@@ -116,11 +116,6 @@ namespace BUTEClassAdministrationClient.ViewModels
         public AssignmentViewModel(List<Group> groups)
         {
 			_groups = groups;
-
-			foreach (var group in groups)
-			{
-				Console.WriteLine(group.Instructor.Name);
-			}
 
             GroupsForCombobox = new ObservableCollection<ComboBoxGroupPair>();
 			foreach (var group in groups)
@@ -163,7 +158,11 @@ namespace BUTEClassAdministrationClient.ViewModels
         {
 			using (var service = new ClassAdministrationServiceClient())
 			{
-				service.CreateGroup(_groups.ToArray());
+				if (_groups.Count > 0)
+				{
+					service.DeleteGroups(_groups[0].Semester.Id);
+					service.CreateGroup(_groups.ToArray());
+				}
 			}
 
             _assignmentWindow.Close();
@@ -293,7 +292,11 @@ namespace BUTEClassAdministrationClient.ViewModels
 		public void moveStudentExecuted()
 		{
 			SelectedGroup.Student.Remove(SelectedStudent);
+			
 			SelectedTargetGroup.Student.Add(SelectedStudent);
+			
+			// modify the students course accordingly
+			SelectedStudent.Course = SelectedGroup.Course;
 
 			changeGroupExecuted();
 		}

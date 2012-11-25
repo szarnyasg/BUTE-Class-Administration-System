@@ -175,9 +175,6 @@ namespace BUTEClassAdministrationClient
 
 		public MainWindowViewModel()
         {
-			AppDomain currentDomain = AppDomain.CurrentDomain;
-			currentDomain.UnhandledException += new UnhandledExceptionEventHandler(BUTEClassAdministrationExceptionHandler);
-			
 			SemesterPairs = new List<ComboBoxSemesterPair>();
 
             using (var service = new ClassAdministrationServiceClient())
@@ -195,13 +192,6 @@ namespace BUTEClassAdministrationClient
         }
 
 		#endregion
-
-		void BUTEClassAdministrationExceptionHandler(object sender, UnhandledExceptionEventArgs args)
-		{
-			Exception e = (Exception)args.ExceptionObject;
-			Console.WriteLine("MyHandler caught exception.");
-		}
-
 
 		#region change selected item in semester combobox command members
 
@@ -320,7 +310,6 @@ namespace BUTEClassAdministrationClient
                 IEnumerable<Student> students = ExcelTools.ImportFromExcel(filename, semester);
 
                 service.CreateStudents(students.ToArray());
-                Console.WriteLine(students.Count());
             }
         }
 
@@ -436,15 +425,14 @@ namespace BUTEClassAdministrationClient
 			groupIndex++;
 			group.Index = groupIndex;
 			group.Course = course;
+			group.Semester = SelectedSemester;
 
 			if (!roomEnumerator.MoveNext())
 			{
-				throw new Exception("Nincs elég terem a beosztáshoz");
+				throw new BUTEClassAdministrationException("Nincs elég terem a beosztáshoz");
 			}
 
 			group.Room = roomEnumerator.Current;
-
-			Console.WriteLine(roomEnumerator.Current.Name);
 
 			instructorEnumerator.MoveNext();
 			group.Instructor = instructorEnumerator.Current;
@@ -468,8 +456,6 @@ namespace BUTEClassAdministrationClient
 					groupIndex = 0;
 					foreach (var course in courses)
 					{
-						Console.WriteLine("################### " + course.Id + " ####################");
-
 						List<Student> students = service.ReadStudentsFromCourse(course.Id).ToList();
 
 						// no group for empty courses --> continue with the other courses
@@ -477,9 +463,6 @@ namespace BUTEClassAdministrationClient
 
 						List<Room> rooms = service.ReadRoomsFromCourse(course.Id).ToList();
 						List<Room>.Enumerator roomEnumerator = rooms.GetEnumerator();
-
-						Console.WriteLine(course.Id);
-						Console.WriteLine(rooms.Count());
 
 						// create new group
 						groups.Add(newGroup(ref roomEnumerator, ref instructorEnumerator, course));
@@ -500,24 +483,13 @@ namespace BUTEClassAdministrationClient
 							group.Student.Add(student);
 						}
 
-						Console.WriteLine("Groups in course");
-						Console.WriteLine("================");
 						foreach (var item in groups)
 						{
-							Console.WriteLine(item);
 							List<Student> groupsStudents = item.Student.ToList();
-
-							Console.WriteLine("Room " + item.Room);
-							foreach (var st in groupsStudents)
-							{
-								Console.WriteLine(st.Name);
-							}
 						}
 					}
 
 				} catch (Exception e) {
-					//MessageBox.Show(e.ToString()); // TODO
-					// throw the exception
 					throw e;
 				}
 
@@ -531,6 +503,35 @@ namespace BUTEClassAdministrationClient
         {
 			return (SelectedSemester != null);
         }
+
+		#endregion
+
+		#region load assignment command members
+
+		private DelegateCommand _loadAssignmentCommand;
+		public ICommand LoadAssignmentCommand
+		{
+			get
+			{
+				if (_loadAssignmentCommand == null)
+					_loadAssignmentCommand = new DelegateCommand(new Action(loadAssignmentExecuted), new Func<bool>(loadAssignmentCanExecuted));
+				return _loadAssignmentCommand;
+			}
+		}
+
+		public void loadAssignmentExecuted()
+		{
+			using (var service = new ClassAdministrationServiceClient())
+			{
+				Group[] groups = service.ReadGroupsFromSemester(SelectedSemester.Id);
+				AssignmentViewModel assignmentViewModel = new AssignmentViewModel(groups.ToList());
+			}
+		}
+
+		public bool loadAssignmentCanExecuted()
+		{
+			return (SelectedSemester != null);
+		}
 
         #endregion
 

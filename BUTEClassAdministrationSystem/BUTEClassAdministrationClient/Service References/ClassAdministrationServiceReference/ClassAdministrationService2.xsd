@@ -156,48 +156,21 @@
   <xs:element name="ReadGroupsFromSemester">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/BUTEClassAdministrationTypes" minOccurs="0" name="semesterId" nillable="true" type="q11:Semester" />
+        <xs:element minOccurs="0" name="semesterId" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="ReadGroupsFromSemesterResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/BUTEClassAdministrationTypes" minOccurs="0" name="ReadGroupsFromSemesterResult" nillable="true" type="q12:ArrayOfGroup" />
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/BUTEClassAdministrationTypes" minOccurs="0" name="ReadGroupsFromSemesterResult" nillable="true" type="q11:ArrayOfGroup" />
       </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="ReadGroupsFromSemesterAndCourse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="semesterId" type="xs:int" />
-        <xs:element minOccurs="0" name="courseId" type="xs:int" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="ReadGroupsFromSemesterAndCourseResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/BUTEClassAdministrationTypes" minOccurs="0" name="ReadGroupsFromSemesterAndCourseResult" nillable="true" type="q13:ArrayOfGroup" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="UpdateGroups">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/BUTEClassAdministrationTypes" minOccurs="0" name="groups" nillable="true" type="q14:ArrayOfGroup" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="UpdateGroupsResponse">
-    <xs:complexType>
-      <xs:sequence />
     </xs:complexType>
   </xs:element>
   <xs:element name="DeleteGroups">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q15="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="groupIds" nillable="true" type="q15:ArrayOfint" />
+        <xs:element minOccurs="0" name="semesterId" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -209,7 +182,7 @@
   <xs:element name="CreateInstructor">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/BUTEClassAdministrationTypes" minOccurs="0" name="instructors" nillable="true" type="q16:ArrayOfInstructor" />
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/BUTEClassAdministrationTypes" minOccurs="0" name="instructors" nillable="true" type="q12:ArrayOfInstructor" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -226,14 +199,14 @@
   <xs:element name="ReadInstructorsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/BUTEClassAdministrationTypes" minOccurs="0" name="ReadInstructorsResult" nillable="true" type="q17:ArrayOfInstructor" />
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/BUTEClassAdministrationTypes" minOccurs="0" name="ReadInstructorsResult" nillable="true" type="q13:ArrayOfInstructor" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdateInstructors">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/BUTEClassAdministrationTypes" minOccurs="0" name="instructors" nillable="true" type="q18:ArrayOfInstructor" />
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/BUTEClassAdministrationTypes" minOccurs="0" name="instructors" nillable="true" type="q14:ArrayOfInstructor" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -245,7 +218,7 @@
   <xs:element name="DeleteInstructors">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q19="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="instructorIds" nillable="true" type="q19:ArrayOfint" />
+        <xs:element xmlns:q15="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="instructorIds" nillable="true" type="q15:ArrayOfint" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -262,7 +235,7 @@
   <xs:element name="ReadRoomsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/BUTEClassAdministrationTypes" minOccurs="0" name="ReadRoomsResult" nillable="true" type="q20:ArrayOfRoom" />
+        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/BUTEClassAdministrationTypes" minOccurs="0" name="ReadRoomsResult" nillable="true" type="q16:ArrayOfRoom" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -276,7 +249,7 @@
   <xs:element name="ReadRoomsFromCourseResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/BUTEClassAdministrationTypes" minOccurs="0" name="ReadRoomsFromCourseResult" nillable="true" type="q21:ArrayOfRoom" />
+        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/BUTEClassAdministrationTypes" minOccurs="0" name="ReadRoomsFromCourseResult" nillable="true" type="q17:ArrayOfRoom" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
