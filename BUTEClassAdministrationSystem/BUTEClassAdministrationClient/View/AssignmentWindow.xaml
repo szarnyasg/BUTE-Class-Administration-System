@@ -107,6 +107,23 @@
             Content="Számítógépek száma:"
             />
 
+    <Label
+            x:Name="nameTxtBox"
+            Grid.Row="5"
+            Grid.Column="2"
+            Validation.ErrorTemplate="{x:Null}"
+            >
+      <Label.Content>
+        <Binding 
+                    Path="Name" 
+                    ValidatesOnDataErrors="True" 
+                    UpdateSourceTrigger="PropertyChanged"
+                    >
+        </Binding>
+      </Label.Content>
+    </Label>
+
+    <!--
     <TextBox
             x:Name="nameTxtBox"
             Grid.Row="5"
@@ -122,7 +139,8 @@
         </Binding>
       </TextBox.Text>
     </TextBox>
-
+-->
+     
     <ContentPresenter 
             Grid.Row="6" Grid.Column="2"
             Content="{Binding ElementName=nameTxtBox, Path=(Validation.Errors).CurrentItem}"
@@ -155,7 +173,7 @@
 -->
     
 
-    <!-- computer count -->
+    <!-- seating capacity -->
         <Label
             Grid.Column="0"
             Grid.Row="7"

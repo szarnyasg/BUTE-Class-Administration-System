@@ -155,7 +155,7 @@ namespace BUTEClassAdministrationClient.ViewModels
 			TargetGroupPairs = new ObservableCollection<ComboBoxGroupPair>();
 
 			_student = new Student();
-			_student.Name = "x";
+			_student.Name = "";
 
 			_assignmentWindow = new AssignmentWindow();
 			_assignmentWindow.DataContext = this;
