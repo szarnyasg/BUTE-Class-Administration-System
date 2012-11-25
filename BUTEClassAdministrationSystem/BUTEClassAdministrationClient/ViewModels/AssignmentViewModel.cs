@@ -7,10 +7,11 @@ using BUTEClassAdministrationTypes;
 using BUTEClassAdministrationClient.ClassAdministrationServiceReference;
 using BUTEClassAdministrationClient.View;
 using System.Windows.Input;
+using System.ComponentModel;
 
 namespace BUTEClassAdministrationClient.ViewModels
 {
-	public class AssignmentViewModel : ViewModelBase
+	public class AssignmentViewModel : ViewModelBase, IDataErrorInfo
 	{
 		private AssignmentWindow _assignmentWindow;
 
@@ -29,6 +30,8 @@ namespace BUTEClassAdministrationClient.ViewModels
 					NotifyPropertyChanged("Time");
 					NotifyPropertyChanged("Room");
 					NotifyPropertyChanged("Instructor");
+					NotifyPropertyChanged("ComputerCount");
+					NotifyPropertyChanged("SeatingCapacity");
                 }
             }     
         }
@@ -78,6 +81,23 @@ namespace BUTEClassAdministrationClient.ViewModels
 				return SelectedGroup != null ? SelectedGroup.Instructor.Name : "";
 			}
 		}
+
+		public String SeatingCapacity
+		{
+			get
+			{
+				return SelectedGroup != null ? SelectedGroup.Room.Seating_capacity.ToString() : "";
+			}
+		}
+
+		public String ComputerCount
+		{
+			get
+			{
+				return SelectedGroup != null ? SelectedGroup.Room.Computer_count.ToString() : "";
+			}
+		}
+
 
 		#endregion
 		
@@ -133,6 +153,9 @@ namespace BUTEClassAdministrationClient.ViewModels
 
 			StudentsForDatagrid = new ObservableCollection<Student>();
 			TargetGroupPairs = new ObservableCollection<ComboBoxGroupPair>();
+
+			_student = new Student();
+			_student.Name = "x";
 
 			_assignmentWindow = new AssignmentWindow();
 			_assignmentWindow.DataContext = this;
@@ -327,6 +350,54 @@ namespace BUTEClassAdministrationClient.ViewModels
 		}
 
 		#endregion
-		
+
+
+		private Student _student;
+		public string Name
+		{
+			get
+			{
+				return _student.Name;
+			}
+			set
+			{
+				if (_student.Name != value)
+				{
+					_student.Name = value;
+					NotifyPropertyChanged("Name");
+				}
+			}
+		}
+
+		public string Error
+		{
+			get { throw new NotImplementedException(); }
+		}
+
+		public string this[string columnName]
+		{
+			get { return validateStudent(columnName); }
+		}
+
+		private string validateStudent(string propName)
+		{
+
+			switch (propName)
+			{
+				case "Name":
+					{
+						if (nameIsValid(Name)) return null;
+						else return "Kérem adja meg a hallgató nevét!";
+					}
+				default:
+					return "";
+			}
+
+		}
+
+		public bool nameIsValid(string value)
+		{
+			return (value.Length > 0);
+		}
     }
 }

@@ -259,7 +259,7 @@ namespace BUTEClassAdministrationClient
                         else return "A Neptunkód nincs megadva, vagy hibás formátumú.";
                     }
                 default:
-                    return "Nem leteyo properti validalas.";
+                    return "";
             }
 
         }
