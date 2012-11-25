@@ -115,7 +115,7 @@
             >
       <Label.Content>
         <Binding 
-                    Path="Name" 
+                    Path="ComputerCount" 
                     ValidatesOnDataErrors="True" 
                     UpdateSourceTrigger="PropertyChanged"
                     >

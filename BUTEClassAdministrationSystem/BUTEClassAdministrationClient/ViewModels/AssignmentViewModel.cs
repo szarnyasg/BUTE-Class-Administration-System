@@ -154,9 +154,6 @@ namespace BUTEClassAdministrationClient.ViewModels
 			StudentsForDatagrid = new ObservableCollection<Student>();
 			TargetGroupPairs = new ObservableCollection<ComboBoxGroupPair>();
 
-			_student = new Student();
-			_student.Name = "";
-
 			_assignmentWindow = new AssignmentWindow();
 			_assignmentWindow.DataContext = this;
 			_assignmentWindow.ShowDialog();
@@ -351,23 +348,7 @@ namespace BUTEClassAdministrationClient.ViewModels
 
 		#endregion
 
-
-		private Student _student;
-		public string Name
-		{
-			get
-			{
-				return _student.Name;
-			}
-			set
-			{
-				if (_student.Name != value)
-				{
-					_student.Name = value;
-					NotifyPropertyChanged("Name");
-				}
-			}
-		}
+		#region validation
 
 		public string Error
 		{
@@ -381,23 +362,31 @@ namespace BUTEClassAdministrationClient.ViewModels
 
 		private string validateStudent(string propName)
 		{
-
 			switch (propName)
 			{
-				case "Name":
+				case "ComputerCount":
 					{
-						if (nameIsValid(Name)) return null;
-						else return "Kérem adja meg a hallgató nevét!";
+						if (nameIsValid(ComputerCount)) return null;
+						else return "A hallgatók száma több a számítógépek számánál.";
+					}
+				case "SeatingCapacity":
+					{
+						if (nameIsValid(SeatingCapacity)) return null;
+						else return "A hallgatók száma ülőhelyek számánál.";
 					}
 				default:
 					return "";
 			}
-
 		}
 
 		public bool nameIsValid(string value)
 		{
-			return (value.Length > 0);
+			if (value == null || value == "") return true;
+
+			int n = Convert.ToInt32(value);
+			return (n >= SelectedGroup.Student.Count());
 		}
-    }
+
+		#endregion
+	}
 }
