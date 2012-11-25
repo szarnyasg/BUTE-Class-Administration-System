@@ -16,6 +16,8 @@ namespace BUTEClassAdministrationClient
 
         #region Fields, properties
 
+		private int groupIndex;
+
 		#region SemesterPairs property
 
 		private List<ComboBoxSemesterPair> _semesterPairs;
@@ -69,7 +71,6 @@ namespace BUTEClassAdministrationClient
                     NotifyPropertyChanged("CoursePairs");
                 }
             }
-
         }
 		
 		#endregion
@@ -430,8 +431,10 @@ namespace BUTEClassAdministrationClient
 
 		private Group newGroup(ref List<Room>.Enumerator roomEnumerator, ref List<Instructor>.Enumerator instructorEnumerator, Course course)
 		{
-			//Console.WriteLine("---------> new group");
 			Group group = new Group();
+
+			groupIndex++;
+			group.Index = groupIndex;
 			group.Course = course;
 
 			if (!roomEnumerator.MoveNext())
@@ -462,7 +465,7 @@ namespace BUTEClassAdministrationClient
 
 				try
 				{
-
+					groupIndex = 0;
 					foreach (var course in courses)
 					{
 						Console.WriteLine("################### " + course.Id + " ####################");

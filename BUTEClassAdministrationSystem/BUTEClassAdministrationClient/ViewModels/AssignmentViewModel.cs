@@ -115,6 +115,8 @@ namespace BUTEClassAdministrationClient.ViewModels
 
         public AssignmentViewModel(List<Group> groups)
         {
+			_groups = groups;
+
 			foreach (var group in groups)
 			{
 				Console.WriteLine(group.Instructor.Name);
@@ -125,14 +127,17 @@ namespace BUTEClassAdministrationClient.ViewModels
 			{
                 GroupsForCombobox.Add(new ComboBoxGroupPair() { 
                     GroupObject = group ,
-                    GroupString = PrettyFormatter.dayFormatter(Convert.ToInt32(group.Course.Day_of_week)) + ' '
-                                            + group.Course.Starting_time + ' '
-                                            + PrettyFormatter.parityFormatter(group.Course.Week_parity) + ' '
-                                            + group.Room.Name
-                });
+                    GroupString =
+						group.Index + ". " +
+						PrettyFormatter.dayFormatter(Convert.ToInt32(group.Course.Day_of_week)) + " " +
+                        group.Course.Starting_time + " " +
+						PrettyFormatter.parityFormatter(group.Course.Week_parity) + " " +
+                        "(" + group.Room.Name + ")"
+				});
 			}
 
 			StudentsForDatagrid = new ObservableCollection<Student>();
+			TargetGroupPairs = new ObservableCollection<ComboBoxGroupPair>();
 
 			_assignmentWindow = new AssignmentWindow();
 			_assignmentWindow.DataContext = this;
@@ -156,6 +161,11 @@ namespace BUTEClassAdministrationClient.ViewModels
 
         public void closeExecuted()
         {
+			using (var service = new ClassAdministrationServiceClient())
+			{
+				service.CreateGroup(_groups.ToArray());
+			}
+
             _assignmentWindow.Close();
         }
 
@@ -189,8 +199,8 @@ namespace BUTEClassAdministrationClient.ViewModels
 			}
 
 			string filename = dlg.FileName;
-
-			ExcelTools.ExportToExcel(filename);
+			
+			ExcelTools.ExportToExcel(filename, _groups);
 		}
 
 		#endregion
@@ -203,12 +213,12 @@ namespace BUTEClassAdministrationClient.ViewModels
             get
             {
                 if (_groupChange == null)
-                    _groupChange = new DelegateCommand(new Action(changeExecuted));
+                    _groupChange = new DelegateCommand(new Action(changeGroupExecuted));
                 return _groupChange;
             }
         }
 
-        public void changeExecuted()
+        public void changeGroupExecuted()
         {
 			StudentsForDatagrid.Clear();
 			if (SelectedGroup == null) return;
@@ -219,26 +229,23 @@ namespace BUTEClassAdministrationClient.ViewModels
 				StudentsForDatagrid.Add(student);
 			}
 
-			/*
-			// load target course combobox
+			// load target group combobox
 			TargetGroupPairs.Clear();
-			foreach (var coursePair in GroupsForCombobox)
+			foreach (var groupPair in GroupsForCombobox)
 			{
-				if (((Course)coursePair.CourseObject).Id != SelectedCourse.Id)
+				if (((Group)groupPair.GroupObject).Index != SelectedGroup.Index)
 				{
-					TargetCoursePairs.Add(coursePair);
+					TargetGroupPairs.Add(groupPair);
 				}
 			}
-			 */
         }
 
         #endregion
 
 		#region TargetGroupPairs
 
-		private ObservableCollection<ComboBoxCoursePair> _targetGroupPairs;
-
-		public ObservableCollection<ComboBoxCoursePair> TargetGroupPairs
+		private ObservableCollection<ComboBoxGroupPair> _targetGroupPairs;
+		public ObservableCollection<ComboBoxGroupPair> TargetGroupPairs
 		{
 			get { return _targetGroupPairs; }
 			set
@@ -255,9 +262,8 @@ namespace BUTEClassAdministrationClient.ViewModels
 
 		#region SelectedTargetGroup property
 
-		private Course _selectedTargetGroup;
-
-		public Course SelectedTargetGroup
+		private Group _selectedTargetGroup;
+		public Group SelectedTargetGroup
 		{
 			get { return _selectedTargetGroup; }
 			set
@@ -286,13 +292,10 @@ namespace BUTEClassAdministrationClient.ViewModels
 
 		public void moveStudentExecuted()
 		{
-			using (var service = new ClassAdministrationServiceClient())
-			{
-				//service.MoveStudent(SelectedStudent.Id, SelectedTargetCourse.Id);
+			SelectedGroup.Student.Remove(SelectedStudent);
+			SelectedTargetGroup.Student.Add(SelectedStudent);
 
-				// refresh datagrid
-				//changeCourseExecuted();
-			}
+			changeGroupExecuted();
 		}
 
 		public bool moveStudenCanExecuted()
@@ -305,6 +308,7 @@ namespace BUTEClassAdministrationClient.ViewModels
 		#region SelectedStudent
 
 		private Student _selectedStudent;
+		private List<Group> _groups;
 
 		public Student SelectedStudent
 		{
@@ -320,6 +324,6 @@ namespace BUTEClassAdministrationClient.ViewModels
 		}
 
 		#endregion
-
+		
     }
 }
