@@ -48,10 +48,16 @@ namespace BUTEClassAdministrationService
 					foreach (var student in group.Student)
 					{
 						student.Group = null;
-					}
-					context.DeleteObject(group);
+					}					
 				}
 
+				foreach (var group in groups)
+				{
+					foreach (var student in group.Student)
+					{
+						context.DeleteObject(group);
+					}
+				}
 				context.SaveChanges();
 			}
 		}
