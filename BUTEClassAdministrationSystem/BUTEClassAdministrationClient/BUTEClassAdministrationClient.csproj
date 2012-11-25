@@ -66,8 +66,8 @@
     <Compile Include="BUTEClassAdministrationException.cs" />
     <Compile Include="ComboBoxItemExtensions.cs" />
     <Compile Include="ComboBoxWithCommand.cs" />
-    <Compile Include="DelegateComm\CommandReference.cs" />
-    <Compile Include="DelegateComm\DelegateCommand.cs" />
+    <Compile Include="DelegateCommand\CommandReference.cs" />
+    <Compile Include="DelegateCommand\DelegateCommand.cs" />
     <Compile Include="ViewModels\AssignmentViewModel.cs" />
     <Compile Include="ViewModels\InstructorViewModel.cs" />
     <Compile Include="ViewModels\ListOfInstructorsViewModel.cs" />

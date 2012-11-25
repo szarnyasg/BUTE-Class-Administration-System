@@ -10,7 +10,7 @@ namespace BUTEClassAdministrationService
 	{
 		public void CreateInstructor(Instructor[] instructors)
 		{
-			using (ClassAdministrationEntityContext context = new ClassAdministrationEntityContext())
+			using (ClassAdministrationEntityContext context = new ClassAdministrationEntityContext(BUTEClassAdministrationService.Properties.Resources.connectionString))
 			{
 				foreach (var instructor in instructors)
 				{
@@ -22,7 +22,7 @@ namespace BUTEClassAdministrationService
 
 		public Instructor[] ReadInstructors()
 		{
-			using (ClassAdministrationEntityContext context = new ClassAdministrationEntityContext())
+			using (ClassAdministrationEntityContext context = new ClassAdministrationEntityContext(BUTEClassAdministrationService.Properties.Resources.connectionString))
 			{
 				return context.InstructorSet.ToArray();
 			}
@@ -30,7 +30,7 @@ namespace BUTEClassAdministrationService
 
 		public void UpdateInstructors(Instructor[] instructors)
 		{
-			using (ClassAdministrationEntityContext context = new ClassAdministrationEntityContext())
+			using (ClassAdministrationEntityContext context = new ClassAdministrationEntityContext(BUTEClassAdministrationService.Properties.Resources.connectionString))
 			{
 				foreach (var instructor in instructors)
 				{
@@ -42,7 +42,7 @@ namespace BUTEClassAdministrationService
 
 		public void DeleteInstructors(int[] instructorIds)
 		{
-			using (ClassAdministrationEntityContext context = new ClassAdministrationEntityContext())
+			using (ClassAdministrationEntityContext context = new ClassAdministrationEntityContext(BUTEClassAdministrationService.Properties.Resources.connectionString))
 			{
 
 				var instructors = context.InstructorSet.Where(instructor => instructorIds.Contains(instructor.Id));

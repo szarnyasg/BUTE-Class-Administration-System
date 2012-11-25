@@ -10,7 +10,7 @@ namespace BUTEClassAdministrationService
 	{
 		public Semester[] ReadSemesters()
 		{
-			using (ClassAdministrationEntityContext context = new ClassAdministrationEntityContext())
+			using (ClassAdministrationEntityContext context = new ClassAdministrationEntityContext(BUTEClassAdministrationService.Properties.Resources.connectionString))
 			{
 				return context.SemesterSet.ToArray();
 			}

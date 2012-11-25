@@ -39,6 +39,7 @@ namespace BUTEClassAdministrationClient
 			Excel.Worksheet worksheet = excelApp.ActiveSheet;
 
 			// a worksheet about the groups, instructors, rooms, etc.
+			worksheet.Name = "csoportok";
 			worksheet.Cells[1, 1] = "csoport";
 			worksheet.Cells[1, 2] = "nap";
 			worksheet.Cells[1, 3] = "időpont";

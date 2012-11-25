@@ -10,7 +10,7 @@ namespace BUTEClassAdministrationService
 	{	
 		public Room[] ReadRooms()
 		{
-			using (ClassAdministrationEntityContext context = new ClassAdministrationEntityContext())
+			using (ClassAdministrationEntityContext context = new ClassAdministrationEntityContext(BUTEClassAdministrationService.Properties.Resources.connectionString))
 			{
 				return context.RoomSet.ToArray();
 			}
@@ -18,7 +18,7 @@ namespace BUTEClassAdministrationService
 
 		public Room[] ReadRoomsFromCourse(int courseId)
 		{
-			using (ClassAdministrationEntityContext context = new ClassAdministrationEntityContext())
+			using (ClassAdministrationEntityContext context = new ClassAdministrationEntityContext(BUTEClassAdministrationService.Properties.Resources.connectionString))
 			{
 				return context.RoomSet.Where(room => room.Course.Any(course => course.Id == courseId)).ToArray();
 			}

@@ -10,7 +10,7 @@ namespace BUTEClassAdministrationService
 	{
 		public void CreateCourse(Course[] courses)
 		{
-			using (ClassAdministrationEntityContext context = new ClassAdministrationEntityContext())
+			using (ClassAdministrationEntityContext context = new ClassAdministrationEntityContext(BUTEClassAdministrationService.Properties.Resources.connectionString))
 			{
 				foreach (var course in courses)
 				{
@@ -22,7 +22,7 @@ namespace BUTEClassAdministrationService
 
 		public Course[] ReadCoursesFromSemester(int semesterId)
 		{
-			using (ClassAdministrationEntityContext context = new ClassAdministrationEntityContext())
+			using (ClassAdministrationEntityContext context = new ClassAdministrationEntityContext(BUTEClassAdministrationService.Properties.Resources.connectionString))
 			{
 				return context.CourseSet.Where(course => course.Semester.Id == semesterId).ToArray();
 			}
@@ -31,7 +31,7 @@ namespace BUTEClassAdministrationService
 
 		public void UpdateCourses(Course[] courses)
 		{
-			using (ClassAdministrationEntityContext context = new ClassAdministrationEntityContext())
+			using (ClassAdministrationEntityContext context = new ClassAdministrationEntityContext(BUTEClassAdministrationService.Properties.Resources.connectionString))
 			{
 				foreach (var course in courses)
 				{

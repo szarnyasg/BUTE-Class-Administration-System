@@ -12,7 +12,6 @@ namespace BUTEClassAdministrationClient
   /// </summary>
   public partial class App : Application
   {
-	  //public bool DoHandle { get; set; }
 	  private void Application_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
 	  {
 		  if (e.Exception is BUTEClassAdministrationException)
@@ -24,7 +23,7 @@ namespace BUTEClassAdministrationClient
 		  else
 		  {
 			  //If you do not set e.Handled to true, the application will close due to crash.
-			  MessageBox.Show("Application is going to close! ", "Uncaught Exception");
+			  MessageBox.Show("Belső hiba! Az alkalmazás leáll! ", "Uncaught Exception");
 			  e.Handled = false;
 		  }
 	  }

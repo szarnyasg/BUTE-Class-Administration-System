@@ -8,6 +8,7 @@ using BUTEClassAdministrationTypes;
 using BUTEClassAdministrationClient.ViewModels;
 using System.Collections.ObjectModel;
 using System.Windows;
+using System.ServiceModel;
 
 namespace BUTEClassAdministrationClient
 {
@@ -177,7 +178,7 @@ namespace BUTEClassAdministrationClient
         {
 			SemesterPairs = new List<ComboBoxSemesterPair>();
 
-            using (var service = new ClassAdministrationServiceClient())
+			using (var service = new ClassAdministrationServiceClient(new BasicHttpBinding(), new EndpointAddress(BUTEClassAdministrationClient.Properties.Resources.endpointAddress)))
             {
                 Semester[] semesters = service.ReadSemesters();
                 foreach (var semester in semesters)
@@ -210,7 +211,7 @@ namespace BUTEClassAdministrationClient
         {
             CoursePairs.Clear();
 
-            using (var service = new ClassAdministrationServiceClient())
+			using (var service = new ClassAdministrationServiceClient(new BasicHttpBinding(), new EndpointAddress(BUTEClassAdministrationClient.Properties.Resources.endpointAddress)))
             {
                 Course[] courses = service.ReadCoursesFromSemester(SelectedSemester.Id);
                 foreach (var course in courses)
@@ -304,7 +305,7 @@ namespace BUTEClassAdministrationClient
 
             string filename = dlg.FileName;
 
-            using (var service = new ClassAdministrationServiceClient())
+            using (var service = new ClassAdministrationServiceClient(new BasicHttpBinding(), new EndpointAddress(BUTEClassAdministrationClient.Properties.Resources.endpointAddress)))
             {
                 Semester semester = service.ReadSemesters().First();
                 IEnumerable<Student> students = ExcelTools.ImportFromExcel(filename, semester);
@@ -358,7 +359,7 @@ namespace BUTEClassAdministrationClient
 
 		public void deleteStudentExecuted()
 		{
-			using (var service = new ClassAdministrationServiceClient())
+			using (var service = new ClassAdministrationServiceClient(new BasicHttpBinding(), new EndpointAddress(BUTEClassAdministrationClient.Properties.Resources.endpointAddress)))
 			{
 				service.DeleteStudents(new int[] { SelectedStudent.Id });
 				//MessageBox.Show("Rekord törölve.");
@@ -389,7 +390,7 @@ namespace BUTEClassAdministrationClient
 
 		public void moveStudentExecuted()
 		{
-			using (var service = new ClassAdministrationServiceClient())
+			using (var service = new ClassAdministrationServiceClient(new BasicHttpBinding(), new EndpointAddress(BUTEClassAdministrationClient.Properties.Resources.endpointAddress)))
 			{
 				service.MoveStudent(SelectedStudent.Id, SelectedTargetCourse.Id);
 
@@ -442,7 +443,7 @@ namespace BUTEClassAdministrationClient
 
         public void assignExecuted()
         {
-			using (var service = new ClassAdministrationServiceClient())
+			using (var service = new ClassAdministrationServiceClient(new BasicHttpBinding(), new EndpointAddress(BUTEClassAdministrationClient.Properties.Resources.endpointAddress)))
 			{
 				List<Course> courses = service.ReadCoursesFromSemester(SelectedSemester.Id).ToList();
 
@@ -521,7 +522,7 @@ namespace BUTEClassAdministrationClient
 
 		public void loadAssignmentExecuted()
 		{
-			using (var service = new ClassAdministrationServiceClient())
+			using (var service = new ClassAdministrationServiceClient(new BasicHttpBinding(), new EndpointAddress(BUTEClassAdministrationClient.Properties.Resources.endpointAddress)))
 			{
 				Group[] groups = service.ReadGroupsFromSemester(SelectedSemester.Id);
 				AssignmentViewModel assignmentViewModel = new AssignmentViewModel(groups.ToList());
@@ -555,7 +556,7 @@ namespace BUTEClassAdministrationClient
 			if (SelectedCourse == null) return;
 
             // load datagrid with students
-			using (var service = new ClassAdministrationServiceClient())
+			using (var service = new ClassAdministrationServiceClient(new BasicHttpBinding(), new EndpointAddress(BUTEClassAdministrationClient.Properties.Resources.endpointAddress)))
             {                
 				Student[] students = service.ReadStudentsFromCourse(SelectedCourse.Id);
        

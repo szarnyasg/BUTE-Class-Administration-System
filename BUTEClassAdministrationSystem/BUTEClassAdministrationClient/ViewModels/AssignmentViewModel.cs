@@ -8,6 +8,7 @@ using BUTEClassAdministrationClient.ClassAdministrationServiceReference;
 using BUTEClassAdministrationClient.View;
 using System.Windows.Input;
 using System.ComponentModel;
+using System.ServiceModel;
 
 namespace BUTEClassAdministrationClient.ViewModels
 {
@@ -176,7 +177,7 @@ namespace BUTEClassAdministrationClient.ViewModels
 
         public void closeExecuted()
         {
-			using (var service = new ClassAdministrationServiceClient())
+			using (var service = new ClassAdministrationServiceClient(new BasicHttpBinding(), new EndpointAddress(BUTEClassAdministrationClient.Properties.Resources.endpointAddress)))
 			{
 				if (_groups.Count > 0)
 				{
@@ -367,12 +368,12 @@ namespace BUTEClassAdministrationClient.ViewModels
 				case "ComputerCount":
 					{
 						if (nameIsValid(ComputerCount)) return null;
-						else return "A hallgatók száma több a számítógépek számánál.";
+						else return "A hallgatók száma nagyobb a számítógépek számánál.";
 					}
 				case "SeatingCapacity":
 					{
 						if (nameIsValid(SeatingCapacity)) return null;
-						else return "A hallgatók száma ülőhelyek számánál.";
+						else return "A hallgatók száma nagyobb az ülőhelyek számánál.";
 					}
 				default:
 					return "";

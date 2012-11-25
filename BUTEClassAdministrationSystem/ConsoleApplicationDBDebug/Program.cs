@@ -6,6 +6,8 @@ using System.Text;
 
 using BUTEClassAdministrationTypes;
 using System.Data.EntityClient;
+using System.Resources;
+using System.Reflection;
 
 namespace ConsoleApplicationDBDebug
 {
@@ -13,14 +15,22 @@ namespace ConsoleApplicationDBDebug
 	{
 		static void Main(string[] args)
 		{
-			string connectionString = 
-				"metadata=res://*/ClassAdministrationDatabase.csdl|res://*/ClassAdministrationDatabase.ssdl|res://*/" +
-				"ClassAdministrationDatabase.msl;provider=System.Data.SqlClient;provider connection string=\"Data Source=SZARNYASG-PC\\SQLEXPRESS;Initial Catalog=ClassAdministration;Integrated Security=True\"";
 
+
+			//string connectionString = 
+			//	"metadata=res://*/ClassAdministrationDatabase.csdl|res://*/ClassAdministrationDatabase.ssdl|res://*/" +
+			//	"ClassAdministrationDatabase.msl;provider=System.Data.SqlClient;provider connection string=\"Data Source=SZARNYASG-PC\\SQLEXPRESS;Initial Catalog=ClassAdministration;Integrated Security=True\"";
+
+
+
+			string connectionString = ConsoleApplicationDBDebug.Properties.Resources.connectionString;
+			Console.WriteLine(connectionString);
+
+			return;
+			
 			EntityConnection ec = new EntityConnection();
 			ec.ConnectionString = connectionString;
-
-
+			
 			using (ClassAdministrationEntityContext context = new ClassAdministrationEntityContext(ec))
 			{
 				int[] studentIds = { 14 };
@@ -37,5 +47,6 @@ namespace ConsoleApplicationDBDebug
 
 			Console.ReadLine();
 		}
+
 	}
 }

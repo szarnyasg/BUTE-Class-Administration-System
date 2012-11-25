@@ -8,6 +8,7 @@ using System.Collections.ObjectModel;
 
 using BUTEClassAdministrationTypes;
 using BUTEClassAdministrationClient.ClassAdministrationServiceReference;
+using System.ServiceModel;
 
 namespace BUTEClassAdministrationClient.ViewModels
 {
@@ -50,7 +51,7 @@ namespace BUTEClassAdministrationClient.ViewModels
         private void getInstructors()
         {
             InstructorsForDataGrid.Clear();
-            using (var service = new ClassAdministrationServiceClient())
+            using (var service = new ClassAdministrationServiceClient(new BasicHttpBinding(), new EndpointAddress(BUTEClassAdministrationClient.Properties.Resources.endpointAddress)))
             {
                 Instructor[] instructors = service.ReadInstructors();
                 foreach (var instructor in instructors)
@@ -158,7 +159,7 @@ namespace BUTEClassAdministrationClient.ViewModels
 
         public void deleteInstructorExecuted()
         {
-            using (var service = new ClassAdministrationServiceClient())
+            using (var service = new ClassAdministrationServiceClient(new BasicHttpBinding(), new EndpointAddress(BUTEClassAdministrationClient.Properties.Resources.endpointAddress)))
             {
                 service.DeleteInstructors(new int[] { SelectedInstructor.Id });
                 //MessageBox.Show("Rekord törölve.");

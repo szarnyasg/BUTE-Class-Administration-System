@@ -117,7 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="endpointAddress" xml:space="preserve">
-    <value>http://localhost:8080/ClassAdministrationService.svc</value>
+  <data name="connectionString" xml:space="preserve">
+    <value>metadata=res://*/ClassAdministrationDatabase.csdl|res://*/ClassAdministrationDatabase.ssdl|res://*/ClassAdministrationDatabase.msl;provider=System.Data.SqlClient;provider connection string="Data Source=SZARNYASG-PC\SQLEXPRESS;Initial Catalog=ClassAdministration;Integrated Security=True"</value>
   </data>
 </root>

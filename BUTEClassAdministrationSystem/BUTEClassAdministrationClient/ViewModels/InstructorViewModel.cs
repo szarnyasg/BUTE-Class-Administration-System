@@ -10,6 +10,7 @@ using System.Windows;
 using System.ComponentModel;
 using System.Text.RegularExpressions;
 using BUTEClassAdministrationClient.View;
+using System.ServiceModel;
 
 namespace BUTEClassAdministrationClient.ViewModels
 {
@@ -131,7 +132,7 @@ namespace BUTEClassAdministrationClient.ViewModels
         {
             ModifyableInstructor.clone(_instructor);
 
-            using (var service = new ClassAdministrationServiceClient())
+            using (var service = new ClassAdministrationServiceClient(new BasicHttpBinding(), new EndpointAddress(BUTEClassAdministrationClient.Properties.Resources.endpointAddress)))
             {
                 service.UpdateInstructors(new Instructor[] { ModifyableInstructor });
                 _instructor.AcceptChanges();
@@ -144,7 +145,7 @@ namespace BUTEClassAdministrationClient.ViewModels
 
         public void saveInstructorExecuted()
         {
-            using (var service = new ClassAdministrationServiceClient())
+            using (var service = new ClassAdministrationServiceClient(new BasicHttpBinding(), new EndpointAddress(BUTEClassAdministrationClient.Properties.Resources.endpointAddress)))
             {
                 service.CreateInstructor(new Instructor[] { _instructor });
                 _instructor.AcceptChanges();

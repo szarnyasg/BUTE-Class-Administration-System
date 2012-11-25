@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BUTEClassAdministrationClient.Properties {
+namespace ConsoleApplicationDBDebug.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace BUTEClassAdministrationClient.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("BUTEClassAdministrationClient.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ConsoleApplicationDBDebug.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,11 +61,11 @@ namespace BUTEClassAdministrationClient.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to http://localhost:8080/ClassAdministrationService.svc.
+        ///   Looks up a localized string similar to metadata=res://*/ClassAdministrationDatabase.csdl|res://*/ClassAdministrationDatabase.ssdl|res://*/ClassAdministrationDatabase.msl;provider=System.Data.SqlClient;provider connection string=&amp;quot;Data Source=SZARNYASG-PC\SQLEXPRESS;Initial Catalog=ClassAdministration;Integrated Security=True&amp;quot;.
         /// </summary>
-        internal static string endpointAddress {
+        internal static string connectionString {
             get {
-                return ResourceManager.GetString("endpointAddress", resourceCulture);
+                return ResourceManager.GetString("connectionString", resourceCulture);
             }
         }
     }

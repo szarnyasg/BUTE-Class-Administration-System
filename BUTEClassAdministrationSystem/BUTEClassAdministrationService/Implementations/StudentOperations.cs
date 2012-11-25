@@ -10,7 +10,7 @@ namespace BUTEClassAdministrationService
 	{
 		public void CreateStudents(Student[] students)
 		{
-			using (ClassAdministrationEntityContext context = new ClassAdministrationEntityContext())
+			using (ClassAdministrationEntityContext context = new ClassAdministrationEntityContext(BUTEClassAdministrationService.Properties.Resources.connectionString))
 			{
 				foreach (var student in students)
 				{
@@ -29,7 +29,7 @@ namespace BUTEClassAdministrationService
 
 		public Student[] ReadStudentsFromSemester(int semesterId)
 		{
-			using (ClassAdministrationEntityContext context = new ClassAdministrationEntityContext())
+			using (ClassAdministrationEntityContext context = new ClassAdministrationEntityContext(BUTEClassAdministrationService.Properties.Resources.connectionString))
 			{
 				return context.StudentSet.Where(student => student.Semester.Id == semesterId).ToArray();
 			}
@@ -38,7 +38,7 @@ namespace BUTEClassAdministrationService
 
 		public Student[] ReadStudentsFromCourse(int courseId)
 		{
-			using (ClassAdministrationEntityContext context = new ClassAdministrationEntityContext())
+			using (ClassAdministrationEntityContext context = new ClassAdministrationEntityContext(BUTEClassAdministrationService.Properties.Resources.connectionString))
 			{
 				return context.StudentSet.Where(student => student.Course.Id == courseId).ToArray();
 			}
@@ -47,7 +47,7 @@ namespace BUTEClassAdministrationService
 
 		public void UpdateStudents(Student[] students)
 		{
-			using (ClassAdministrationEntityContext context = new ClassAdministrationEntityContext())
+			using (ClassAdministrationEntityContext context = new ClassAdministrationEntityContext(BUTEClassAdministrationService.Properties.Resources.connectionString))
 			{
 				foreach (var student in students)
 				{
@@ -59,7 +59,7 @@ namespace BUTEClassAdministrationService
 
 		public void DeleteStudents(int[] studentIds)
 		{
-			using (ClassAdministrationEntityContext context = new ClassAdministrationEntityContext())
+			using (ClassAdministrationEntityContext context = new ClassAdministrationEntityContext(BUTEClassAdministrationService.Properties.Resources.connectionString))
 			{
 				var students = context.StudentSet.Where(student => studentIds.Contains(student.Id));
 
@@ -74,7 +74,7 @@ namespace BUTEClassAdministrationService
 
 		public void MoveStudent(int studentId, int courseId)
 		{
-			using (ClassAdministrationEntityContext context = new ClassAdministrationEntityContext())
+			using (ClassAdministrationEntityContext context = new ClassAdministrationEntityContext(BUTEClassAdministrationService.Properties.Resources.connectionString))
 			{
 				Student student = context.StudentSet.Where(s => s.Id == studentId).First();
 				Course course = context.CourseSet.Where(c => c.Id == courseId).First();

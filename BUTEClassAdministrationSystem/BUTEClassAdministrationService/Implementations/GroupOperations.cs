@@ -10,7 +10,7 @@ namespace BUTEClassAdministrationService
 	{
 		public void CreateGroup(Group[] groups)
 		{
-			using (ClassAdministrationEntityContext context = new ClassAdministrationEntityContext())
+			using (ClassAdministrationEntityContext context = new ClassAdministrationEntityContext(BUTEClassAdministrationService.Properties.Resources.connectionString))
 			{
 				foreach (var group in groups)
 				{
@@ -22,7 +22,7 @@ namespace BUTEClassAdministrationService
 
 		public Group[] ReadGroupsFromSemester(int semesterId)
 		{
-			using (ClassAdministrationEntityContext context = new ClassAdministrationEntityContext())
+			using (ClassAdministrationEntityContext context = new ClassAdministrationEntityContext(BUTEClassAdministrationService.Properties.Resources.connectionString))
 			{
 				List<Group> groups = context.GroupSet.Where(group => group.Semester.Id == semesterId).ToList();
 				foreach (var group in groups)
@@ -39,7 +39,7 @@ namespace BUTEClassAdministrationService
 
 		public void DeleteGroups(int semesterId)
 		{
-			using (ClassAdministrationEntityContext context = new ClassAdministrationEntityContext())
+			using (ClassAdministrationEntityContext context = new ClassAdministrationEntityContext(BUTEClassAdministrationService.Properties.Resources.connectionString))
 			{
 				var groups = context.GroupSet.Where(group => group.Semester.Id == semesterId);
 
