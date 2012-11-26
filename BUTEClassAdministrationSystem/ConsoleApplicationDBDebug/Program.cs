@@ -15,38 +15,29 @@ namespace ConsoleApplicationDBDebug
 	{
 		static void Main(string[] args)
 		{
+			string connectionString = 
+				"metadata=res://*/ClassAdministrationDatabase.csdl|res://*/ClassAdministrationDatabase.ssdl|res://*/" +
+				"ClassAdministrationDatabase.msl;provider=System.Data.SqlClient;provider connection string=\"Data Source=SZARNYASG-PC\\SQLEXPRESS;Initial Catalog=ClassAdministration;Integrated Security=True\"";
 
-
-			//string connectionString = 
-			//	"metadata=res://*/ClassAdministrationDatabase.csdl|res://*/ClassAdministrationDatabase.ssdl|res://*/" +
-			//	"ClassAdministrationDatabase.msl;provider=System.Data.SqlClient;provider connection string=\"Data Source=SZARNYASG-PC\\SQLEXPRESS;Initial Catalog=ClassAdministration;Integrated Security=True\"";
-
-
-
-			string connectionString = ConsoleApplicationDBDebug.Properties.Resources.connectionString;
-			Console.WriteLine(connectionString);
-
-			return;
-			
 			EntityConnection ec = new EntityConnection();
 			ec.ConnectionString = connectionString;
-			
+
+
 			using (ClassAdministrationEntityContext context = new ClassAdministrationEntityContext(ec))
 			{
-				int[] studentIds = { 14 };
-
-				var students = context.StudentSet.Where(student => studentIds.Contains(student.Id));
 				
-				foreach (var student in students)
-				{
-					context.DeleteObject(student);
-				}
+				Group group1 = new Group();
+
+				Room room1 = context.RoomSet.First();
+				Instructor instructor1 = context.InstructorSet.First();
+				Course course1 = context.CourseSet.First();
+				Semester semester = context.SemesterSet.First();
+
+				context.GroupSet.AddObject(group1);
+				
 
 				context.SaveChanges();
 			}
-
-			Console.ReadLine();
 		}
-
 	}
 }

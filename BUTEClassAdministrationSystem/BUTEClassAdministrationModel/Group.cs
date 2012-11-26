@@ -374,16 +374,19 @@ namespace BUTEClassAdministrationTypes
                 return;
             }
     
-            if (previousValue != null && ReferenceEquals(previousValue.Group, this))
+            if (previousValue != null && previousValue.Group.Contains(this))
             {
-                previousValue.Group = null;
+                previousValue.Group.Remove(this);
             }
     
             if (Room != null)
             {
-                Room.Group = this;
-            }
+                if (!Room.Group.Contains(this))
+                {
+                    Room.Group.Add(this);
+                }
     
+            }
             if (ChangeTracker.ChangeTrackingEnabled)
             {
                 if (ChangeTracker.OriginalValues.ContainsKey("Room")

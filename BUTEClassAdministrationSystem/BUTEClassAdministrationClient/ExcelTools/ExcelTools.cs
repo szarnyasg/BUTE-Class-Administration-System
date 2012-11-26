@@ -65,9 +65,7 @@ namespace BUTEClassAdministrationClient
 			{
 				worksheet.Columns[k].AutoFit();
 			}
-
-
-
+			
 			// separate worksheet for each group
 			foreach (var group in groups)
 			{

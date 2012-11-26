@@ -127,21 +127,39 @@ namespace BUTEClassAdministrationTypes
         private TrackableCollection<Course> _course;
     
         [DataMember]
-        public Group Group
+        public TrackableCollection<Group> Group
         {
-            get { return _group; }
+            get
+            {
+                if (_group == null)
+                {
+                    _group = new TrackableCollection<Group>();
+                    _group.CollectionChanged += FixupGroup;
+                }
+                return _group;
+            }
             set
             {
                 if (!ReferenceEquals(_group, value))
                 {
-                    var previousValue = _group;
+                    if (ChangeTracker.ChangeTrackingEnabled)
+                    {
+                        throw new InvalidOperationException("Cannot set the FixupChangeTrackingCollection when ChangeTracking is enabled");
+                    }
+                    if (_group != null)
+                    {
+                        _group.CollectionChanged -= FixupGroup;
+                    }
                     _group = value;
-                    FixupGroup(previousValue);
+                    if (_group != null)
+                    {
+                        _group.CollectionChanged += FixupGroup;
+                    }
                     OnNavigationPropertyChanged("Group");
                 }
             }
         }
-        private Group _group;
+        private TrackableCollection<Group> _group;
 
         #endregion
         #region ChangeTracking
@@ -222,46 +240,11 @@ namespace BUTEClassAdministrationTypes
         protected virtual void ClearNavigationProperties()
         {
             Course.Clear();
-            Group = null;
+            Group.Clear();
         }
 
         #endregion
         #region Association Fixup
-    
-        private void FixupGroup(Group previousValue)
-        {
-            if (IsDeserializing)
-            {
-                return;
-            }
-    
-            if (previousValue != null && ReferenceEquals(previousValue.Room, this))
-            {
-                previousValue.Room = null;
-            }
-    
-            if (Group != null)
-            {
-                Group.Room = this;
-            }
-    
-            if (ChangeTracker.ChangeTrackingEnabled)
-            {
-                if (ChangeTracker.OriginalValues.ContainsKey("Group")
-                    && (ChangeTracker.OriginalValues["Group"] == Group))
-                {
-                    ChangeTracker.OriginalValues.Remove("Group");
-                }
-                else
-                {
-                    ChangeTracker.RecordOriginalValue("Group", previousValue);
-                }
-                if (Group != null && !Group.ChangeTracker.ChangeTrackingEnabled)
-                {
-                    Group.StartTracking();
-                }
-            }
-        }
     
         private void FixupCourse(object sender, NotifyCollectionChangedEventArgs e)
         {
@@ -300,6 +283,45 @@ namespace BUTEClassAdministrationTypes
                     if (ChangeTracker.ChangeTrackingEnabled)
                     {
                         ChangeTracker.RecordRemovalFromCollectionProperties("Course", item);
+                    }
+                }
+            }
+        }
+    
+        private void FixupGroup(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (IsDeserializing)
+            {
+                return;
+            }
+    
+            if (e.NewItems != null)
+            {
+                foreach (Group item in e.NewItems)
+                {
+                    item.Room = this;
+                    if (ChangeTracker.ChangeTrackingEnabled)
+                    {
+                        if (!item.ChangeTracker.ChangeTrackingEnabled)
+                        {
+                            item.StartTracking();
+                        }
+                        ChangeTracker.RecordAdditionToCollectionProperties("Group", item);
+                    }
+                }
+            }
+    
+            if (e.OldItems != null)
+            {
+                foreach (Group item in e.OldItems)
+                {
+                    if (ReferenceEquals(item.Room, this))
+                    {
+                        item.Room = null;
+                    }
+                    if (ChangeTracker.ChangeTrackingEnabled)
+                    {
+                        ChangeTracker.RecordRemovalFromCollectionProperties("Group", item);
                     }
                 }
             }

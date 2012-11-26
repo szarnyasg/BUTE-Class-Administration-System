@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 11/18/2012 23:13:59
+-- Date Created: 11/26/2012 00:06:28
 -- Generated from EDMX file: C:\GitHub\BUTE-Class-Administration-System\BUTEClassAdministrationSystem\BUTEClassAdministrationModel\ClassAdministrationDatabase.edmx
 -- --------------------------------------------------
 

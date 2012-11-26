@@ -21,7 +21,6 @@ namespace BUTEClassAdministrationService
 					};
 
 					context.StudentSet.ApplyChanges(student);
-					context.SaveChanges();
 				}
 				context.SaveChanges();
 			}

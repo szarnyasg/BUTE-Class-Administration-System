@@ -14,7 +14,7 @@ namespace BUTEClassAdministrationService
 			{
 				foreach (var group in groups)
 				{
-					context.GroupSet.ApplyChanges(group);
+					context.GroupSet.ApplyChanges(group);					
 				}
 				context.SaveChanges();
 			}

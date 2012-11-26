@@ -361,7 +361,7 @@
           <End Type="ClassAdministrationModel.Course" Role="Course" Multiplicity="*" />
         </Association>
         <Association Name="GroupRoom">
-          <End Type="ClassAdministrationModel.Group" Role="Group" Multiplicity="0..1" />
+          <End Type="ClassAdministrationModel.Group" Role="Group" Multiplicity="*" />
           <End Type="ClassAdministrationModel.Room" Role="Room" Multiplicity="1" />
         </Association>
         <Association Name="GroupStudent">

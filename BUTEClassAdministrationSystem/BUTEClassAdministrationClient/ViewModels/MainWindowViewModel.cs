@@ -432,10 +432,12 @@ namespace BUTEClassAdministrationClient
 			{
 				throw new BUTEClassAdministrationException("Nincs elég terem a beosztáshoz");
 			}
-
 			group.Room = roomEnumerator.Current;
 
-			instructorEnumerator.MoveNext();
+			if (!instructorEnumerator.MoveNext())
+			{
+				throw new BUTEClassAdministrationException("Nincs elég gyakorlatvezető a beosztáshoz");
+			}
 			group.Instructor = instructorEnumerator.Current;
 
 			return group;
@@ -446,11 +448,11 @@ namespace BUTEClassAdministrationClient
 			using (var service = new ClassAdministrationServiceClient(new BasicHttpBinding(), new EndpointAddress(BUTEClassAdministrationClient.Properties.Resources.endpointAddress)))
 			{
 				List<Course> courses = service.ReadCoursesFromSemester(SelectedSemester.Id).ToList();
-
 				List<Instructor> instructors = service.ReadInstructors().ToList();
 				List<Instructor>.Enumerator instructorEnumerator = instructors.GetEnumerator();
-
 				List<Group> groups = new List<Group>();
+				List<Room> rooms = service.ReadRooms().ToList();
+				List<Room>.Enumerator roomEnumerator = rooms.GetEnumerator();
 
 				try
 				{
@@ -461,9 +463,6 @@ namespace BUTEClassAdministrationClient
 
 						// no group for empty courses --> continue with the other courses
 						if (students.Count() == 0) continue;
-
-						List<Room> rooms = service.ReadRoomsFromCourse(course.Id).ToList();
-						List<Room>.Enumerator roomEnumerator = rooms.GetEnumerator();
 
 						// create new group
 						groups.Add(newGroup(ref roomEnumerator, ref instructorEnumerator, course));
@@ -480,13 +479,7 @@ namespace BUTEClassAdministrationClient
 							}
 
 							// set the students group and add the student to the collection
-							student.Group = group;
 							group.Student.Add(student);
-						}
-
-						foreach (var item in groups)
-						{
-							List<Student> groupsStudents = item.Student.ToList();
 						}
 					}
 

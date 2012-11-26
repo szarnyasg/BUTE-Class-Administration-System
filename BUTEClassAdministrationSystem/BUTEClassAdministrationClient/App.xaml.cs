@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Data;
 using System.Linq;
 using System.Windows;
+using System.Windows.Markup;
 
 namespace BUTEClassAdministrationClient
 {
@@ -16,14 +17,20 @@ namespace BUTEClassAdministrationClient
 	  {
 		  if (e.Exception is BUTEClassAdministrationException)
 		  {
-			  //Handling the exception within the UnhandledExcpeiton handler.
-			  MessageBox.Show(e.Exception.Message, "Exception Caught", MessageBoxButton.OK, MessageBoxImage.Error);
+			  MessageBox.Show(e.Exception.Message, "Belső hiba.", MessageBoxButton.OK, MessageBoxImage.Error);
 			  e.Handled = true;
 		  }
+		  else if (e.Exception is XamlParseException)
+		  {
+			  if ((e.Exception as XamlParseException).InnerException is System.ServiceModel.EndpointNotFoundException)
+			  {
+				  MessageBox.Show("A webszolgáltatás nem érhető el a " + BUTEClassAdministrationClient.Properties.Resources.endpointAddress + " címen. Az alkalmazás leáll.", "Hiba");
+				  e.Handled = false;
+			  }
+		  } 
 		  else
 		  {
-			  //If you do not set e.Handled to true, the application will close due to crash.
-			  MessageBox.Show("Belső hiba! Az alkalmazás leáll! ", "Uncaught Exception");
+			  MessageBox.Show("Belső hiba. Az alkalmazás leáll.", "Hiba");
 			  e.Handled = false;
 		  }
 	  }
@@ -36,7 +43,7 @@ namespace BUTEClassAdministrationClient
 	  void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
 	  {
 		  Exception ex = e.ExceptionObject as Exception;
-		  MessageBox.Show(ex.Message, "Uncaught Thread Exception", MessageBoxButton.OK, MessageBoxImage.Error);
+		  MessageBox.Show(ex.Message, "Kivételkezelésen túli hiba.", MessageBoxButton.OK, MessageBoxImage.Error);
 	  }
   }
 }
